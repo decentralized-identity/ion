@@ -22,11 +22,11 @@ By leveraging the blockchain-agnostic Sidetree protocol, ION makes it possible t
    1. Run `npm i` to install dependencies.
    1. Run `npm run build` to build the service.
    1. Run 'npm start` to start the service.
-1. Build and run `sidetree-core` service which depends on the micro-services above. Keep in mind soon you will need to build and run `ion` instead.
-   1. Install MongoDB on local machine (or subscribed a MongoDB cloud service), this is used to keep processed state. 
-   1. Clone the repo and go to the root folder.
+1. Build and run `ion` (this) core service which depends on the micro-services above.
+   1. Install MongoDB on local machine (or subscribe to a MongoDB cloud service), this is used for state keeping for the node. 
+   1. Clone this repo and go to the root folder.
    1. Run `npm i` to install dependencies.
-   1. Modify `json/config.json` accordingly. Parameters of interest:
+   1. Modify `json/config.json` accordingly. Some parameters of interest:
       1. Update `operationStoreUri` to point to the MongoDB configured earlier.
       1. Update `didMethodName` to `did:ion:`;
    1. Run `npm run build` to build the service.
