@@ -4,9 +4,9 @@
 export default {
   batchingIntervalInSeconds: 'batchingIntervalInSeconds',
   blockchainServiceUri: 'blockchainServiceUri',
-  casServiceUri: 'casServiceUri',
+  contentAddressableStoreServiceUri: 'contentAddressableStoreServiceUri',
   didMethodName: 'didMethodName',
-  maxConcurrentCasDownloads: 'maxConcurrentCasDownloads',
+  maxConcurrentDownloads: 'maxConcurrentDownloads',
   observingIntervalInSeconds: 'observingIntervalInSeconds',
   operationStoreUri: 'operationStoreUri',
   port: 'port'
