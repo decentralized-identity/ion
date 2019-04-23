@@ -17,7 +17,7 @@ By leveraging the blockchain-agnostic Sidetree protocol, ION makes it possible t
 
 1. Build and run `sidetree-bitcoin` micro-service. This micro-service depends on a Bitcored node. Instructions can be found in the `sidetree-bitcoin` [README.md](https://github.com/decentralized-identity/sidetree-bitcoin).
 
-1. Build and run `sidetree-ipfs` micro-service. Keep in mind soon you will need to build and run `sidetree-ipfs-reference` instead.
+1. Build and run [`sidetree-ipfs-reference`](https://github.com/decentralized-identity/sidetree-ipfs-reference) micro-service.
    1. Clone the repo and go to the root folder.
    1. Run `npm i` to install dependencies.
    1. Run `npm run build` to build the service.
@@ -27,8 +27,7 @@ By leveraging the blockchain-agnostic Sidetree protocol, ION makes it possible t
    1. Clone this repo and go to the root folder.
    1. Run `npm i` to install dependencies.
    1. Modify `json/config.json` accordingly. Some parameters of interest:
-      1. Update `operationStoreUri` to point to the MongoDB configured earlier.
-      1. Update `didMethodName` to `did:ion:`;
+      1. Update `mongoDbConnectionString` to point to the MongoDB configured earlier.
    1. Run `npm run build` to build the service.
    1. Run 'npm start` to start the service. 
 
