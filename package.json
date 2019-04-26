@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "main": "dist/src/index.js",
   "dependencies": {
-    "@decentralized-identity/sidetree-core": "0.1.2",
+    "@decentralized-identity/sidetree-core": "0.1.5",
     "koa": "2.6.2",
     "koa-router": "7.2.1",
     "raw-body": "2.3.3"
