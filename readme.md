@@ -15,7 +15,7 @@ By leveraging the blockchain-agnostic Sidetree protocol, ION makes it possible t
 
 ## Building the project:
 
-Please use the installation guide to setup the various services that comprise an ION node: https://github.com/decentralized-identity/ion/install-guide.md
+Please use the following guide to setup the various services that comprise an ION node: [ION Installation Guide](https://github.com/decentralized-identity/ion/blob/master/install-guide.md)
 
 ## Contribution Guidelines:
 
