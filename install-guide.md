@@ -105,7 +105,7 @@ Run the following commands:
     
 ## 3. Setting up the IPFS service.
 
-Clone the IPFS service repo and navigate to its root folder: https://github.com/decentralized-identity/sidetree-ipfs-reference
+Clone the IPFS service repo and navigate to its root folder: https://github.com/decentralized-identity/sidetree-ipfs
 
 After cloning the repo:
 
