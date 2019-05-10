@@ -13,24 +13,9 @@ ION is a public, permissionless, Decentralized Identifier (DID) network that imp
 
 By leveraging the blockchain-agnostic Sidetree protocol, ION makes it possible to anchor tens of thousands of DID/PKI operations on a target chain (in ION's case, Bitcoin) using a single on-chain transaction. The transactions are encoded with a hash that ION nodes use to fetch, store, and replicate the hash-associated DID operation batches via IPFS. The nodes process these batches of operations in accordance with a specific set of deterministic rules that enables them to independently arrive at the correct PKI state for IDs in the system, without requiring a separate consensus mechanism, blockchain, or sidechain. Nodes can fetch, process, and assemble DID states in parallel, allowing the aggregate capacity of nodes to run at tens of thousands of operations per second.
 
-## Build Steps:
+## Building the project:
 
-1. Build and run `sidetree-bitcoin` micro-service. This micro-service depends on a Bitcored node. Instructions can be found in the `sidetree-bitcoin` [README.md](https://github.com/decentralized-identity/sidetree-bitcoin).
-
-1. Build and run `sidetree-ipfs` micro-service. Keep in mind soon you will need to build and run `sidetree-ipfs-reference` instead.
-   1. Clone the repo and go to the root folder.
-   1. Run `npm i` to install dependencies.
-   1. Run `npm run build` to build the service.
-   1. Run 'npm start` to start the service.
-1. Build and run `ion` (this) core service which depends on the micro-services above.
-   1. Install MongoDB on local machine (or subscribe to a MongoDB cloud service), this is used for state keeping for the node. 
-   1. Clone this repo and go to the root folder.
-   1. Run `npm i` to install dependencies.
-   1. Modify `json/config.json` accordingly. Some parameters of interest:
-      1. Update `operationStoreUri` to point to the MongoDB configured earlier.
-      1. Update `didMethodName` to `did:ion:`;
-   1. Run `npm run build` to build the service.
-   1. Run 'npm start` to start the service. 
+Please use the following guide to setup the various services that comprise an ION node: [ION Installation Guide](https://github.com/decentralized-identity/ion/blob/master/install-guide.md)
 
 ## Contribution Guidelines:
 

@@ -8,6 +8,6 @@ export default {
   didMethodName: 'didMethodName',
   maxConcurrentDownloads: 'maxConcurrentDownloads',
   observingIntervalInSeconds: 'observingIntervalInSeconds',
-  operationStoreUri: 'operationStoreUri',
+  mongoDbConnectionString: 'mongoDbConnectionString',
   port: 'port'
 };
