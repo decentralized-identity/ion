@@ -5,3 +5,6 @@ nunitresults.xml
 # Istanbul code coverage folders
 .nyc_output/
 coverage/
+
+# sidetree-ipfs data folder
+sidetree-ipfs/
