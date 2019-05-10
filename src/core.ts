@@ -7,7 +7,7 @@ import {
   ISidetreeResponse,
   SidetreeCore,
   SidetreeResponse
-} from '@decentralized-identity/sidetree-core';
+} from '@decentralized-identity/sidetree';
 
 /** Configuration used by this server. */
 interface IServerConfig extends ISidetreeConfig {
@@ -15,8 +15,8 @@ interface IServerConfig extends ISidetreeConfig {
   port: number;
 }
 
-const config: IServerConfig = require('../json/config.json');
-const versionsOfProtocolParameters: ISidetreeProtocolParameters[] = require('../json/protocol-parameters.json');
+const config: IServerConfig = require('../json/core-config.json');
+const versionsOfProtocolParameters: ISidetreeProtocolParameters[] = require('../json/core-protocol-parameters.json');
 
 const sidetreeCore = new SidetreeCore(config, versionsOfProtocolParameters);
 const app = new Koa();
