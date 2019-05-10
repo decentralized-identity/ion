@@ -33,7 +33,7 @@ Once NVM is installed, run the following command to install Node v9 and v10.15.3
     nvm install 9
     nvm install 10.15.3
 
-#### Ports for ION node writes to Bitcoin
+#### Inbound Ports to Open
 
 If you wish to run a node that writes DID operations to the Bitcoin blockchain, you will need to open ports `4002` and `4003`.
 
@@ -59,11 +59,11 @@ Run the following initialization command in your desired directory/drive locatio
 
     bitcore create ion-bitcore --testnet
     
-Clone the Sidetree Bitcoin repo:
+Clone the Sidetree repo:
 
-    git clone https://github.com/decentralized-identity/sidetree-bitcoin
+    git clone https://github.com/decentralized-identity/sidetree
 
-Navigate to the `sidetree-bitcoin/bitcored-services/sidetree` directory of the cloned repo and run the following:
+Navigate to the `sidetree/lib/bitcored-extension` directory of the cloned repo and run the following:
     
     npm install bitcore-lib
     
@@ -73,7 +73,7 @@ Navigate to the directory of the `ion-bitcore` instance you created, and run the
 
     cd /node_modules
     
-    ln -s sidetree-bitcoin/src/bitcored-services/sidetree ion-bitcore
+    ln -s sidetree/lib/bitcored-extension ion-bitcore
     
 Add the string `ion-bitcore` to the services array in the `ion-bitcore` instance's `bitcore-node.json` configuration file.
     
@@ -89,38 +89,7 @@ Verify that the bitcored installation was successful by pointing the browser to:
 
     http://localhost:3001/insight/
     
-Once Sidetree's bitcored instance is running correctly, you'll need to build and run the Sidetree’s Bitcoin service that consumes the blockchain data and APIs exposed by bitcored:
-
-Clone the Sidetree Bitcoin repo and navigate to its root directory: https://github.com/decentralized-identity/sidetree-bitcoin
-
-Examine the `json/config.json` file to ensure the `bitcoreSidetreeServiceUri` property points to the location of the bitcored service you setup earlier in this guide (e.g. `http://localhost:3001/SidetreeBlockchainService`)
-
-Run the following commands:
-
-    nvm use 10.15.3
-    npm i
-    npm run build
-    npm start
-    
-    
-## 3. Setting up the IPFS service.
-
-Clone the IPFS service repo and navigate to its root folder: https://github.com/decentralized-identity/sidetree-ipfs
-
-After cloning the repo:
-
-- cd into the the repo
-- Run `git checkout ec6e63100`
-- Change the `port` value in the `json/config.json` to `3002`
-
-Run the following commands:
-
-    nvm use 10.15.3
-    npm i
-    npm run build
-    npm start
-
-## 4. Setting up the ION service
+## 3. Setting up Prerequisites for ION Service
 
 ### Installing MongoDB
 
@@ -137,18 +106,37 @@ After MongoDB is installed and running, modify the `operationStoreUri` property 
 
 To view MongoDB files with a more approachable GUI, download and install MongoDB Compass: https://docs.mongodb.com/compass/master/install/
 
-### Configure & Build ION
+## 4. Configure & Build ION
 
 Clone https://github.com/decentralized-identity/ion
 
-Change the `contentAddressableStoreServiceUri` property in `json/config.json` to `http://127.0.0.1:3002/v1.0`
+Edit the `json/bitcoin-config.json` file to ensure the `bitcoreExtensionUri` property points to the location of the bitcored service you setup earlier in this guide (e.g. `http://localhost:3001/ion-bitcore/`)
 
-Run the following commands:
+Run the following commands to build ION:
 
     nvm use 10.15.3
     npm i
     npm run build
-    npm start
+    
+## 5. Run Sidetree Bitcoin micro-service
 
+    nvm use 10.15.3
+    npm run bitcoin
+    
+## 6. Run Sidetree IPFS micro-service
 
-Verify ION is running properly by checking the following DID resolution link in your browser: http://localhost:3000/did:ion:EiBzpfCmJlxXnfJtJwBr-u6DLXAWX3g7CeLZXY_pFyNhvw
+Start a new console and run the following commands:
+
+    nvm use 10.15.3
+    npm run ipfs
+
+## 7. Run Sidetree core service
+
+Start a new console and run the following commands:
+
+    nvm use 10.15.3
+    npm run core
+
+Give it a few minutes to synchronize Sidetree transactions.
+
+Verify ION is running properly by checking the following DID resolution link in your browser: http://localhost:3000/did:ion-test:EiBNsl-a8ZjvFsJCEousqy-9N4RFypLEU1Ha7pn9KPFpPg
