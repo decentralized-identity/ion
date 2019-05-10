@@ -1,0 +1,11 @@
+{
+  "bitcoreExtensionUri": "[MUST FILL THIS IN!!!]",
+  "databaseName": "sidetree-bitcoin",
+  "genesisBlockNumber": 1500000,
+  "genesisBlockHash": "0000000000049a6b07f91975568dc96bb1aec1a24c6bdadb21eb17c9f1b7256f",
+  "maxSidetreeTransactions": 10,
+  "mongoDbConnectionString": "mongodb://localhost:27017/",
+  "pollingInternalInSeconds": 100,
+  "port": 3002,
+  "sidetreeTransactionPrefix": "ion-test:"
+}
