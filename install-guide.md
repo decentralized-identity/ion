@@ -102,7 +102,7 @@ The default persistence option for storing data locally is MongoDB, though it is
 
 You'll probably want to store the data from the Mongo instance in the same place you chose to store the blockchain data, due to the large amount of storage required. Set the directory for this by creating a `db` folder in the location you chose and `run mongod --dbpath ~/YOUR_LOCATION/db`
 
-After MongoDB is installed and running, modify the `operationStoreUri` property of the JSON configuration file located at `/json/config.json` in the ION repo to match the location of your MongoDB instance.
+After MongoDB is installed and running, modify the `mongoDbConnectionString` property of the JSON configuration file located at `/json/core-config.json` in the ION repo to match the location of your MongoDB instance.
 
 To view MongoDB files with a more approachable GUI, download and install MongoDB Compass: https://docs.mongodb.com/compass/master/install/
 
