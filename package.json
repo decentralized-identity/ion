@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "main": "dist/src/core.js",
   "dependencies": {
-    "@decentralized-identity/sidetree": "0.1.10",
+    "@decentralized-identity/sidetree": "0.1.11",
     "koa": "2.7.0",
     "koa-router": "7.4.0",
     "raw-body": "2.3.3"
@@ -31,7 +31,7 @@
   },
   "scripts": {
     "precommit": "npm run lint",
-    "build": "tsc && copyfiles \"./**/*.json\" dist -e \"./node_modules/**/*\"",
+    "build": "tsc && copyfiles \"json/**/*.json\" dist && copyfiles \"tests/**/*.json\" dist",
     "test": "jasmine-ts --config=./tests/jasmine.json",
     "cc": "npm run build && nyc jasmine-ts --config=./tests/jasmine.json",
     "lint": "tslint --fix --project .",

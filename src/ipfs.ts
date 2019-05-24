@@ -29,7 +29,7 @@ const router = new Router({
 });
 
 router.get('/:hash', async (ctx, _next) => {
-  const response = await requestHandler.handleFetchRequest(ctx.params.hash);
+  const response = await requestHandler.handleFetchRequest(ctx.params.hash, ctx.query['max-size']);
   setKoaResponse(response, ctx.response, 'application/octet-stream');
 });
 
