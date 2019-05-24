@@ -35,8 +35,6 @@ If you wish to run a node that writes DID operations to the Bitcoin blockchain, 
 
 An ION node needs a trusted Bitcoin peer for fetching and writing ION transactions, we use Bcoin for this.
 
-### Prerequisites
-
 ### Automated script for installing Bcoin
 
 If you would like to install and start Bcoin automatcially, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/start.sh).
