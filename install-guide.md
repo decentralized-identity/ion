@@ -29,17 +29,26 @@ sudo snap install node --classic --channel=10
 
 #### Inbound Ports to Open
 
-If you wish to run a node that writes DID operations to the Bitcoin blockchain, you will need to open ports `4002` and `4003`.
+If you wish to run a node that writes DID operations to the Bitcoin blockchain, you will need to open ports `4002` and `4003` so that the transaction files (Anchor and Batch files) can be served to others via IPFS.
 
-## 2. Setting up the Sidetree blockchain service
+## 2. Setting up Bcoin
+
+An ION node needs a trusted Bitcoin peer for fetching and writing ION transactions, we use Bcoin for this.
 
 ### Prerequisites
+
+### Automated script for installing Bcoin
+
+If you would like to install and start Bcoin automatcially, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/start.sh).
+
+> NOTE: Initial synchronization takes ~6 hours on testnet.
+
+### Installing Bcoin Manually
+
 Node-gyp is required by Bcoin (the currently used bitcoin miner) and requires `make` and a c++ compiler. You can install these by:
 ```
 sudo apt-get install gcc g++ make
 ```
-
-### Install Bcoin
 
 Clone the Bcoin repo:
 ```
@@ -69,9 +78,7 @@ Start Bcoin and let it sync with Testnet:
 ```
 > You can add `--daemon` to run Bcoin as a daemon process.
     
-## 3. Setting up Prerequisites for ION Service
-
-### Installing MongoDB
+## 3. Setting up MongoDB
 
 The default persistence option for storing data locally is MongoDB, though it is possible to create adapters for other datastores. To use the default MongoDB option, you'll need to install MongoDB community build:
 
@@ -82,15 +89,24 @@ The default persistence option for storing data locally is MongoDB, though it is
 
 You'll probably want to store the data from the Mongo instance in the same place you chose to store the blockchain data, due to the large amount of storage required. Set the directory for this by creating a `db` folder in the location you chose and `run mongod --dbpath ~/YOUR_LOCATION/db`
 
-After MongoDB is installed and running, modify the `mongoDbConnectionString` property of the JSON configuration file located at `/json/core-config.json` in the ION repo to match the location of your MongoDB instance.
-
 To view MongoDB files with a more approachable GUI, download and install MongoDB Compass: https://docs.mongodb.com/compass/master/install/
 
-## 4. Configure & Build ION
+## 4. Configure & Build ION Microservices
 
-Clone https://github.com/decentralized-identity/ion
+Clone https://github.com/decentralized-identity/ion:
+```
+git clone https://github.com/decentralized-identity/ion
+```
 
-Edit the `json/bitcoin-config.json` file to ensure the `bitcoreExtensionUri` property points to the http location of the bcoin service you setup earlier in this guide (e.g. `http://localhost:18331`)
+Update the configuration for the Sidetree Bitcoin microservice under `json/bitcoin-config.json`:
+
+  - Ensure `bitcoinPeerUri` points to the http location of the bcoin service you setup earlier in this guide (e.g. `http://localhost:18331`).
+  - Ensure `bitcoinWalletImportString` is populated with your private key.
+  - Ensure `mongoDbConnectionString` is pointing to your MongoDB (e.g. mongodb://localhost:27017/).
+  
+Update the configuration for the Sidetree core service under `json/core-config.json`:
+
+  - Ensure `mongoDbConnectionString` is pointing to your MongoDB (e.g. mongodb://localhost:27017/).
 
 Run the following commands to build ION:
 ```
@@ -98,18 +114,21 @@ npm i
 npm run build
 ```
 
-## 5. Run Sidetree Bitcoin micro-service
+> NOTE: You must run `npm run build` everytime a confiuration JSON file is modified.
+
+## 5. Run Sidetree Bitcoin microservice
 ```
 npm run bitcoin
 ```
-Bitcoin may fail to start until your Bcoin node has blocks past the ION genesis block. Please wait and try again later.
+This service will fail to start until your Bcoin node has blocks past the ION genesis block. Please wait and try again later if this happens.
 
-## 6. Run Sidetree IPFS micro-service
+## 6. Run Sidetree IPFS microservice
 
 Start a new console and run the following commands:
 ```
 npm run ipfs
 ```
+
 ## 7. Run Sidetree core service
 
 Start a new console and run the following commands:
