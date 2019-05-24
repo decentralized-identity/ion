@@ -4,9 +4,7 @@ import * as Router from 'koa-router';
 import * as querystring from 'querystring';
 import {
   ISidetreeBitcoinConfig,
-  ISidetreeResponse,
-  SidetreeBitcoinService,
-  SidetreeResponse
+  SidetreeBitcoinProcessor
 } from '@decentralized-identity/sidetree';
 
 /** Bitcoin service configuration parameters */
@@ -16,10 +14,6 @@ interface IBitcoinServiceConifg extends ISidetreeBitcoinConfig {
 }
 
 const config: IBitcoinServiceConifg = require('../json/bitcoin-config.json');
-const blockchainService = new SidetreeBitcoinService(config);
-console.info('Sidetree bitcoin service configuration:');
-console.info(config);
-
 const app = new Koa();
 
 // Raw body parser.
@@ -36,31 +30,33 @@ router.get('/transactions', async (ctx, _next) => {
   if ('since' in params && 'transaction-time-hash' in params) {
     const since = Number(params['since']);
     const transactionTimeHash = String(params['transaction-time-hash']);
-    const response = await blockchainService.handleFetchRequestCached(since, transactionTimeHash);
+    const response = await blockchainService.transactions(since, transactionTimeHash);
     setKoaResponse(response, ctx.response);
   } else {
-    const response = await blockchainService.handleFetchRequestCached();
+    const response = await blockchainService.transactions();
     setKoaResponse(response, ctx.response);
   }
 });
 
 router.post('/transactions', async (ctx, _next) => {
-  const response = await blockchainService.requestHandler.handleAnchorRequest(ctx.body);
+  const writeRequest = JSON.parse(ctx.body);
+  const response = await blockchainService.writeTransaction(writeRequest.anchorFileHash);
   setKoaResponse(response, ctx.response);
 });
 
 router.post('/transactions/firstValid', async (ctx, _next) => {
-  const response = await blockchainService.handleFirstValidRequestCached(ctx.body);
+  const transactionsObject = JSON.parse(ctx.body);
+  const response = await blockchainService.firstValidTransaction(transactionsObject.transactions);
   setKoaResponse(response, ctx.response);
 });
 
 router.get('/time', async (ctx, _next) => {
-  const response = await blockchainService.requestHandler.handleLastBlockRequest();
+  const response = await blockchainService.time();
   setKoaResponse(response, ctx.response);
 });
 
 router.get('/time/:hash', async (ctx, _next) => {
-  const response = await blockchainService.requestHandler.handleBlockByHashRequest(ctx.params.hash);
+  const response = await blockchainService.time(ctx.params.hash);
   setKoaResponse(response, ctx.response);
 });
 
@@ -71,21 +67,31 @@ app.use(router.routes())
 app.use((ctx, _next) => {
   ctx.response.status = 400;
 });
-const port = config.port;
+
+const port = process.env.SIDETREE_BITCOIN_PORT || config.port;
 
 // initialize the blockchain service and kick-off background tasks
-blockchainService.initialize()
-  .then(() => {
-    return blockchainService.startPeriodicProcessing();
-  })
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Sidetree-Bitcoin node running on port: ${port}`);
+let blockchainService: SidetreeBitcoinProcessor;
+try {
+  blockchainService = new SidetreeBitcoinProcessor(config);
+
+  blockchainService.initialize()
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`Sidetree-Bitcoin node running on port: ${port}`);
+      });
+    })
+    .catch((error: Error) => {
+      console.error(`Sidetree-Bitcoin node initialization failed with error: ${error}`);
+      process.exit(1);
     });
-  })
-  .catch((e) => {
-    console.log(`Sidetree-Bitcoin node initialization failed with error ${e}`);
-  });
+} catch (error) {
+  console.log('Is bitcoinWalletImportString valid? Consider using testnet key...');
+  console.log(SidetreeBitcoinProcessor.generatePrivateKey('testnet'));
+  process.exit(1);
+}
+console.info('Sidetree bitcoin service configuration:');
+console.info(config);
 
 /**
  * Sets the koa response according to the Sidetree response object given.
@@ -93,17 +99,12 @@ blockchainService.initialize()
  * @param koaResponse Koa Response object to be filled
  * @param contentType Content type to be set for response, defaults to application/json
  */
-const setKoaResponse = (response: ISidetreeResponse, koaResponse: Koa.Response, contentType?: string) => {
-  koaResponse.status = SidetreeResponse.toHttpStatus(response.status);
+const setKoaResponse = (response: any, koaResponse: Koa.Response, contentType?: string) => {
+  koaResponse.status = 200;
   if (contentType) {
     koaResponse.set('Content-Type', contentType);
   } else {
     koaResponse.set('Content-Type', 'application/json');
   }
-  if (response.body) {
-    koaResponse.body = response.body;
-  } else {
-    // Need to set the body explicitly, otherwise Koa will return HTTP 204
-    koaResponse.body = '';
-  }
+  koaResponse.body = response ? JSON.stringify(response) : '';
 };
