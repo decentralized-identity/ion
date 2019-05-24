@@ -20,18 +20,12 @@ We recommend you run ION on a machine with the following minimum specs:
 
 Setup a Debian-based distros of Linux. This guide was verified on Ubuntu 18, so we currently recommend this distro and version. 
 
-#### Node.js and NVM
+#### Node.js
 
-Services within ION rely on both Node.js version 9 and 10. To install both versions and easily use them together, you'll need to install the Node Version Manager (NVM) utility. Installation of NVM should be as easy as running the following command and restarting your console:
-
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-
-> NOTE: If the command above doesn't work for some reason, there are other installation options detailed in the [NVM installation doc](https://github.com/creationix/nvm#installation-and-update).
-
-Once NVM is installed, run the following command to install Node v9 and v10.15.3:
-    
-    nvm install 9
-    nvm install 10.15.3
+Services within ION rely on Node.js version 10. Run the following command to install Node v10:
+```
+sudo snap install node --classic --channel=10
+```
 
 #### Inbound Ports to Open
 
@@ -40,54 +34,40 @@ If you wish to run a node that writes DID operations to the Bitcoin blockchain, 
 ## 2. Setting up the Sidetree blockchain service
 
 ### Prerequisites
+Node-gyp is required by Bcoin (the currently used bitcoin miner) and requires `make` and a c++ compiler. You can install these by:
+```
+sudo apt-get install gcc g++ make
+```
 
-    sudo add-apt-repository ppa:chris-lea/zeromq
-    sudo apt-get update
-    sudo apt-get install python
-    sudo apt-get install -y libzmq3-dev
-    sudo apt-get install build-essential
+### Install Bcoin
 
-### Install Bitcore
+Clone the Bcoin repo:
+```
+git clone git://github.com/bcoin-org/bcoin.git
+```
 
-Run `nvm use 9` to ensure you're using the version that the current version of Bitcore requires.
+Install the Bcoin dependencies:
+```
+cd bcoin
+npm install
+```
 
-Install the Bitcore npm package:
+Create a Bcoin configuration file (`bcoin.conf`) designating the path you would like the Bitcoin data to be stored in (`[DATA DIRECTORY PATH]`):
+```yaml
+network: testnet
+prefix: [DATA DIRECTORY PATH]
+host: 127.0.0.1
+port: 18332
+http-port: 18331
+workers-size: 1
+index-address: true
+```
 
-    npm install -g bitcore
-
-Run the following initialization command in your desired directory/drive location - which this guide will refer to as `ion-bitcore` - where you want the Bitcoin `testnet` data to be stored:
-
-    bitcore create ion-bitcore --testnet
-    
-Clone the Sidetree repo:
-
-    git clone https://github.com/decentralized-identity/sidetree
-
-Navigate to the `sidetree/lib/bitcored-extension` directory of the cloned repo and run the following:
-    
-    npm install bitcore-lib
-    
-Navigate to the directory of the `ion-bitcore` instance you created, and run the following:
-
-    bitcore install insight-api insight-ui
-
-    cd /node_modules
-    
-    ln -s sidetree/lib/bitcored-extension ion-bitcore
-    
-Add the string `ion-bitcore` to the services array in the `ion-bitcore` instance's `bitcore-node.json` configuration file.
-    
-
-To start the bitcored daemon by navigating to the root of the `ion-bitcore` instance you created, and run the following:
-
-    bitcored
-
-> NOTE: Bitcore can, in some circumstances, fail with RPC queue errors, so you may also want to manually increase the RPC worker queue limit. You can do this by adding `rpcworkqueue=64` to the `bitcoin.conf` file located in your `ion-bitcore` instance directory.
-   
-
-Verify that the bitcored installation was successful by pointing the browser to:
-
-    http://localhost:3001/insight/
+Start Bcoin and let it sync with Testnet:
+```
+./bin/bcoin --config bcoin.conf
+```
+> You can add `--daemon` to run Bcoin as a daemon process.
     
 ## 3. Setting up Prerequisites for ION Service
 
@@ -110,33 +90,32 @@ To view MongoDB files with a more approachable GUI, download and install MongoDB
 
 Clone https://github.com/decentralized-identity/ion
 
-Edit the `json/bitcoin-config.json` file to ensure the `bitcoreExtensionUri` property points to the location of the bitcored service you setup earlier in this guide (e.g. `http://localhost:3001/ion-bitcore/`)
+Edit the `json/bitcoin-config.json` file to ensure the `bitcoreExtensionUri` property points to the http location of the bcoin service you setup earlier in this guide (e.g. `http://localhost:18331`)
 
 Run the following commands to build ION:
+```
+npm i
+npm run build
+```
 
-    nvm use 10.15.3
-    npm i
-    npm run build
-    
 ## 5. Run Sidetree Bitcoin micro-service
+```
+npm run bitcoin
+```
+Bitcoin may fail to start until your Bcoin node has blocks past the ION genesis block. Please wait and try again later.
 
-    nvm use 10.15.3
-    npm run bitcoin
-    
 ## 6. Run Sidetree IPFS micro-service
 
 Start a new console and run the following commands:
-
-    nvm use 10.15.3
-    npm run ipfs
-
+```
+npm run ipfs
+```
 ## 7. Run Sidetree core service
 
 Start a new console and run the following commands:
-
-    nvm use 10.15.3
-    npm run core
-
+```
+npm run core
+```
 Give it a few minutes to synchronize Sidetree transactions.
 
 Verify ION is running properly by checking the following DID resolution link in your browser: http://localhost:3000/did:ion-test:EiBNsl-a8ZjvFsJCEousqy-9N4RFypLEU1Ha7pn9KPFpPg
