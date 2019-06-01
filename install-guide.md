@@ -37,15 +37,16 @@ An ION node needs a trusted Bitcoin peer for fetching and writing ION transactio
 
 ### Automated script for installing Bcoin
 
-If you would like to install and start Bcoin automatcially, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/start.sh).
+If you would like to install and start Bcoin automatically, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/start.sh).
 
 > NOTE: Initial synchronization takes ~6 hours on testnet.
 
 ### Installing Bcoin Manually
 
-Node-gyp is required by Bcoin (the currently used bitcoin miner) and requires `make` and a c++ compiler. You can install these by:
+Node-gyp is required by Bcoin (the currently used bitcoin miner) and requires `make` and a c++ compiler as well as Python 2.7. You can install these by:
 ```
 sudo apt-get install gcc g++ make
+sudo apt-get install -y python 
 ```
 
 Clone the Bcoin repo:
