@@ -2,7 +2,7 @@
   "bitcoinPeerUri": "[MUST FILL THIS IN!!!]",
   "bitcoinWalletImportString": "[MUST FILL THIS IN!!!]",
   "bitcoinFee": 4000,
-  "sidetreeTransactionPrefix": "ion-test:",
+  "sidetreeTransactionPrefix": "ion:",
   "genesisBlockNumber": 1500000,
   "databaseName": "sidetree-bitcoin",
   "transactionFetchPageSize": 100,
