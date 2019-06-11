@@ -135,4 +135,4 @@ npm run core
 ```
 Give it a few minutes to synchronize Sidetree transactions.
 
-Verify ION is running properly by checking the following DID resolution link in your browser: http://localhost:3000/did:ion-test:EiBNsl-a8ZjvFsJCEousqy-9N4RFypLEU1Ha7pn9KPFpPg[http://localhost:3000/did:ion-test:EiBNsl-a8ZjvFsJCEousqy-9N4RFypLEU1Ha7pn9KPFpPg]
+Verify ION is running properly by checking the following DID resolution link in your browser: [http://localhost:3000/did:ion-test:EiBNsl-a8ZjvFsJCEousqy-9N4RFypLEU1Ha7pn9KPFpPg](http://localhost:3000/did:ion-test:EiBNsl-a8ZjvFsJCEousqy-9N4RFypLEU1Ha7pn9KPFpPg)
