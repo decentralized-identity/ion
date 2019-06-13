@@ -24,9 +24,7 @@ app.use(async (ctx, next) => {
   await next();
 });
 
-const router = new Router({
-  prefix: '/v1.0'
-});
+const router = new Router();
 
 router.get('/:hash', async (ctx, _next) => {
   const response = await requestHandler.handleFetchRequest(ctx.params.hash, ctx.query['max-size']);
