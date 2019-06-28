@@ -20,6 +20,13 @@ We recommend you run ION on a machine with the following minimum specs:
 
 Setup a Debian-based distros of Linux. This guide was verified on Ubuntu 18, so we currently recommend this distro and version. 
 
+#### Snap
+
+We use snap to simplify installation of certain services. Run the following command to install snap:
+```
+sudo apt install snapd
+```
+
 #### Node.js
 
 Services within ION rely on Node.js version 10. Run the following command to install Node v10:
