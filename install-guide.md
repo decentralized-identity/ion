@@ -37,7 +37,7 @@ An ION node needs a trusted Bitcoin peer for fetching and writing ION transactio
 
 ### Automated script for installing Bcoin
 
-If you would like to install and start Bcoin automatically, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/start.sh).
+If you would like to install and start Bcoin automatically, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/setup.sh).
 
 > NOTE: Initial synchronization takes ~6 hours on testnet.
 
