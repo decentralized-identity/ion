@@ -31,51 +31,34 @@ sudo snap install node --classic --channel=10
 
 If you wish to run a node that writes DID operations to the Bitcoin blockchain, you will need to open ports `4002` and `4003` so that the transaction files (Anchor and Batch files) can be served to others via IPFS.
 
-## 2. Setting up Bcoin
+## 2. Setting up Bitcoin Core
 
-An ION node needs a trusted Bitcoin peer for fetching and writing ION transactions, we use Bcoin for this.
+An ION node needs a trusted Bitcoin peer for fetching and writing ION transactions. We use Bitcoin Core for this.
 
-### Automated script for installing Bcoin
+### Automated script for installing Bitcoin Core
 
-If you would like to install and start Bcoin automatically, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/start.sh).
+If you would like to install and start Bitcoin Core automatically, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/start.sh).
 
 > NOTE: Initial synchronization takes ~6 hours on testnet.
 
-### Installing Bcoin Manually
+### Installing Bitcoin Core Manually
 
-Node-gyp is required by Bcoin (the currently used bitcoin miner) and requires `make` and a c++ compiler as well as Python 2.7. You can install these by:
-```
-sudo apt-get install gcc g++ make
-sudo apt-get install -y python 
-```
+You can find binaries for Bitcoin Core releases [here.](https://bitcoincore.org/en/releases/)
 
-Clone the Bcoin repo:
-```
-git clone git://github.com/bcoin-org/bcoin.git
-```
-
-Install the Bcoin dependencies:
-```
-cd bcoin
-npm install
-```
-
-Create a Bcoin configuration file (`bcoin.conf`) designating the path you would like the Bitcoin data to be stored in (`[DATA DIRECTORY PATH]`):
+Create a configuration file (`bitcoin.conf`) designating the path you would like the Bitcoin data to be stored in (`[datadir]`):
 ```yaml
-network: testnet
-prefix: [DATA DIRECTORY PATH]
-host: 127.0.0.1
-port: 18332
-http-port: 18331
-workers-size: 1
-index-address: true
+testnet=1
+server=1
+datadir=~/.bitcoin
+rpcuser=admin
+rpcpassword=<yourRand0mP4SSword>
 ```
 
-Start Bcoin and let it sync with Testnet:
+Start Bitcoin Core and let it sync with Testnet:
 ```
-./bin/bcoin --config bcoin.conf
+./bin/bitcoind --config bitcoin.conf
 ```
-> You can add `--daemon` to run Bcoin as a daemon process.
+> You can add `--daemon` to run bitcoind as a daemon process.
     
 ## 3. Setting up MongoDB
 
