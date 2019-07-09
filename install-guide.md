@@ -89,8 +89,9 @@ git clone https://github.com/decentralized-identity/ion
 
 Update the configuration for the Sidetree Bitcoin microservice under `json/bitcoin-config.json`:
 
-  - Ensure `bitcoinPeerUri` points to the http location of the bcoin service you setup earlier in this guide (e.g. `http://localhost:18331`).
+  - Ensure `bitcoinPeerUri` points to the http location of the Bitcoin Core client you setup earlier in this guide (e.g. `http://localhost:18332`).
   - Ensure `bitcoinWalletImportString` is populated with your private key.
+  - Official Bitcoin Core client PRC API requires authentication, so make sure the `bitcoinRpcUsername` & `bitcoinPrcPassword` are populated accordingly.
   - Ensure `mongoDbConnectionString` is pointing to your MongoDB (e.g. `mongodb://localhost:27017/`).
   
 Update the configuration for the Sidetree core service under `json/core-config.json`:
@@ -109,7 +110,7 @@ npm run build
 ```
 npm run bitcoin
 ```
-This service will fail to start until your Bcoin node has blocks past the ION genesis block. Please wait and try again later if this happens.
+This service will fail to start until your Bitcoin Core client has blocks past the ION genesis block. Please wait and try again later if this happens.
 
 ## 6. Run Sidetree IPFS microservice
 
