@@ -21,3 +21,6 @@ Please use the following guide to setup the various services that comprise an IO
 
 TBD
 
+## Partner Organisations:
+
+- ION has been developed as a part of the [DIF](https://identity.foundation/)
