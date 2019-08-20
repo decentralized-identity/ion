@@ -3,9 +3,9 @@ import * as Koa from 'koa';
 import * as Router from 'koa-router';
 
 import {
-  ISidetreeResponse,
   SidetreeIpfsService,
-  SidetreeResponse
+  SidetreeResponse,
+  SidetreeResponseModel
 } from '@decentralized-identity/sidetree';
 
 const config: {
@@ -76,7 +76,7 @@ process.on('uncaughtException', () => {
  * @param koaResponse Koa Response object to be filled
  * @param contentType Content type to be set for response, defaults to application/json
  */
-const setKoaResponse = (response: ISidetreeResponse, koaResponse: Koa.Response, contentType?: string) => {
+const setKoaResponse = (response: SidetreeResponseModel, koaResponse: Koa.Response, contentType?: string) => {
   koaResponse.status = SidetreeResponse.toHttpStatus(response.status);
   if (contentType) {
     koaResponse.set('Content-Type', contentType);

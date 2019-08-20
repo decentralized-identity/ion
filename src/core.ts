@@ -2,23 +2,23 @@ import * as getRawBody from 'raw-body';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import {
-  ISidetreeConfig,
-  ISidetreeProtocolParameters,
-  ISidetreeResponse,
+  SidetreeConfig,
   SidetreeCore,
-  SidetreeResponse
+  SidetreeResponse,
+  SidetreeResponseModel
 } from '@decentralized-identity/sidetree';
+import { IProtocolVersion } from '@decentralized-identity/sidetree/dist/lib/core/VersionManager';
 
 /** Configuration used by this server. */
-interface IServerConfig extends ISidetreeConfig {
+interface ServerConfig extends SidetreeConfig {
   /** Port to be used by the server. */
   port: number;
 }
 
-const config: IServerConfig = require('../json/core-config.json');
-const versionsOfProtocolParameters: ISidetreeProtocolParameters[] = require('../json/core-protocol-parameters.json');
+const config: ServerConfig = require('../json/core-config.json');
+const protocolVersions: IProtocolVersion[] = require('../json/core-protocol-versioning.json');
 
-const sidetreeCore = new SidetreeCore(config, versionsOfProtocolParameters);
+const sidetreeCore = new SidetreeCore(config, protocolVersions);
 const app = new Koa();
 
 // Raw body parser.
@@ -29,12 +29,12 @@ app.use(async (ctx, next) => {
 
 const router = new Router();
 router.post('/', async (ctx, _next) => {
-  const response = await sidetreeCore.requestHandler.handleOperationRequest(ctx.body);
+  const response = await sidetreeCore.handleOperationRequest(ctx.body);
   setKoaResponse(response, ctx.response);
 });
 
 router.get('/:didOrDidDocument', async (ctx, _next) => {
-  const response = await sidetreeCore.requestHandler.handleResolveRequest(ctx.params.didOrDidDocument);
+  const response = await sidetreeCore.handleResolveRequest(ctx.params.didOrDidDocument);
   setKoaResponse(response, ctx.response);
 });
 
@@ -60,7 +60,7 @@ sidetreeCore.initialize()
 /**
  * Sets the koa response according to the Sidetree response object given.
  */
-const setKoaResponse = (response: ISidetreeResponse, koaResponse: Koa.Response) => {
+const setKoaResponse = (response: SidetreeResponseModel, koaResponse: Koa.Response) => {
   koaResponse.status = SidetreeResponse.toHttpStatus(response.status);
 
   if (response.body) {
