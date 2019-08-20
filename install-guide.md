@@ -36,6 +36,14 @@ Services within ION rely on Node.js version 10. Run the following command to ins
 sudo snap install node --classic --channel=10
 ```
 
+##### build-essential
+
+Building ION requires your distro's equivalent of Ubuntu's 'build-essential', e.g. make, g++, etc.
+```
+sudo apt install build-essential
+```
+
+
 #### Windows Environment Setup
 
 Go go https://nodejs.org, download and install the latest v10 of Node.js.
