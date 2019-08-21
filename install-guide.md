@@ -29,6 +29,16 @@ We use snap to simplify installation of certain services. Run the following comm
 sudo apt install snapd
 ```
 
+Add the snap binaries directory to your path by adding the following line in ~/.bash_profile
+```
+PATH="$PATH:/snap/bin"
+```
+
+To ensure that the path changes go into effect immediately:
+```
+source ~/.bash_profile
+```
+
 ##### Node.js
 
 Services within ION rely on Node.js version 10. Run the following command to install Node v10:
@@ -52,7 +62,7 @@ An ION node needs a trusted Bitcoin peer for fetching and writing ION transactio
 
 If you would like to install and start Bitcoin Core automatically on Linux, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/setup.sh).
 
-> NOTE: Initial synchronization takes ~6 hours on testnet.
+> NOTE: Initial synchronization takes ~2 hours for testnet on a 2 core machine with an SSD.
 
 ### Installing Bitcoin Core Manually
 
@@ -131,6 +141,7 @@ npm run build
 ```
 npm run bitcoin
 ```
+
 This service will fail to start until your Bitcoin Core client has blocks past the ION genesis block. Please wait and try again later if this happens.
 
 ## 6. Run Sidetree IPFS microservice
