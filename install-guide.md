@@ -8,7 +8,7 @@ The ION node implementation is composed of a collection of microservices written
 
 ## 1. Preparing your development environment
 
-#### Hardware
+### Hardware
 
 We recommend you run ION on a machine with the following minimum specs:
 
@@ -16,11 +16,13 @@ We recommend you run ION on a machine with the following minimum specs:
 - 6GB of RAM
 - 1TB of storage
 
-#### Operating System
+### Operating System
 
-Setup a Debian-based distros of Linux. This guide was verified on Ubuntu 18, so we currently recommend this distro and version. 
+Both Linux and Windows are supported and tested. For Linux, the setup is verified on Ubuntu 18, so we recommend Debian-based distros for Linux setup.
 
-#### Snap
+#### Linux Environment Setup
+
+##### Snap
 
 We use snap to simplify installation of certain services. Run the following command to install snap:
 ```
@@ -37,14 +39,18 @@ To ensure that the path changes go into effect immediately:
 source ~/.bash_profile
 ```
 
-#### Node.js
+##### Node.js
 
 Services within ION rely on Node.js version 10. Run the following command to install Node v10:
 ```
 sudo snap install node --classic --channel=10
 ```
 
-#### Inbound Ports to Open
+#### Windows Environment Setup
+
+Go go https://nodejs.org, download and install the latest v10 of Node.js.
+
+### Inbound Ports to Open
 
 If you wish to run a node that writes DID operations to the Bitcoin blockchain, you will need to open ports `4002` and `4003` so that the transaction files (Anchor and Batch files) can be served to others via IPFS.
 
@@ -54,30 +60,41 @@ An ION node needs a trusted Bitcoin peer for fetching and writing ION transactio
 
 ### Automated script for installing Bitcoin Core
 
-If you would like to install and start Bitcoin Core automatically, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/setup.sh).
+If you would like to install and start Bitcoin Core automatically on Linux, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/setup.sh).
 
 > NOTE: Initial synchronization takes ~2 hours for testnet on a 2 core machine with an SSD.
 
 ### Installing Bitcoin Core Manually
 
-You can find binaries for Bitcoin Core releases [here.](https://bitcoincore.org/en/releases/)
+You can find Windows and Linux binaries for Bitcoin Core releases [here.](https://bitcoincore.org/en/releases/)
+
+#### On Linux:
 
 Create a configuration file (`bitcoin.conf`) designating the path you would like the Bitcoin data to be stored in (`[datadir]`):
 ```yaml
 testnet=1
 server=1
 datadir=~/.bitcoin
-rpcuser=admin
-rpcpassword=<yourRand0mP4SSword>
+rpcuser=<your-rpc-username>
+rpcpassword=<your-rpc-password>
 ```
 
 Start Bitcoin Core and let it sync with Testnet:
+
 ```
 ./bin/bitcoind --config bitcoin.conf
 ```
 > You can add `--daemon` to run bitcoind as a daemon process.
+
+#### On Windows:
+
+```
+bitcoin-qt.exe -testnet -datadir=<path-to-store-data> -server -rpcuser=<you-rpc-username> -rpcpassword=<your-rpc-password>
+```
     
 ## 3. Setting up MongoDB
+
+### On Linux:
 
 The default persistence option for storing data locally is MongoDB, though it is possible to create adapters for other datastores. To use the default MongoDB option, you'll need to install MongoDB community build:
 
@@ -86,9 +103,13 @@ The default persistence option for storing data locally is MongoDB, though it is
 
 > NOTE: You may not have all the dependencies required to run MongoDB, if so you can run `sudo apt-get install -f` to bring them in.
 
-You'll probably want to store the data from the Mongo instance in the same place you chose to store the blockchain data, due to the large amount of storage required. Set the directory for this by creating a `db` folder in the location you chose and `run mongod --dbpath ~/YOUR_LOCATION/db`
+You'll probably want to store the data from the Mongo instance in the same drive you chose to store the blockchain data, due to the large amount of storage required. Set the directory for this by creating a `db` folder in the location you chose and `run mongod --dbpath ~/YOUR_LOCATION/db`
 
-To view MongoDB files with a more approachable GUI, download and install MongoDB Compass: https://docs.mongodb.com/compass/master/install/
+### On Windows:
+
+Download and install MongoDB from https://www.mongodb.com/download-center/community.
+
+> NOTE: To view MongoDB files with a more approachable GUI, download and install MongoDB Compass: https://docs.mongodb.com/compass/master/install/
 
 ## 4. Configure & Build ION Microservices
 
@@ -99,8 +120,9 @@ git clone https://github.com/decentralized-identity/ion
 
 Update the configuration for the Sidetree Bitcoin microservice under `json/bitcoin-config.json`:
 
-  - Ensure `bitcoinPeerUri` points to the http location of the Bitcoin node you setup earlier in this guide (e.g. `http://localhost:18331`).
+  - Ensure `bitcoinPeerUri` points to the http location of the Bitcoin Core client you setup earlier in this guide (e.g. `http://localhost:18332`).
   - Ensure `bitcoinWalletImportString` is populated with your private key.
+  - Official Bitcoin Core client PRC API requires authentication, so make sure the `bitcoinRpcUsername` & `bitcoinPrcPassword` are populated accordingly.
   - Ensure `mongoDbConnectionString` is pointing to your MongoDB (e.g. `mongodb://localhost:27017/`).
   
 Update the configuration for the Sidetree core service under `json/core-config.json`:
@@ -113,13 +135,14 @@ npm i
 npm run build
 ```
 
-> NOTE: You must run `npm run build` everytime a confiuration JSON file is modified.
+> NOTE: You must rerun `npm run build` everytime a configuration JSON file is modified.
 
 ## 5. Run Sidetree Bitcoin microservice
 ```
 npm run bitcoin
 ```
-This service will fail to start until your Bitcoin node has blocks past the ION genesis block. Please wait and try again later if this happens.
+
+This service will fail to start until your Bitcoin Core client has blocks past the ION genesis block. Please wait and try again later if this happens.
 
 ## 6. Run Sidetree IPFS microservice
 
@@ -136,4 +159,4 @@ npm run core
 ```
 Give it a few minutes to synchronize Sidetree transactions.
 
-Verify ION is running properly by checking the following DID resolution link in your browser: [http://localhost:3000/did:ion:test:EiCsyN-6rmSMoaMaiYAXs2EggeoYnbtOvDmwWd_QfHW5dg](http://localhost:3000/did:ion:test:EiCsyN-6rmSMoaMaiYAXs2EggeoYnbtOvDmwWd_QfHW5dg)
+Verify ION is running properly by checking the following DID resolution link in your browser: [http://localhost:3000/did:ion:test:EiDk2RpPVuC4wNANUTn_4YXJczjzi10zLG1XE4AjkcGOLA](http://localhost:3000/did:ion:test:EiDk2RpPVuC4wNANUTn_4YXJczjzi10zLG1XE4AjkcGOLA)
