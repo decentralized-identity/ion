@@ -29,7 +29,7 @@ We use snap to simplify installation of certain services. Run the following comm
 sudo apt install snapd
 ```
 
-Add the snap binaries directory to your path by adding the following line in ~/.bash_profile
+You may need to add the snap binaries directory to your path by adding the following line in ~/.bash_profile
 ```
 PATH="$PATH:/snap/bin"
 ```
