@@ -43,7 +43,6 @@ router.get('/:didOrDidDocument', async (ctx, _next) => {
   setKoaResponse(response, ctx.response);
 });
 
-
 app.use(router.routes())
    .use(router.allowedMethods());
 
