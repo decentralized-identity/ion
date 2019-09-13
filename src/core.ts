@@ -7,7 +7,7 @@ import {
   SidetreeResponse,
   SidetreeResponseModel
 } from '@decentralized-identity/sidetree';
-import { IProtocolVersion } from '@decentralized-identity/sidetree/dist/lib/core/VersionManager';
+import { ProtocolVersionModel } from '@decentralized-identity/sidetree/dist/lib/core/VersionManager';
 
 /** Configuration used by this server. */
 interface ServerConfig extends SidetreeConfig {
@@ -16,7 +16,7 @@ interface ServerConfig extends SidetreeConfig {
 }
 
 const config: ServerConfig = require('../json/core-config.json');
-const protocolVersions: IProtocolVersion[] = require('../json/core-protocol-versioning.json');
+const protocolVersions: ProtocolVersionModel[] = require('../json/core-protocol-versioning.json');
 
 const sidetreeCore = new SidetreeCore(config, protocolVersions);
 const app = new Koa();
