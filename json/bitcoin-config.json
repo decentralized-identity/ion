@@ -1,8 +1,8 @@
 {
   "bitcoinPeerUri": "http://localhost:18332",
-  "bitcoinRpcUsername": "muali",
-  "bitcoinRpcPassword": "Adrumble@6",
-  "bitcoinWalletImportString": "cMtNDSh5tLVb91ZRKeWjngjdSKuR47Pbz66V8bL6vb9L99extUKk",
+  "bitcoinRpcUsername": "",
+  "bitcoinRpcPassword": "",
+  "bitcoinWalletImportString": "[FILL THIS IN!]",
   "bitcoinFee": 4000,
   "sidetreeTransactionPrefix": "ion:",
   "genesisBlockNumber": 1500000,
