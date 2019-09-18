@@ -72,6 +72,11 @@ router.get('/transactions', async (ctx, _next) => {
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
+router.get('/version', async (ctx, _next) => {
+  let requestHandler = () => blockchainService.handleGetVersionRequest();
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
 router.post('/transactions', async (ctx, _next) => {
   const writeRequest = JSON.parse(ctx.body);
   const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorFileHash);

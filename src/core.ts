@@ -33,10 +33,16 @@ router.post('/', async (ctx, _next) => {
   setKoaResponse(response, ctx.response);
 });
 
+router.get('/version', async (ctx, _next) => {
+  const response = await sidetreeCore.handleGetVersionRequest();
+  setKoaResponse(response, ctx.response);
+});
+
 router.get('/:didOrDidDocument', async (ctx, _next) => {
   const response = await sidetreeCore.handleResolveRequest(ctx.params.didOrDidDocument);
   setKoaResponse(response, ctx.response);
 });
+
 
 app.use(router.routes())
    .use(router.allowedMethods());
