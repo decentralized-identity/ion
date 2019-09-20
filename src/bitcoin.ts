@@ -73,7 +73,7 @@ router.get('/transactions', async (ctx, _next) => {
 });
 
 router.get('/version', async (ctx, _next) => {
-  let requestHandler = () => blockchainService.handleGetVersionRequest();
+  let requestHandler = () => blockchainService.getServiceVersion();
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
