@@ -77,9 +77,14 @@ router.get('/version', async (ctx, _next) => {
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
+router.get('/fee/:blockchainTime', async (ctx, _next) => {
+  const requestHandler = () => blockchainService.getFee(ctx.params.blockchainTime);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
 router.post('/transactions', async (ctx, _next) => {
   const writeRequest = JSON.parse(ctx.body);
-  const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString);
+  const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString, writeRequest.fee);
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
