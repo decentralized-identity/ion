@@ -1,5 +1,6 @@
 {
   "batchingIntervalInSeconds": 600,
+  "blockchainFeeMarkupFactor": 0.00,
   "blockchainServiceUri": "http://127.0.0.1:3002",
   "contentAddressableStoreServiceUri": "http://127.0.0.1:3003",
   "didMethodName": "did:ion:test:",
