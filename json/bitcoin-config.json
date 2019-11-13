@@ -3,7 +3,6 @@
   "bitcoinRpcUsername": "",
   "bitcoinRpcPassword": "",
   "bitcoinWalletImportString": "[FILL THIS IN!]",
-  "bitcoinFee": 4000,
   "sidetreeTransactionPrefix": "ion:",
   "genesisBlockNumber": 1500000,
   "databaseName": "sidetree-bitcoin",
