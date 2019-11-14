@@ -1,7 +1,6 @@
 {
   "bitcoinPeerUri": "unused",
   "bitcoinWalletImportString": "cVneRge89Va3mrxv7dehTYTknbgLVan8rY5hkbXUwdwXtZrrueGY",
-  "bitcoinFee": 4000,
   "sidetreeTransactionPrefix": "sidetree:",
   "genesisBlockNumber": 1500000,
   "databaseName": "sidetree-bitcoin",
