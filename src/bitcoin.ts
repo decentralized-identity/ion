@@ -78,7 +78,7 @@ router.get('/version', async (ctx, _next) => {
 });
 
 router.get('/fee/:blockchainTime', async (ctx, _next) => {
-  const requestHandler = () => blockchainService.getFee(ctx.params.blockchainTime);
+  const requestHandler = () => blockchainService.getNormalizedFee(ctx.params.blockchainTime);
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
