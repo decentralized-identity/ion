@@ -131,7 +131,7 @@ try {
       });
     })
     .catch((error) => {
-      console.error(`Sidetree-Bitcoin node initialization failed with error: ${error}`);
+      console.error(`Sidetree-Bitcoin node initialization failed with error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
       process.exit(1);
     });
   }
@@ -141,7 +141,7 @@ try {
   process.exit(1);
 }
 console.info('Sidetree bitcoin service configuration:');
-console.info(config);
+// console.info(config);
 
 export {
   server,
