@@ -35,6 +35,8 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
     console.error(error);
     if ('status' in error) {
       koaResponse.status = error.status;
+    } else {
+      koaResponse.status = 500;
     }
 
     if ('code' in error) {
