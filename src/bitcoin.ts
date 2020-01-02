@@ -139,7 +139,7 @@ try {
   }
 } catch (error) {
   console.log('Is bitcoinWalletImportString valid? Consider using testnet key generated below:');
-  console.log(SidetreeBitcoinProcessor.generatePrivateKey('testnet'));
+  console.log(SidetreeBitcoinProcessor.generatePrivateKeyForTestnet());
   process.exit(1);
 }
 console.info('Sidetree bitcoin service configuration:');
