@@ -1,6 +1,6 @@
 {
-  "bitcoinFeeSpendingCutoffPeriodInBlocks": 6,
-  "bitcoinFeeSpendingCutoff": 0.5,
+  "bitcoinFeeSpendingCutoffPeriodInBlocks": 1,
+  "bitcoinFeeSpendingCutoff": 0.01,
   "bitcoinPeerUri": "http://localhost:18332",
   "bitcoinRpcUsername": "",
   "bitcoinRpcPassword": "",
