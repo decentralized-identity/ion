@@ -79,7 +79,7 @@ router.get('/version', async (ctx, _next) => {
 
 router.post('/transactions', async (ctx, _next) => {
   const writeRequest = JSON.parse(ctx.body);
-  const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString);
+  const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString, writeRequest.fee);
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
@@ -132,7 +132,7 @@ try {
   }
 } catch (error) {
   console.log('Is bitcoinWalletImportString valid? Consider using testnet key generated below:');
-  console.log(SidetreeBitcoinProcessor.generatePrivateKey('testnet'));
+  console.log(SidetreeBitcoinProcessor.generatePrivateKeyForTestnet());
   process.exit(1);
 }
 console.info('Sidetree bitcoin service configuration:');
