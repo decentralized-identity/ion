@@ -99,6 +99,11 @@ router.get('/time/:hash', async (ctx, _next) => {
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
+router.get('/fee/:transactionTime', async (ctx, _next) => {
+  const requestHandler = () => blockchainService.getNormalizedFee(ctx.params.transactionTime);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
 app.use(router.routes())
   .use(router.allowedMethods());
 
