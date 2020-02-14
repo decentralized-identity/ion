@@ -6,7 +6,7 @@
   "bitcoinRpcPassword": "",
   "bitcoinWalletImportString": "[FILL THIS IN!]",
   "sidetreeTransactionPrefix": "ion:",
-  "genesisBlockNumber": 1600000,
+  "genesisBlockNumber": 1662950,
   "databaseName": "sidetree-bitcoin",
   "mongoDbConnectionString": "mongodb://localhost:27017/",
   "port": 3002
