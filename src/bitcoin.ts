@@ -86,7 +86,7 @@ router.get('/fee/:blockchainTime', async (ctx, _next) => {
 
 router.post('/transactions', async (ctx, _next) => {
   const writeRequest = JSON.parse(ctx.body);
-  const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString, writeRequest.fee);
+  const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString, writeRequest.minimumFee);
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
