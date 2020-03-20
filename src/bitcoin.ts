@@ -28,6 +28,12 @@ async function handleRequestAndSetKoaResponseAsync (requestHandler: () => Promis
   }
 }
 
+/**
+ * Handles the request using the given request handler then assigns the returned value as the body.
+ * NOTE: The value of this method is really the unified handling of errors thrown.
+ * @param requestHandler Request handler.
+ * @param koaResponse Response object to update.
+ */
 function handleRequestAndSetKoaResponse (requestHandler: () => any, koaResponse: Koa.Response) {
   try {
     const responseBody = requestHandler();
@@ -37,6 +43,11 @@ function handleRequestAndSetKoaResponse (requestHandler: () => any, koaResponse:
   }
 }
 
+/**
+ * Updates the Koa response in case of a successful response.
+ * @param responseBody The response body to set.
+ * @param koaResponse The response object to update.
+ */
 function setSuccessKoaResponse (responseBody: any, koaResponse: Koa.Response): void {
   koaResponse.status = 200;
   koaResponse.set('Content-Type', 'application/json');
@@ -49,6 +60,11 @@ function setSuccessKoaResponse (responseBody: any, koaResponse: Koa.Response): v
   }
 }
 
+/**
+ * Updates the Koa response if the request handling threw an exception.
+ * @param error The exception.
+ * @param koaResponse The response object to update.
+ */
 function setExceptionKoaResponse (error: any, koaResponse: Koa.Response): void {
 
   console.error(error);
