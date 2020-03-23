@@ -75,27 +75,27 @@ void SidetreeIpfsService.create(config.fetchTimeoutInSeconds).then(requestHandle
     process.exit();
   });
 
-  /**
-   * Sets the koa response according to the Sidetree response object given.
-   * @param response Response object fetched from request handler.
-   * @param koaResponse Koa Response object to be filled
-   * @param contentType Content type to be set for response, defaults to application/json
-   */
-  const setKoaResponse = (response: SidetreeResponseModel, koaResponse: Koa.Response, contentType?: string) => {
-    koaResponse.status = SidetreeResponse.toHttpStatus(response.status);
-    if (contentType) {
-      koaResponse.set('Content-Type', contentType);
-    } else {
-      koaResponse.set('Content-Type', 'application/json');
-    }
-
-    if (response.body) {
-      koaResponse.body = response.body;
-    } else {
-      // Need to set the body explicitly, otherwise Koa will return HTTP 204.
-      koaResponse.body = '';
-    }
-  };
-
   module.exports = server;
 });
+
+/**
+ * Sets the koa response according to the Sidetree response object given.
+ * @param response Response object fetched from request handler.
+ * @param koaResponse Koa Response object to be filled
+ * @param contentType Content type to be set for response, defaults to application/json
+ */
+const setKoaResponse = (response: SidetreeResponseModel, koaResponse: Koa.Response, contentType?: string) => {
+  koaResponse.status = SidetreeResponse.toHttpStatus(response.status);
+  if (contentType) {
+    koaResponse.set('Content-Type', contentType);
+  } else {
+    koaResponse.set('Content-Type', 'application/json');
+  }
+
+  if (response.body) {
+    koaResponse.body = response.body;
+  } else {
+    // Need to set the body explicitly, otherwise Koa will return HTTP 204.
+    koaResponse.body = '';
+  }
+};
