@@ -15,64 +15,67 @@ const config: {
   fetchTimeoutInSeconds: number;
 } = require('../json/ipfs-config.json');
 
-const requestHandler = new SidetreeIpfsService(config.fetchTimeoutInSeconds);
-const app = new Koa();
+void SidetreeIpfsService.create(config.fetchTimeoutInSeconds).then(requestHandler => {
+  const app = new Koa();
 
-// Raw body parser.
-app.use(async (ctx, next) => {
-  ctx.body = await getRawBody(ctx.req);
-  await next();
-});
+  // Raw body parser.
+  app.use(async (ctx, next) => {
+    ctx.body = await getRawBody(ctx.req);
+    await next();
+  });
 
-const router = new Router();
+  const router = new Router();
 
-router.get('/version', async (ctx, _next) => {
-  const response = await requestHandler.handleGetVersionRequest();
-  setKoaResponse(response, ctx.response);
-});
+  router.get('/version', async (ctx, _next) => {
+    const response = await requestHandler.handleGetVersionRequest();
+    setKoaResponse(response, ctx.response);
+  });
 
-router.get('/:hash', async (ctx, _next) => {
-  const response = await requestHandler.handleFetchRequest(ctx.params.hash, ctx.query['max-size']);
-  setKoaResponse(response, ctx.response, 'application/octet-stream');
-});
+  router.get('/:hash', async (ctx, _next) => {
+    const response = await requestHandler.handleFetchRequest(ctx.params.hash, ctx.query['max-size']);
+    setKoaResponse(response, ctx.response, 'application/octet-stream');
+  });
 
-router.post('/', async (ctx, _next) => {
-  const response = await requestHandler.handleWriteRequest(ctx.body);
-  setKoaResponse(response, ctx.response);
-});
+  router.post('/', async (ctx, _next) => {
+    const response = await requestHandler.handleWriteRequest(ctx.body);
+    setKoaResponse(response, ctx.response);
+  });
 
-app.use(router.routes())
-   .use(router.allowedMethods());
+  app.use(router.routes())
+    .use(router.allowedMethods());
 
-// Handler to return bad request for all unhandled paths.
-app.use((ctx, _next) => {
-  ctx.response.status = 400;
-});
-const port = config.port;
+  // Handler to return bad request for all unhandled paths.
+  app.use((ctx, _next) => {
+    ctx.response.status = 400;
+  });
+  const port = config.port;
 
-const server = app.listen(port, () => {
-  console.log(`Sidetree-IPFS node running on port: ${port}`);
-})
-.on('error', (e) => {
-  console.error(`${e.message} on starting Sidetree-IPFS service`);
-});
+  const server = app.listen(port, () => {
+    console.log(`Sidetree-IPFS node running on port: ${port}`);
+  })
+  .on('error', (e) => {
+    console.error(`${e.message} on starting Sidetree-IPFS service`);
+  });
 
-// Listen for graceful termination
-process.on('SIGTERM', () => {
-  requestHandler.ipfsStorage.stop();
-  process.exit();
-});
-process.on('SIGINT', () => {
-  requestHandler.ipfsStorage.stop();
-  process.exit();
-});
-process.on('SIGHUP', () => {
-  requestHandler.ipfsStorage.stop();
-  process.exit();
-});
-process.on('uncaughtException', () => {
-  requestHandler.ipfsStorage.stop();
-  process.exit();
+  // Listen for graceful termination
+  process.on('SIGTERM', async () => {
+    await requestHandler.ipfsStorage.stop();
+    process.exit();
+  });
+  process.on('SIGINT', async () => {
+    await requestHandler.ipfsStorage.stop();
+    process.exit();
+  });
+  process.on('SIGHUP', async () => {
+    await requestHandler.ipfsStorage.stop();
+    process.exit();
+  });
+  process.on('uncaughtException', async () => {
+    await requestHandler.ipfsStorage.stop();
+    process.exit();
+  });
+
+  module.exports = server;
 });
 
 /**
@@ -96,5 +99,3 @@ const setKoaResponse = (response: SidetreeResponseModel, koaResponse: Koa.Respon
     koaResponse.body = '';
   }
 };
-
-module.exports = server;
