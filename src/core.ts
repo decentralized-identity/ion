@@ -38,8 +38,10 @@ router.get('/version', async (ctx, _next) => {
   setKoaResponse(response, ctx.response);
 });
 
-router.get('/:didOrDidDocument', async (ctx, _next) => {
-  const response = await sidetreeCore.handleResolveRequest(ctx.params.didOrDidDocument);
+router.get('/:did', async (ctx, _next) => {
+  // Strip away the first '/' character.
+  const didOrDidDocument = ctx.url.slice(1);
+  const response = await sidetreeCore.handleResolveRequest(didOrDidDocument);
   setKoaResponse(response, ctx.response);
 });
 
