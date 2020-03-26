@@ -19,66 +19,29 @@ interface IBitcoinServiceConifg extends ISidetreeBitcoinConfig {
  * @param requestHandler Request handler.
  * @param koaResponse Response object to update.
  */
-async function handleRequestAndSetKoaResponseAsync (requestHandler: () => Promise<any>, koaResponse: Koa.Response) {
+async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any>, koaResponse: Koa.Response) {
   try {
     const responseBody = await requestHandler();
-    setSuccessKoaResponse(responseBody, koaResponse);
+    koaResponse.status = 200;
+    koaResponse.set('Content-Type', 'application/json');
+
+    if (responseBody) {
+      koaResponse.body = JSON.stringify(responseBody);
+    } else {
+      // Need to set the body explicitly, otherwise Koa will return HTTP 204
+      koaResponse.body = '';
+    }
   } catch (error) {
-    setExceptionKoaResponse(error, koaResponse);
-  }
-}
+    console.error(error);
+    if ('status' in error) {
+      koaResponse.status = error.status;
+    }
 
-/**
- * Handles the request using the given request handler then assigns the returned value as the body.
- * NOTE: The value of this method is really the unified handling of errors thrown.
- * @param requestHandler Request handler.
- * @param koaResponse Response object to update.
- */
-function handleRequestAndSetKoaResponse (requestHandler: () => any, koaResponse: Koa.Response) {
-  try {
-    const responseBody = requestHandler();
-    setSuccessKoaResponse(responseBody, koaResponse);
-  } catch (error) {
-    setExceptionKoaResponse(error, koaResponse);
-  }
-}
-
-/**
- * Updates the Koa response in case of a successful response.
- * @param responseBody The response body to set.
- * @param koaResponse The response object to update.
- */
-function setSuccessKoaResponse (responseBody: any, koaResponse: Koa.Response): void {
-  koaResponse.status = 200;
-  koaResponse.set('Content-Type', 'application/json');
-
-  if (responseBody) {
-    koaResponse.body = JSON.stringify(responseBody);
-  } else {
-    // Need to set the body explicitly, otherwise Koa will return HTTP 204
-    koaResponse.body = '';
-  }
-}
-
-/**
- * Updates the Koa response if the request handling threw an exception.
- * @param error The exception.
- * @param koaResponse The response object to update.
- */
-function setExceptionKoaResponse (error: any, koaResponse: Koa.Response): void {
-
-  console.error(error);
-
-  if ('status' in error) {
-    koaResponse.status = error.status;
-  } else {
-    koaResponse.status = 500;
-  }
-
-  if ('code' in error) {
-    koaResponse.body = JSON.stringify({
-      code: error.code
-    });
+    if ('code' in error) {
+      koaResponse.body = JSON.stringify({
+        code: error.code
+      });
+    }
   }
 }
 
@@ -106,49 +69,49 @@ router.get('/transactions', async (ctx, _next) => {
     requestHandler = () => blockchainService.transactions();
   }
 
-  await handleRequestAndSetKoaResponseAsync(requestHandler, ctx.response);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 router.get('/version', async (ctx, _next) => {
   const requestHandler = () => blockchainService.getServiceVersion();
-  await handleRequestAndSetKoaResponseAsync(requestHandler, ctx.response);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 router.get('/fee/:blockchainTime', async (ctx, _next) => {
   const requestHandler = () => blockchainService.getNormalizedFee(ctx.params.blockchainTime);
-  await handleRequestAndSetKoaResponseAsync(requestHandler, ctx.response);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 router.post('/transactions', async (ctx, _next) => {
   const writeRequest = JSON.parse(ctx.body);
   const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString, writeRequest.minimumFee);
-  await handleRequestAndSetKoaResponseAsync(requestHandler, ctx.response);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 router.post('/transactions/firstValid', async (ctx, _next) => {
   const transactionsObject = JSON.parse(ctx.body);
   const requestHandler = () => blockchainService.firstValidTransaction(transactionsObject.transactions);
-  await handleRequestAndSetKoaResponseAsync(requestHandler, ctx.response);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 router.get('/time', async (ctx, _next) => {
   const requestHandler = () => blockchainService.time();
-  await handleRequestAndSetKoaResponseAsync(requestHandler, ctx.response);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 router.get('/time/:hash', async (ctx, _next) => {
   const requestHandler = () => blockchainService.time(ctx.params.hash);
-  await handleRequestAndSetKoaResponseAsync(requestHandler, ctx.response);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 router.get('/locks/:identifier', async (ctx, _next) => {
   const requestHandler = () => blockchainService.getValueTimeLock(ctx.params.identifier);
-  await handleRequestAndSetKoaResponseAsync(requestHandler, ctx.response);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 router.get('/writerlock', async (ctx, _next) => {
-  const requestHandler = () => blockchainService.getActiveValueTimeLockForThisNode();
-  handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+  const requestHandler = async () => blockchainService.getActiveValueTimeLockForThisNode();
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
 app.use(router.routes())
