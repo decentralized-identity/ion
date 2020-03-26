@@ -106,6 +106,16 @@ router.get('/time/:hash', async (ctx, _next) => {
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
+router.get('/locks/:identifier', async (ctx, _next) => {
+  const requestHandler = () => blockchainService.getValueTimeLock(ctx.params.identifier);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
+router.get('/writerlock', async (ctx, _next) => {
+  const requestHandler = async () => blockchainService.getActiveValueTimeLockForThisNode();
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
 app.use(router.routes())
   .use(router.allowedMethods());
 
