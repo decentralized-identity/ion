@@ -4,7 +4,7 @@
   "bitcoinPeerUri": "http://localhost:18332",
   "bitcoinRpcUsername": "",
   "bitcoinRpcPassword": "",
-  "bitcoinWalletImportString": "[FILL THIS IN!]",
+  "bitcoinWalletOrImportString": "[FILL THIS IN!]",
   "sidetreeTransactionFeeMarkupPercentage": 5,
   "sidetreeTransactionPrefix": "ion:",
   "genesisBlockNumber": 1500000,
