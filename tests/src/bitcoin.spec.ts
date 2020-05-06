@@ -3,9 +3,9 @@ process.env.SIDETREE_TEST_MODE = 'true';
 process.env.SIDETREE_BITCOIN_CONFIG_FILE_PATH = '../tests/json/bitcoin-config-test.json';
 
 import * as supertest from 'supertest';
-import ErrorCode from '@decentralized-identity/sidetree/lib/common/SharedErrorCode';
-import RequestError from '@decentralized-identity/sidetree/lib/bitcoin/RequestError';
-import ResponseStatus from '@decentralized-identity/sidetree/lib/common/enums/ResponseStatus';
+import ErrorCode from '@decentralized-identity/sidetree/dist/lib/common/SharedErrorCode';
+import RequestError from '@decentralized-identity/sidetree/dist/lib/bitcoin/RequestError';
+import ResponseStatus from '@decentralized-identity/sidetree/dist/lib/common/enums/ResponseStatus';
 import { blockchainService, server } from '../../src/bitcoin';
 
 describe('Bitcoin service', async () => {
