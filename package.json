@@ -6,12 +6,13 @@
   "license": "Apache-2.0",
   "main": "dist/src/core.js",
   "dependencies": {
-    "@decentralized-identity/sidetree": "0.5.0",
+    "@decentralized-identity/sidetree": "0.7.0",
     "koa": "2.7.0",
     "koa-router": "7.4.0",
     "raw-body": "2.3.3"
   },
   "devDependencies": {
+    "@types/bitcore-lib": "0.15.1",
     "@types/cls-hooked": "4.2.1",
     "@types/jasmine": "2.8.12",
     "@types/koa": "2.0.48",
