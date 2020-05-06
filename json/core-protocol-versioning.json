@@ -1,10 +1,6 @@
 [
   {
-    "startingBlockchainTime": 1500000,
-    "version": "0.4.0"
-  },
-  {
-    "startingBlockchainTime": 1585000,
-    "version": "0.5.0"
+    "startingBlockchainTime": 1723000,
+    "version": "0.7.0"
   }
 ]

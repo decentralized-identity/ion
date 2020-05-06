@@ -35,6 +35,8 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
     console.error(error);
     if ('status' in error) {
       koaResponse.status = error.status;
+    } else {
+      koaResponse.status = 500;
     }
 
     if ('code' in error) {
@@ -77,9 +79,14 @@ router.get('/version', async (ctx, _next) => {
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
+router.get('/fee/:blockchainTime', async (ctx, _next) => {
+  const requestHandler = () => blockchainService.getNormalizedFee(ctx.params.blockchainTime);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
 router.post('/transactions', async (ctx, _next) => {
   const writeRequest = JSON.parse(ctx.body);
-  const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString);
+  const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString, writeRequest.minimumFee);
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
@@ -96,6 +103,16 @@ router.get('/time', async (ctx, _next) => {
 
 router.get('/time/:hash', async (ctx, _next) => {
   const requestHandler = () => blockchainService.time(ctx.params.hash);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
+router.get('/locks/:identifier', async (ctx, _next) => {
+  const requestHandler = () => blockchainService.getValueTimeLock(ctx.params.identifier);
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
+router.get('/writerlock', async (ctx, _next) => {
+  const requestHandler = async () => blockchainService.getActiveValueTimeLockForThisNode();
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
@@ -126,17 +143,18 @@ try {
       });
     })
     .catch((error) => {
-      console.error(`Sidetree-Bitcoin node initialization failed with error: ${error}`);
+      console.error(`Sidetree-Bitcoin node initialization failed with error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
       process.exit(1);
     });
   }
 } catch (error) {
+  console.log(error.toString());
   console.log('Is bitcoinWalletImportString valid? Consider using testnet key generated below:');
-  console.log(SidetreeBitcoinProcessor.generatePrivateKey('testnet'));
+  console.log(SidetreeBitcoinProcessor.generatePrivateKeyForTestnet());
   process.exit(1);
 }
 console.info('Sidetree bitcoin service configuration:');
-console.info(config);
+// console.info(config);
 
 export {
   server,

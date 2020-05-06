@@ -1,11 +1,16 @@
 {
+  "bitcoinFeeSpendingCutoffPeriodInBlocks": 1,
+  "bitcoinFeeSpendingCutoff": 0.01,
   "bitcoinPeerUri": "unused",
-  "bitcoinWalletImportString": "cVneRge89Va3mrxv7dehTYTknbgLVan8rY5hkbXUwdwXtZrrueGY",
-  "bitcoinFee": 4000,
+  "bitcoinRpcUsername": "",
+  "bitcoinRpcPassword": "",
+  "bitcoinWalletOrImportString": "cVneRge89Va3mrxv7dehTYTknbgLVan8rY5hkbXUwdwXtZrrueGY",
+  "sidetreeTransactionFeeMarkupPercentage": 5,
   "sidetreeTransactionPrefix": "sidetree:",
   "genesisBlockNumber": 1500000,
   "databaseName": "sidetree-bitcoin",
   "transactionFetchPageSize": 100,
   "mongoDbConnectionString": "mongodb://localhost:27017/",
-  "port": 3002
+  "port": 3002,
+  "valueTimeLockAmountInBitcoins": 0
 }

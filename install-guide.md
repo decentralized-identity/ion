@@ -85,6 +85,7 @@ server=1
 datadir=~/.bitcoin
 rpcuser=<your-rpc-username>
 rpcpassword=<your-rpc-password>
+txindex=1
 ```
 
 Start Bitcoin Core and let it sync with Testnet:
@@ -97,7 +98,7 @@ Start Bitcoin Core and let it sync with Testnet:
 #### On Windows:
 
 ```
-bitcoin-qt.exe -testnet -datadir=<path-to-store-data> -server -rpcuser=<you-rpc-username> -rpcpassword=<your-rpc-password>
+bitcoin-qt.exe -testnet -datadir=<path-to-store-data> -server -rpcuser=<you-rpc-username> -rpcpassword=<your-rpc-password> -txindex=1
 ```
     
 ## 3. Setting up MongoDB

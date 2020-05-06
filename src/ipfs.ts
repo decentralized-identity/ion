@@ -15,7 +15,8 @@ const config: {
   fetchTimeoutInSeconds: number;
 } = require('../json/ipfs-config.json');
 
-const requestHandler = new SidetreeIpfsService(config.fetchTimeoutInSeconds);
+const requestHandler = SidetreeIpfsService.create(config.fetchTimeoutInSeconds);
+
 const app = new Koa();
 
 // Raw body parser.
@@ -42,7 +43,7 @@ router.post('/', async (ctx, _next) => {
 });
 
 app.use(router.routes())
-   .use(router.allowedMethods());
+  .use(router.allowedMethods());
 
 // Handler to return bad request for all unhandled paths.
 app.use((ctx, _next) => {
@@ -58,22 +59,24 @@ const server = app.listen(port, () => {
 });
 
 // Listen for graceful termination
-process.on('SIGTERM', () => {
-  requestHandler.ipfsStorage.stop();
+process.on('SIGTERM', async () => {
+  await requestHandler.ipfsStorage.stop();
   process.exit();
 });
-process.on('SIGINT', () => {
-  requestHandler.ipfsStorage.stop();
+process.on('SIGINT', async () => {
+  await requestHandler.ipfsStorage.stop();
   process.exit();
 });
-process.on('SIGHUP', () => {
-  requestHandler.ipfsStorage.stop();
+process.on('SIGHUP', async () => {
+  await requestHandler.ipfsStorage.stop();
   process.exit();
 });
-process.on('uncaughtException', () => {
-  requestHandler.ipfsStorage.stop();
+process.on('uncaughtException', async () => {
+  await requestHandler.ipfsStorage.stop();
   process.exit();
 });
+
+module.exports = server;
 
 /**
  * Sets the koa response according to the Sidetree response object given.
@@ -96,5 +99,3 @@ const setKoaResponse = (response: SidetreeResponseModel, koaResponse: Koa.Respon
     koaResponse.body = '';
   }
 };
-
-module.exports = server;
