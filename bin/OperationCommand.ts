@@ -17,12 +17,13 @@ export default class OperationCommand {
     console.info('');
 
     // Save the private signing and recovery keys.
-    const recoveryKeyFileName = `keys${didSuffix}-RecoveryPrivateKey.json`;
-    const signingKeyFileName = `keys${didSuffix}-SigningPrivateKey.json`;
+    const recoveryKeyFileName = `${didSuffix}-RecoveryPrivateKey.json`;
+    const signingKeyFileName = `${didSuffix}-SigningPrivateKey.json`;
     fs.writeFileSync(recoveryKeyFileName, JSON.stringify(createOperationData.recoveryPrivateKey));
     fs.writeFileSync(signingKeyFileName, JSON.stringify(createOperationData.signingPrivateKey));
     console.info(`Recovery private key saved as: ${chalk.yellow(recoveryKeyFileName)}`);
     console.info(`Siging private key saved as: ${chalk.yellow(signingKeyFileName)}`);
+    console.info('');
 
     console.info(chalk.hex('#75b0eb')(`Create request body:`));
     console.info(createOperationData.operationRequest);
