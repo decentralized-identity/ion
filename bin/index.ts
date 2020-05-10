@@ -22,7 +22,7 @@
 
 // import * as util from 'util';
 import * as yargs from 'yargs';
-import OperationGenerator from '@decentralized-identity/sidetree/dist/tests/generators/OperationGenerator';
+import OperationCommand from './OperationCommand';
 
 // tslint:disable-next-line: no-unused-expression
 yargs
@@ -45,24 +45,7 @@ yargs
     yargs
       .usage('usage: $0 operation <create|update|recover|deactivate> [options]')
       .command('create', 'Generates a create operation.', async () => {
-        const createOperationData = await OperationGenerator.generateCreateOperation();
-        console.info(`DID: did:ion:${createOperationData.createOperation.didUniqueSuffix}`);
-        console.info('');
-
-        console.info(`Create request body:`);
-        console.info(createOperationData.operationRequest);
-        console.info('');
-
-        console.info(`Decoded suffix data:`);
-        console.info(createOperationData.createOperation.suffixData);
-        console.info('');
-
-        console.info(`Decoded delta:`);
-        const delta = createOperationData.createOperation.delta;
-        // const decodedDeltaString = util.inspect(delta, false, null, true /* enable colors */)
-        // console.info(decodedDeltaString);
-        console.info(delta);
-        console.info('');
+        await OperationCommand.handleCreate();
       })
       .command('update', 'Generates an update operation.', () => {
         console.log('parsing update operation command');
