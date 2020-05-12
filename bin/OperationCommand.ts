@@ -1,5 +1,5 @@
-import * as chalk from 'chalk';
 import * as fs from 'fs';
+import LogColor from './LogColor';
 import OperationGenerator from '@decentralized-identity/sidetree/dist/tests/generators/OperationGenerator';
 
 /**
@@ -13,7 +13,7 @@ export default class OperationCommand {
     const createOperationData = await OperationGenerator.generateCreateOperation();
     const didSuffix = createOperationData.createOperation.didUniqueSuffix;
 
-    console.info(chalk.hex('#75b0eb')(`DID: `) + chalk.yellow(`did:ion:${createOperationData.createOperation.didUniqueSuffix}`));
+    console.info(LogColor.lightBlue(`DID: `) + LogColor.yellow(`did:ion:${createOperationData.createOperation.didUniqueSuffix}`));
     console.info('');
 
     // Save the private signing and recovery keys.
@@ -21,23 +21,20 @@ export default class OperationCommand {
     const signingKeyFileName = `${didSuffix}-SigningPrivateKey.json`;
     fs.writeFileSync(recoveryKeyFileName, JSON.stringify(createOperationData.recoveryPrivateKey));
     fs.writeFileSync(signingKeyFileName, JSON.stringify(createOperationData.signingPrivateKey));
-    console.info(`Recovery private key saved as: ${chalk.yellow(recoveryKeyFileName)}`);
-    console.info(`Siging private key saved as: ${chalk.yellow(signingKeyFileName)}`);
+    console.info(LogColor.brightYellow(`Recovery private key saved as: ${LogColor.yellow(recoveryKeyFileName)}`));
+    console.info(LogColor.brightYellow(`Siging private key saved as: ${LogColor.yellow(signingKeyFileName)}`));
     console.info('');
 
-    console.info(chalk.hex('#75b0eb')(`Create request body:`));
-    console.info(createOperationData.operationRequest);
+    console.info(LogColor.lightBlue(`Create request body:`));
+    console.info(JSON.stringify(createOperationData.operationRequest, null, 2)); // 2 space indents.
     console.info('');
 
-    console.info(chalk.hex('#75b0eb')(`Decoded suffix data:`));
+    console.info(LogColor.lightBlue(`Decoded suffix data:`));
     console.info(createOperationData.createOperation.suffixData);
     console.info('');
 
-    console.info(chalk.hex('#75b0eb')(`Decoded delta:`));
-    const delta = createOperationData.createOperation.delta;
-    // const decodedDeltaString = util.inspect(delta, false, null, true /* enable colors */)
-    // console.info(decodedDeltaString);
-    console.info(delta);
+    console.info(LogColor.lightBlue(`Decoded delta:`));
+    console.info(createOperationData.createOperation.delta);
     console.info('');
   }
 }
