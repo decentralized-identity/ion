@@ -9,8 +9,7 @@
             "request": "launch",
             "name": "ion operation create",
             "program": "${workspaceFolder}/dist/bin/index.js",
-            // "args": ["operation", "create"],
-            "args": ["--help"],
+            "args": ["operation", "create"],
             "skipFiles": [
                 "<node_internals>/**"
             ]

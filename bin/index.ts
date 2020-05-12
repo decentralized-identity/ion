@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-// NOTE: MUST keep the line above even so `npm i` will install the CLI correctly across all operating systems. 
+// NOTE: MUST keep the line above even so `npm i` will install the CLI correctly across all operating systems.
 
 import * as yargs from 'yargs';
 import OperationCommand from './OperationCommand';
 
-// tslint:disable-next-line: no-unused-expression
+// tslint:disable-next-line: no-unused-expression - Invoking `argv` is the way to trigger argument processing in `yargs`...
 yargs
   .scriptName('ion') // Make usage help print 'ion' instead 'index.js'.
   .usage('Usage: $0 <command> [options]')
@@ -28,52 +28,13 @@ yargs
       .updateStrings({
         'Commands:': 'Operation type:'
       })
-      .wrap(null) // NO
+      .wrap(null)
       .strict(); // Requires the sub-command must be one of the explicitly defined sub-commands.
   })
   .command('resolve', 'Resolves an ION DID.', () => {
     console.log('To be implemented.');
   })
   .strict() // Requires the command must be one of the explicitly defined commands.
+  .help(false) // Disabling --help option.
+  .version(false) // Disabling --version option.
   .argv;
-
-// const argv = yargs
-//   .scriptName('ion') // Make usage help print 'ion' instead 'index.js'.
-//   .usage('Usage: $0 <command> [options]')
-//   .demandCommand(1, 'A <command> is not supplied.')
-//   .command('count', 'Count the lines in a file')
-//   .example('$0 count -f foo.js', 'count the lines in the given file')
-//   .alias('f', 'file')
-//   .nargs('f', 1)
-//   .describe('f', 'Load a file')
-//   .demandOption(['f'])
-//   .help('h')
-//   .alias('h', 'help')
-//   .epilog('copyright 2019')
-//   .argv;
-
-//   console.log(argv.$0);
-
-// yargs
-//   .demandCommand(1, 'A <command> is not supplied.')
-//   .usage('Usage: $0 <command> [options]')
-//   .command({
-//     command: 'generate [moduleType] [moduleNames...]',
-//     aliases: ['g'],
-//     describe: 'Generates a resource',
-//     handler: parsed => console.log('your handler goes here', parsed),
-//     builder: {
-//       moduleType: {
-//         demand: true,
-//         choices: ['routed', 'stateful'] as const,
-//         default: 'routed',
-//       },
-//       moduleNames: {
-//         demand: true,
-//         array: true,
-//       },
-//     },
-//   })
-//   .help('h')
-//   .alias('h', 'help')
-//   .parse(process.argv.slice(2))
