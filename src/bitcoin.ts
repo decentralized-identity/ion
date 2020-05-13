@@ -2,6 +2,7 @@ import * as getRawBody from 'raw-body';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as querystring from 'querystring';
+import LogColor from '../bin/LogColor';
 import {
   ISidetreeBitcoinConfig,
   SidetreeBitcoinProcessor
@@ -47,7 +48,15 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
   }
 }
 
-const configFilePath = process.env.SIDETREE_BITCOIN_CONFIG_FILE_PATH || '../json/bitcoin-config.json';
+// Selecting configuration file, envionrment variable overrides default config file.
+let configFilePath = '../json/testnet-bitcoin-config.json';
+if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
+  console.log(LogColor.yellow(`Environment variable ION_BITCOIN_CONFIG_FILE_PATH undefined, using default path ${configFilePath} instead.`));
+} else {
+  configFilePath = process.env.ION_BITCOIN_CONFIG_FILE_PATH;
+  console.log(LogColor.lightBlue(`Loading configuration from ${LogColor.green(configFilePath)}...`));
+}
+
 const config: IBitcoinServiceConifg = require(configFilePath);
 const app = new Koa();
 
