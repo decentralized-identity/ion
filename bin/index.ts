@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// NOTE: MUST keep the line above even so `npm i` will install the CLI correctly across all operating systems.
+// NOTE: MUST keep the line above so `npm i` will install the CLI correctly across all operating systems.
 
 import * as yargs from 'yargs';
 import OperationCommand from './OperationCommand';
