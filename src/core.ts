@@ -16,7 +16,7 @@ interface ServerConfig extends SidetreeConfig {
   port: number;
 }
 
-// Selecting core config file, envionrment variable overrides default config file.
+// Selecting core config file, environment variable overrides default config file.
 let configFilePath = '../json/testnet-core-config.json';
 if (process.env.ION_CORE_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(`Environment variable ION_CORE_CONFIG_FILE_PATH undefined, using default core config path ${configFilePath} instead.`));
@@ -26,7 +26,7 @@ if (process.env.ION_CORE_CONFIG_FILE_PATH === undefined) {
 }
 const config: ServerConfig = require(configFilePath);
 
-// Selecting protocol versioning file, envionrment variable overrides default config file.
+// Selecting protocol versioning file, environment variable overrides default config file.
 let protocolVersioningConfigFilePath = '../json/testnet-core-protocol-versioning.json';
 if (process.env.ION_CORE_PROTOCOL_VERSIONING_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(`Environment variable ION_CORE_PROTOCOL_VERSIONING_CONFIG_FILE_PATH undefined, using default protocol versioning config path ${protocolVersioningConfigFilePath} instead.`));

@@ -48,7 +48,7 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
   }
 }
 
-// Selecting configuration file, envionrment variable overrides default config file.
+// Selecting configuration file, environment variable overrides default config file.
 let configFilePath = '../json/testnet-bitcoin-config.json';
 if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(`Environment variable ION_BITCOIN_CONFIG_FILE_PATH undefined, using default path ${configFilePath} instead.`));
