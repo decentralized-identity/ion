@@ -1,6 +1,7 @@
 import * as getRawBody from 'raw-body';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
+import LogColor from '../bin/LogColor';
 import {
   SidetreeConfig,
   SidetreeCore,
@@ -15,8 +16,25 @@ interface ServerConfig extends SidetreeConfig {
   port: number;
 }
 
-const config: ServerConfig = require('../json/core-config.json');
-const protocolVersions: ProtocolVersionModel[] = require('../json/core-protocol-versioning.json');
+// Selecting core config file, environment variable overrides default config file.
+let configFilePath = '../json/testnet-core-config.json';
+if (process.env.ION_CORE_CONFIG_FILE_PATH === undefined) {
+  console.log(LogColor.yellow(`Environment variable ION_CORE_CONFIG_FILE_PATH undefined, using default core config path ${configFilePath} instead.`));
+} else {
+  configFilePath = process.env.ION_CORE_CONFIG_FILE_PATH;
+  console.log(LogColor.lightBlue(`Loading core config from ${LogColor.green(configFilePath)}...`));
+}
+const config: ServerConfig = require(configFilePath);
+
+// Selecting protocol versioning file, environment variable overrides default config file.
+let protocolVersioningConfigFilePath = '../json/testnet-core-protocol-versioning.json';
+if (process.env.ION_CORE_PROTOCOL_VERSIONING_CONFIG_FILE_PATH === undefined) {
+  console.log(LogColor.yellow(`Environment variable ION_CORE_PROTOCOL_VERSIONING_CONFIG_FILE_PATH undefined, using default protocol versioning config path ${protocolVersioningConfigFilePath} instead.`));
+} else {
+  protocolVersioningConfigFilePath = process.env.ION_CORE_PROTOCOL_VERSIONING_CONFIG_FILE_PATH;
+  console.log(LogColor.lightBlue(`Loading protocol versioning config from ${LogColor.green(protocolVersioningConfigFilePath)}...`));
+}
+const protocolVersions: ProtocolVersionModel[] = require(protocolVersioningConfigFilePath);
 
 const sidetreeCore = new SidetreeCore(config, protocolVersions);
 const app = new Koa();

@@ -2,9 +2,11 @@
 
 ION is a decentralized Layer 2 network for Decentralized Identifiers that runs atop the Bitcoin blockchain. Running an ION node minimizes trust in external parties for resolving ION DIDs, helps make the network more resilient and reliable, and provides the operator with better DID resolution performance.
 
-The ION node reference implementation is currently in a volatile alpha phase, running on Bitcoin's test net. Operators should expect frequent breaking changes and regular resets of the network's state. Presently, we are only recommending that experienced developers invest the time in running, testing, and contributing to the code base. This recommendation will change as the implementation progresses into more stable stages of development, which contributors will communicate to the community via blog posts and communications from DIF and collaborating organizations.
+The ION node reference implementation is currently in beta phase, operators should expect potential breaking changes and resets of the network's state. Presently, we are only recommending that experienced developers invest the time in running, testing, and contributing to the code base. This recommendation will change as the implementation progresses into more stable stages of development, which contributors will communicate to the community via blog posts and communications from DIF and collaborating organizations.
 
 The ION node implementation is composed of a collection of microservices written in TypeScript. Of these components, the major dependencies are Bitcoin/bitcore, IPFS, and MongoDB (for local persistence of data).
+
+> NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet variables to mainnet.
 
 ## 1. Preparing your development environment
 
@@ -127,7 +129,7 @@ Clone https://github.com/decentralized-identity/ion:
 git clone https://github.com/decentralized-identity/ion
 ```
 
-Update the configuration for the Sidetree Bitcoin microservice under `json/bitcoin-config.json`:
+Update the configuration for the Sidetree Bitcoin microservice under `json/testnet-bitcoin-config.json`:
 
   - Ensure `bitcoinPeerUri` points to the http location of the Bitcoin Core client you setup earlier in this guide (e.g. `http://localhost:18332`).
   - Ensure `bitcoinWalletImportString` is populated with your private key.
@@ -166,6 +168,8 @@ Start a new console and run the following commands:
 ```
 npm run core
 ```
-Give it a few minutes to synchronize Sidetree transactions.
+Give it some time to synchronize Sidetree transactions.
 
-Verify ION is running properly by checking the following DID resolution link in your browser: [http://localhost:3000/did:ion:test:EiDk2RpPVuC4wNANUTn_4YXJczjzi10zLG1XE4AjkcGOLA](http://localhost:3000/did:ion:test:EiDk2RpPVuC4wNANUTn_4YXJczjzi10zLG1XE4AjkcGOLA)
+Verify ION is running properly (mainnet) by checking the following DID resolution link in your browser:
+
+[http://localhost:3000/did:ion:EiAYSMoEuOjIG0JtoUz1bzzomVr310wrPcbNUvpaIFh6Kw](http://localhost:3000/did:ion:EiAYSMoEuOjIG0JtoUz1bzzomVr310wrPcbNUvpaIFh6Kw)
