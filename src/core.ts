@@ -56,9 +56,10 @@ router.get('/version', async (ctx, _next) => {
   setKoaResponse(response, ctx.response);
 });
 
-router.get('/identifiers/:did', async (ctx, _next) => {
+const resolvePath = '/identifiers/';
+router.get(`${resolvePath}:did`, async (ctx, _next) => {
   // Strip away the first '/identifiers/' string.
-  const didOrDidDocument = ctx.url.split('/identifiers/')[1];
+  const didOrDidDocument = ctx.url.split(resolvePath)[1];
   const response = await sidetreeCore.handleResolveRequest(didOrDidDocument);
   setKoaResponse(response, ctx.response);
 });
