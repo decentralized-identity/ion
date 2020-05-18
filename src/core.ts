@@ -57,8 +57,8 @@ router.get('/version', async (ctx, _next) => {
 });
 
 router.get('/identifiers/:did', async (ctx, _next) => {
-  // Strip away the first '/' character.
-  const didOrDidDocument = ctx.url.slice(1);
+  // Strip away the first '/identifiers/' string.
+  const didOrDidDocument = ctx.url.split('/identifiers/')[1];
   const response = await sidetreeCore.handleResolveRequest(didOrDidDocument);
   setKoaResponse(response, ctx.response);
 });
