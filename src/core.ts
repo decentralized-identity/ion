@@ -46,7 +46,7 @@ app.use(async (ctx, next) => {
 });
 
 const router = new Router();
-router.post('/', async (ctx, _next) => {
+router.post('/operations', async (ctx, _next) => {
   const response = await sidetreeCore.handleOperationRequest(ctx.body);
   setKoaResponse(response, ctx.response);
 });
@@ -56,9 +56,10 @@ router.get('/version', async (ctx, _next) => {
   setKoaResponse(response, ctx.response);
 });
 
-router.get('/:did', async (ctx, _next) => {
-  // Strip away the first '/' character.
-  const didOrDidDocument = ctx.url.slice(1);
+const resolvePath = '/identifiers/';
+router.get(`${resolvePath}:did`, async (ctx, _next) => {
+  // Strip away the first '/identifiers/' string.
+  const didOrDidDocument = ctx.url.split(resolvePath)[1];
   const response = await sidetreeCore.handleResolveRequest(didOrDidDocument);
   setKoaResponse(response, ctx.response);
 });
