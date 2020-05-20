@@ -2,6 +2,7 @@
   "batchingIntervalInSeconds": 600,
   "blockchainServiceUri": "http://127.0.0.1:3002",
   "contentAddressableStoreServiceUri": "http://127.0.0.1:3003",
+  "databaseName": "ion-mainnet-core",
   "didMethodName": "ion",
   "maxConcurrentDownloads": 20,
   "mongoDbConnectionString": "mongodb://localhost:27017/",

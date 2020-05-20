@@ -81,6 +81,7 @@ sidetreeCore.initialize()
 })
 .catch((error: Error) => {
   console.log(`Sidetree node initialization failed with error ${error}`);
+  process.exit(1);
 });
 
 /**
