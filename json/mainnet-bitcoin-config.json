@@ -11,6 +11,5 @@
   "port": 3002,
   "sidetreeTransactionFeeMarkupPercentage": 1,
   "sidetreeTransactionPrefix": "ion:",
-  "transactionFetchPageSize": 100,
   "valueTimeLockAmountInBitcoins": 0
 }
