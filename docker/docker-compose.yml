@@ -1,0 +1,49 @@
+version: "3"
+services:
+  bitcoin-core:
+    container_name: bitcoin-core
+    image: ruimarinho/bitcoin-core:0.19.1-alpine
+    command:
+      -printtoconsole
+      -testnet=1
+      -txindex=1
+      -server=1
+    environment:
+      - BITCOIN_DATA=/data
+    volumes:
+      - ${DATA_VOL}:/data
+  bitcoin-ion:
+    container_name: bitcoin-ion
+    image: node:10.20.1-alpine3.11
+    command: "npm run bitcoin"
+    working_dir: /ion
+    links:
+      - "bitcoin-core"
+      - "mongo"
+    volumes:
+      - ./ion:/ion
+  ipfs:
+    container_name: ipfs
+    image: node:10.20.1-alpine3.11
+    command: "npm run ipfs"
+    working_dir: /ion
+    depends_on:
+      - "bitcoin-ion"
+    volumes:
+      - ./ion:/ion
+  core:
+    container_name: core-ion
+    image: node:10.20.1-alpine3.11
+    command: "npm run core"
+    working_dir: /ion
+    links:
+      - "bitcoin-ion"
+      - "ipfs"
+      - "mongo"
+    volumes:
+      - ./ion:/ion
+  mongo:
+    container_name: mongo
+    image: mongo:3.6.18-xenial
+    volumes:
+      - ${DB_VOL}:/data/db
