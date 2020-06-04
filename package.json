@@ -1,12 +1,12 @@
 {
   "name": "ion",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Identity Overlay Network (ION) using Sidetree protocol.",
   "repository": "https://github.com/decentralized-identity/ion",
   "license": "Apache-2.0",
   "main": "dist/src/core.js",
   "dependencies": {
-    "@decentralized-identity/sidetree": "0.7.0",
+    "@decentralized-identity/sidetree": "0.8.0",
     "chalk": "4.0.0",
     "koa": "2.7.0",
     "koa-router": "7.4.0",
