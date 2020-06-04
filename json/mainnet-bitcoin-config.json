@@ -6,7 +6,7 @@
   "bitcoinRpcPassword": "",
   "bitcoinWalletOrImportString": "[FILL THIS IN!]",
   "databaseName": "ion-mainnet-bitcoin",
-  "genesisBlockNumber": 629000,
+  "genesisBlockNumber": 632900,
   "mongoDbConnectionString": "mongodb://localhost:27017/",
   "port": 3002,
   "sidetreeTransactionFeeMarkupPercentage": 1,
