@@ -4,13 +4,13 @@ This directory contains the automated Docker deployment of ION.  This will creat
 
 - bitcoin-core - This container will run the bitcoin-core client.  `NOTE: This is currenlty using testnet as the source chain`
 
-- bitcoin-ion - This is the bitcoin sidetree node for ION.
+- ion-bitcoin - This is the bitcoin sidetree node for ION.
 
-- ipfs - This is the local IPFS node used by the sidetree.
+- ion-ipfs - This is the local IPFS node used by the sidetree.
 
 - mongo - This is the local MongoDB used by the sidetree.
 
-- core-ion - This is the core sidetree node.
+- ion-core - This is the core sidetree node.
 
 The automation will create the docker containers in order (and will wait for bitcoin sync).
 
