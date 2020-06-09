@@ -59,3 +59,5 @@ To use this setup, complete the prerequisites.  Next simply run the [configurati
 ```
 
 The setup will take around 1 hour, based on your machine and internet connectivity speed.  This is primarily because the bitcoin testnet full node will be required to be synced before starting ION.  A simple progress indicator will be shown to give status on the sync operation.
+
+`NOTE: This configuration is using a test key for bitcoin.  You can find this in the config.sh file with the parameter, _bitcoinWalletOrImportString_.  This should be changed to a real key that is appropriately secured for production workloads!`
