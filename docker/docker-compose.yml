@@ -13,7 +13,7 @@ services:
     volumes:
       - ${DATA_VOL}:/data
   bitcoin-ion:
-    container_name: bitcoin-ion
+    container_name: ion-bitcoin
     image: node:10.20.1-alpine3.11
     command: "npm run bitcoin"
     working_dir: /ion
@@ -23,22 +23,22 @@ services:
     volumes:
       - ./ion:/ion
   ipfs:
-    container_name: ipfs
+    container_name: ion-ipfs
     image: node:10.20.1-alpine3.11
     command: "npm run ipfs"
     working_dir: /ion
     depends_on:
-      - "bitcoin-ion"
+      - "ion-bitcoin"
     volumes:
       - ./ion:/ion
   core:
-    container_name: core-ion
+    container_name: ion-core
     image: node:10.20.1-alpine3.11
     command: "npm run core"
     working_dir: /ion
     links:
-      - "bitcoin-ion"
-      - "ipfs"
+      - "ion-bitcoin"
+      - "ion-ipfs"
       - "mongo"
     volumes:
       - ./ion:/ion
