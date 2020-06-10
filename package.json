@@ -35,7 +35,7 @@
     "typescript": "3.4.3"
   },
   "bin": {
-    "ion": "./bin/index.js"
+    "ion": "./dist/bin/index.js"
   },
   "scripts": {
     "precommit": "npm run lint",
