@@ -4,8 +4,9 @@
 ### Installation
 
 1. Clone the ION repository: `git checkout master`
-2. Install the project globally: `git install -g`
-3. Use one of the supported commands below (currently limited to Create).
+1. Build ION: `npm run build`
+1. Install ION globally: `npm install -g .`
+1. Use one of the supported commands below (currently limited to Create).
 
 ### Commands
 
