@@ -39,14 +39,13 @@
   },
   "scripts": {
     "precommit": "npm run lint",
-    "build": "tsc && copyfiles \"json/**/*.json\" dist && copyfiles \"tests/**/*.json\" dist && copyfiles \"tests/**/*.js*\" dist",
+    "build": "tsc && copyfiles \"json/**/*.json\" dist",
     "test": "jasmine --config=./tests/jasmine.json",
     "cc": "npm run build && nyc jasmine --config=./tests/jasmine.json",
     "lint": "tslint --fix --project .",
-    "start": "node dist/src/core.js",
-    "core": "node dist/src/core.js",
-    "bitcoin": "node dist/src/bitcoin.js",
-    "ipfs": "node dist/src/ipfs.js"
+    "start:core": "node dist/src/core.js",
+    "start:bitcoin": "node dist/src/bitcoin.js",
+    "start:ipfs": "node dist/src/ipfs.js"
   },
   "nyc": {
     "all": true,

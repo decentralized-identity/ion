@@ -1,0 +1,30 @@
+name: Unstable Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  push-master:
+    # Don't run on any commit that features [skip ci] in the commit message
+    if: "! contains(github.event.head_commit.message, '[skip ci]')"
+    name: Build, test and publish unstable release
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.15.3]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm i
+    - run: npm run test
+    - uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: identityfoundation/ion
+        tag_with_sha: true

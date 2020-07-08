@@ -2,15 +2,15 @@
 
 This directory contains the automated Docker deployment of ION.  This will create 5 docker containers that contain the core components to run ION.
 
-- bitcoin-core - This container will run the bitcoin-core client.  `NOTE: This is currenlty using testnet as the source chain`
+- bitcoin-node - This container will run the bitcoin-node client.  `NOTE: This is currently using testnet as the source chain`
 
-- ion-bitcoin - This is the bitcoin sidetree node for ION.
+- ion-core - This is the core service of an ION sidetree node.
 
-- ion-ipfs - This is the local IPFS node used by the sidetree.
+- ion-bitcoin - This is the bitcoin service of an ION sidetree node.
 
-- mongo - This is the local MongoDB used by the sidetree.
+- ion-ipfs - This is the local IPFS service node used by the ION sidetree node.
 
-- ion-core - This is the core sidetree node.
+- mongo - This is the local MongoDB used by the core service.
 
 The automation will create the docker containers in order (and will wait for bitcoin sync).
 
@@ -40,24 +40,18 @@ This implementation is designed to be run with very little dependencies, on a Li
   sudo chmod +x /usr/local/bin/docker-compose
   ```
 
-- NodeJS - version 10.x   `NOTE: This has a requirement for version 10 of nodejs only`
-  ```
-  curl -sl https://deb.nodesource.com/setup_10.x | sudo bash -
-  ```
-
-- make - Build tool used for library this depends on.  `NOTE: You can get this as part of the build-essential package for debian based os`
-  ```
-  apt-get install build-essential -y
-  ```
-
 ## Run
 
-To use this setup, complete the prerequisites.  Next simply run the [configuration script](config.sh).  The script will prompt for a data directory to use.  As noted above, you will need about 31GB of free space to run this.
+### Test Net
+
+To use this setup, complete the prerequisites.  Next simply run the [testnet configuration script](config-testnet.sh).  The script will prompt for data directory's it requires for persistance.  As noted above, you will need about 31GB of free space to run this.
 
 ```
-./config.sh
+./config-testnet.sh
 ```
 
-The setup will take around 1 hour, based on your machine and internet connectivity speed.  This is primarily because the bitcoin testnet full node will be required to be synced before starting ION.  A simple progress indicator will be shown to give status on the sync operation.
+Follow the scripts prompts which should resulting in cluster of docker containers running at the end.
+
+The first run will likely take around 1 hour, based on your machine and internet connectivity speed.  This is primarily because the bitcoin testnet full node will be required to be synced before starting the other services. A simple progress indicator will be shown to give status on the sync operation.
 
 `NOTE: This configuration is using a test key for bitcoin.  You can find this in the config.sh file with the parameter, _bitcoinWalletOrImportString_.  This should be changed to a real key that is appropriately secured for production workloads!`
