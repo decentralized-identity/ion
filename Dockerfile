@@ -4,6 +4,11 @@ FROM node:10-slim as builder
 # Set to root user
 USER root
 
+# Install git, python and build-essential as it required by some dependencies
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git python build-essential
+
 # Create app directory
 WORKDIR /app
 
