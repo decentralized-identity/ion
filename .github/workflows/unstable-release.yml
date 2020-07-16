@@ -1,9 +1,6 @@
 name: Unstable Release
 
-on:
-  push:
-    branches:
-      - master
+on: [pull_request]
 
 jobs:
   push-master:
