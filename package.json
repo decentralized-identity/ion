@@ -39,7 +39,7 @@
   },
   "scripts": {
     "precommit": "npm run lint",
-    "build": "tsc && copyfiles \"json/**/*.json\" dist",
+    "build": "tsc && copyfiles \"json/**/*.json\" dist && copyfiles \"tests/**/*.json\" dist && copyfiles \"tests/**/*.js*\" dist",
     "test": "jasmine --config=./tests/jasmine.json",
     "cc": "npm run build && nyc jasmine --config=./tests/jasmine.json",
     "lint": "tslint --fix --project .",
