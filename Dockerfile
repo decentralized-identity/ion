@@ -1,5 +1,5 @@
 # ---------------------- Builder image ----------------------
-FROM node:10-slim as builder
+FROM node:12-slim as builder
 
 # Set to root user
 USER root
@@ -28,7 +28,7 @@ RUN npm i
 RUN npm run build
 
 # ---------------------- Runtime image ----------------------
-FROM node:10-slim
+FROM node:12-slim
 
 # Set app directory
 WORKDIR /app

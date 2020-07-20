@@ -1,7 +1,7 @@
 version: "3"
 services:
-  bitcoin-node:
-    container_name: bitcoin-node
+  bitcoin-core:
+    container_name: bitcoin-core
     image: ruimarinho/bitcoin-core:0.19.1-alpine
     command:
       -printtoconsole
@@ -29,6 +29,7 @@ services:
     ports: 
       - "80:3002"
     links:
+      - "bitcoin-core"
       - "mongo"
   ion-ipfs:
     container_name: ion-ipfs

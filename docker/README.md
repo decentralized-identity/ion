@@ -2,7 +2,7 @@
 
 This directory contains the automated Docker deployment of ION.  This will create 5 docker containers that contain the core components to run ION.
 
-- bitcoin-node - This container will run the bitcoin-node client.  `NOTE: This is currently using testnet as the source chain`
+- bitcoin-core - This container will run the bitcoin-core client.  `NOTE: This by default is currently using testnet as the source chain`
 
 - ion-core - This is the core service of an ION sidetree node.
 
@@ -50,7 +50,7 @@ To use this setup, complete the prerequisites.  Next simply run the [testnet con
 ./config-testnet.sh
 ```
 
-Follow the scripts prompts which should resulting in cluster of docker containers running at the end.
+Follow the scripts prompts which should result in cluster of docker containers running at the end.
 
 The first run will likely take around 1 hour, based on your machine and internet connectivity speed.  This is primarily because the bitcoin testnet full node will be required to be synced before starting the other services. A simple progress indicator will be shown to give status on the sync operation.
 
