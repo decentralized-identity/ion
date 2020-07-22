@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "main": "dist/src/core.js",
   "dependencies": {
-    "@decentralized-identity/sidetree": "0.9.1",
+    "@decentralized-identity/sidetree": "../sidetree",
     "chalk": "4.0.0",
     "koa": "2.7.0",
     "koa-router": "7.4.0",
@@ -32,7 +32,7 @@
     "ts-node": "8.3.0",
     "tslint": "6.1.2",
     "tslint-config-standard": "8.0.1",
-    "typescript": "3.4.3"
+    "typescript": "3.9.6"
   },
   "bin": {
     "ion": "./dist/bin/index.js"
