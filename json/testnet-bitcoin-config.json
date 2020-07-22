@@ -1,4 +1,5 @@
 {
+  "bitcoinDataDirectory": "[FILL THIS IN!]",
   "bitcoinFeeSpendingCutoffPeriodInBlocks": 1,
   "bitcoinFeeSpendingCutoff": 0.001,
   "bitcoinPeerUri": "http://localhost:18332",
