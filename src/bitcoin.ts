@@ -5,11 +5,14 @@ import * as querystring from 'querystring';
 import LogColor from '../bin/LogColor';
 import {
   ISidetreeBitcoinConfig,
-  SidetreeBitcoinProcessor
+  SidetreeBitcoinProcessor,
+  SidetreeVersionModel
 } from '@decentralized-identity/sidetree';
 
 /** Bitcoin service configuration parameters */
 interface IBitcoinServiceConifg extends ISidetreeBitcoinConfig {
+  /** Boolean to control if error thrown by request handler is logged. */
+  logRequestError?: boolean;
   /** Port number used by the service. */
   port: number;
 }
@@ -33,7 +36,6 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
       koaResponse.body = '';
     }
   } catch (error) {
-    console.error(error);
     if ('status' in error) {
       koaResponse.status = error.status;
     } else {
@@ -44,6 +46,10 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
       koaResponse.body = JSON.stringify({
         code: error.code
       });
+    }
+
+    if (config.logRequestError) {
+      console.error(error);
     }
   }
 }
@@ -56,6 +62,16 @@ if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
   configFilePath = process.env.ION_BITCOIN_CONFIG_FILE_PATH;
   console.log(LogColor.lightBlue(`Loading configuration from ${LogColor.green(configFilePath)}...`));
 }
+
+// Selecting versioning file, environment variable overrides default config file.
+let versioningConfigFilePath = '../json/testnet-bitcoin-versioning.json';
+if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
+  console.log(LogColor.yellow(`Environment variable ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH undefined, using default ION bitcoin versioning config path ${versioningConfigFilePath} instead.`));
+} else {
+  versioningConfigFilePath = process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH;
+  console.log(LogColor.lightBlue(`Loading ION bitcoin versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
+}
+const ionBitcoinVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
 
 const config: IBitcoinServiceConifg = require(configFilePath);
 const app = new Koa();
@@ -139,7 +155,7 @@ const port = process.env.SIDETREE_BITCOIN_PORT || config.port;
 let server: any;
 let blockchainService: SidetreeBitcoinProcessor;
 try {
-  blockchainService = new SidetreeBitcoinProcessor(config);
+  blockchainService = new SidetreeBitcoinProcessor(config, ionBitcoinVersions);
 
   // SIDETREE_TEST_MODE enables unit testing of this file by bypassing blockchain service initialization.
   if (process.env.SIDETREE_TEST_MODE === 'true') {

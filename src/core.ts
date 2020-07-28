@@ -6,9 +6,9 @@ import {
   SidetreeConfig,
   SidetreeCore,
   SidetreeResponse,
-  SidetreeResponseModel
+  SidetreeResponseModel,
+  SidetreeVersionModel
 } from '@decentralized-identity/sidetree';
-import { ProtocolVersionModel } from '@decentralized-identity/sidetree/dist/lib/core/VersionManager';
 
 /** Configuration used by this server. */
 interface ServerConfig extends SidetreeConfig {
@@ -26,17 +26,17 @@ if (process.env.ION_CORE_CONFIG_FILE_PATH === undefined) {
 }
 const config: ServerConfig = require(configFilePath);
 
-// Selecting protocol versioning file, environment variable overrides default config file.
-let protocolVersioningConfigFilePath = '../json/testnet-core-protocol-versioning.json';
-if (process.env.ION_CORE_PROTOCOL_VERSIONING_CONFIG_FILE_PATH === undefined) {
-  console.log(LogColor.yellow(`Environment variable ION_CORE_PROTOCOL_VERSIONING_CONFIG_FILE_PATH undefined, using default protocol versioning config path ${protocolVersioningConfigFilePath} instead.`));
+// Selecting versioning file, environment variable overrides default config file.
+let versioningConfigFilePath = '../json/testnet-core-versioning.json';
+if (process.env.ION_CORE_VERSIONING_CONFIG_FILE_PATH === undefined) {
+  console.log(LogColor.yellow(`Environment variable ION_CORE_VERSIONING_CONFIG_FILE_PATH undefined, using default core versioning config path ${versioningConfigFilePath} instead.`));
 } else {
-  protocolVersioningConfigFilePath = process.env.ION_CORE_PROTOCOL_VERSIONING_CONFIG_FILE_PATH;
-  console.log(LogColor.lightBlue(`Loading protocol versioning config from ${LogColor.green(protocolVersioningConfigFilePath)}...`));
+  versioningConfigFilePath = process.env.ION_CORE_VERSIONING_CONFIG_FILE_PATH;
+  console.log(LogColor.lightBlue(`Loading core versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
 }
-const protocolVersions: ProtocolVersionModel[] = require(protocolVersioningConfigFilePath);
+const coreVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
 
-const sidetreeCore = new SidetreeCore(config, protocolVersions);
+const sidetreeCore = new SidetreeCore(config, coreVersions);
 const app = new Koa();
 
 // Raw body parser.
