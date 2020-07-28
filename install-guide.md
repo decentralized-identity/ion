@@ -131,7 +131,10 @@ git clone https://github.com/decentralized-identity/ion
 
 Update the configuration for the Sidetree Bitcoin microservice under `json/testnet-bitcoin-config.json`:
 
-  - Ensure `bitcoinPeerUri` points to the http location of the Bitcoin Core client you setup earlier in this guide (e.g. `http://localhost:18332`).
+  - Ensure `bitcoinPeerUri` points to the http location of the Bitcoin Core client you setup earlier in this guide (e.g. `http://localhost:18332` for testnet and `http://localhost:8332` for mainnet with default Bitcoin Core configuration).
+  - `bitcoinDataDirectory` needs to point to the block files folder:
+    - mainnet: exactly the same as the `datadir` value configured for Bitcoin Core.
+    - testnet: `<datadir>/testnet3`.
   - Ensure `bitcoinWalletImportString` is populated with your private key.
   - Official Bitcoin Core client PRC API requires authentication, so make sure the `bitcoinRpcUsername` & `bitcoinPrcPassword` are populated accordingly.
   - Ensure `mongoDbConnectionString` is pointing to your MongoDB (e.g. `mongodb://localhost:27017/`).
