@@ -1,6 +1,7 @@
 import * as getRawBody from 'raw-body';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
+import Ipfs from '@decentralized-identity/sidetree/dist/lib/ipfs/Ipfs';
 import LogColor from '../bin/LogColor';
 import {
   SidetreeConfig,
@@ -12,6 +13,9 @@ import {
 
 /** Configuration used by this server. */
 interface ServerConfig extends SidetreeConfig {
+  /** IPFS HTTP API endpoint URI. */
+  ipfsHttpApiEndpointUri: string;
+
   /** Port to be used by the server. */
   port: number;
 }
@@ -36,7 +40,9 @@ if (process.env.ION_CORE_VERSIONING_CONFIG_FILE_PATH === undefined) {
 }
 const coreVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
 
-const sidetreeCore = new SidetreeCore(config, coreVersions);
+const ipfsFetchTimeoutInSeconds = 10;
+const cas = new Ipfs(config.ipfsHttpApiEndpointUri, ipfsFetchTimeoutInSeconds);
+const sidetreeCore = new SidetreeCore(config, coreVersions, cas);
 const app = new Koa();
 
 // Raw body parser.

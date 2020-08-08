@@ -83,7 +83,7 @@ echo "
 {
   \"batchingIntervalInSeconds\": 600,
   \"blockchainServiceUri\": \"http://ion-bitcoin:3002\",
-  \"contentAddressableStoreServiceUri\": \"http://ion-ipfs:3003\",
+  \"ipfsHttpApiEndpointUri\": \"http://ion-ipfs:5001\",
   \"didMethodName\": \"ion:test\",
   \"maxConcurrentDownloads\": 20,
   \"mongoDbConnectionString\": \"mongodb://mongo:27017/\",
