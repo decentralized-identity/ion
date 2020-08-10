@@ -4,7 +4,7 @@ ION is a decentralized Layer 2 network for Decentralized Identifiers that runs a
 
 The ION node reference implementation is currently in beta phase, operators should expect potential breaking changes and resets of the network's state. Presently, we are only recommending that experienced developers invest the time in running, testing, and contributing to the code base. This recommendation will change as the implementation progresses into more stable stages of development, which contributors will communicate to the community via blog posts and communications from DIF and collaborating organizations.
 
-The ION node implementation is composed of a collection of microservices written in TypeScript. Of these components, the major dependencies are Bitcoin/bitcore, IPFS, and MongoDB (for local persistence of data).
+The ION node implementation is composed of a collection of microservices. Of these components, the major dependencies are Bitcoin Core, IPFS, and MongoDB (for local persistence of data).
 
 > NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet variables to mainnet.
 
@@ -43,9 +43,9 @@ source ~/.bash_profile
 
 ##### Node.js
 
-Services within ION rely on Node.js version 10. Run the following command to install Node v10:
+Services within ION rely on Node.js version 12. Run the following command to install Node v12:
 ```
-sudo snap install node --classic --channel=10
+sudo snap install node --classic --channel=12
 ```
 
 ##### build-essential
@@ -58,19 +58,19 @@ sudo apt install build-essential
 
 #### Windows Environment Setup
 
-Go go https://nodejs.org, download and install the latest v10 of Node.js.
+Go go https://nodejs.org, download and install the latest v12 of Node.js.
 
 ### Inbound Ports to Open
 
-If you wish to run a node that writes DID operations to the Bitcoin blockchain, you will need to open ports `4002` and `4003` so that the transaction files (Anchor and Batch files) can be served to others via IPFS.
+If you wish to run a node that writes ION DID operations, you will need to enable uPnP on your router or open ports `4002` and `4003` so that the operation data files can be served to others via IPFS.
 
 ## 2. Setting up Bitcoin Core
 
 An ION node needs a trusted Bitcoin peer for fetching and writing ION transactions. We use Bitcoin Core for this.
 
-### Automated script for installing Bitcoin Core
+### Automated script for installing Bitcoin Core on Linux
 
-If you would like to install and start Bitcoin Core automatically on Linux, you can review and run the automated script commited in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/setup.sh).
+If you would like to install and start Bitcoin Core automatically on Linux, you can review and run the automated script committed in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/setup.sh).
 
 > NOTE: Initial synchronization takes ~2 hours for testnet on a 2 core machine with an SSD.
 
@@ -99,11 +99,18 @@ Start Bitcoin Core and let it sync with Testnet:
 
 #### On Windows:
 
+Running Bitcoin Core with friendly UI after install:
+
 ```
 bitcoin-qt.exe -testnet -datadir=<path-to-store-data> -server -rpcuser=<you-rpc-username> -rpcpassword=<your-rpc-password> -txindex=1
 ```
-    
-## 3. Setting up MongoDB
+
+
+## 3. Installing Go-IPFS
+
+Follow the instruction found at [IPFS website](https://docs.ipfs.io/install/) to install Go-IPFS, you can install the IPFS Desktop which internally installs Go-IPFS, it provides you with a user friendly UI.
+
+## 4. Setting up MongoDB
 
 ### On Linux:
 
@@ -122,26 +129,36 @@ Download and install MongoDB from https://www.mongodb.com/download-center/commun
 
 > NOTE: To view MongoDB files with a more approachable GUI, download and install MongoDB Compass: https://docs.mongodb.com/compass/master/install/
 
-## 4. Configure & Build ION Microservices
+## 5. Configure & Build ION Microservices
 
 Clone https://github.com/decentralized-identity/ion:
 ```
 git clone https://github.com/decentralized-identity/ion
 ```
 
-Update the configuration for the Sidetree Bitcoin microservice under `json/testnet-bitcoin-config.json`:
+Update the configuration for the ION Bitcoin microservice under `json/testnet-bitcoin-config.json`:
 
-  - Ensure `bitcoinPeerUri` points to the http location of the Bitcoin Core client you setup earlier in this guide (e.g. `http://localhost:18332` for testnet and `http://localhost:8332` for mainnet with default Bitcoin Core configuration).
-  - `bitcoinDataDirectory` needs to point to the block files folder:
-    - mainnet: exactly the same as the `datadir` value configured for Bitcoin Core.
-    - testnet: `<datadir>/testnet3`.
-  - Ensure `bitcoinWalletImportString` is populated with your private key.
-  - Official Bitcoin Core client PRC API requires authentication, so make sure the `bitcoinRpcUsername` & `bitcoinPrcPassword` are populated accordingly.
-  - Ensure `mongoDbConnectionString` is pointing to your MongoDB (e.g. `mongodb://localhost:27017/`).
+  - `bitcoinPeerUri`
+    - Ensure it points to the RPC endpoint of the Bitcoin Core client you setup earlier in this guide (e.g. `http://localhost:18332` for testnet and `http://localhost:8332` for mainnet with default Bitcoin Core configuration).
+  - `bitcoinDataDirectory`
+    - It needs to point to the block files folder:
+      - mainnet: exactly the same as the `datadir` value configured for Bitcoin Core.
+      - testnet: `<datadir>/testnet3`.
+  - `bitcoinWalletImportString`
+    - Populated it with your private key if you intend to write DID operations, else just use any generated import string without any bitcoin.
+  - `bitcoinRpcUsername` & `bitcoinPrcPassword`
+    - Official Bitcoin Core client PRC API requires authentication, so make sure the are populated correctly.
+  - `mongoDbConnectionString`
+    - Point to your MongoDB if you need to change the endpoint. The existing config points to the default endpoint: `mongodb://localhost:27017/`.
   
-Update the configuration for the Sidetree core service under `json/core-config.json`:
-
-  - Ensure `mongoDbConnectionString` is pointing to your MongoDB (e.g. `mongodb://localhost:27017/`).
+Update the configuration for the ION core service under `json/testnet-core-config.json`:
+  - `didMethodName`
+    - testnet: `ion:test`
+    - mainnet: `ion`
+  - `ipfsHttpApiEndpointUri`
+    - Point it to the Go-IPFS HTTP API endpoint. The existing config points to the default endpoint: `http://127.0.0.1:5001`.
+  - `mongoDbConnectionString`
+    - Point to your MongoDB if you need to change the endpoint. The existing config points to the default endpoint: `mongodb://localhost:27017/`.
 
 Run the following commands to build ION:
 ```
@@ -149,31 +166,31 @@ npm i
 npm run build
 ```
 
-> NOTE: You must rerun `npm run build` everytime a configuration JSON file is modified.
+> NOTE: You must rerun `npm run build` every time a configuration JSON file is modified.
 
-## 5. Run Sidetree Bitcoin microservice
+
+## 6. Run ION Bitcoin microservice
 ```
 npm run bitcoin
 ```
 
 This service will fail to start until your Bitcoin Core client has blocks past the ION genesis block. Please wait and try again later if this happens.
 
-## 6. Run Sidetree IPFS microservice
 
-Start a new console and run the following commands:
-```
-npm run ipfs
-```
+## 7. Run ION core service
 
-## 7. Run Sidetree core service
+Start a new console and run the following command to start the core service. This service will fail to start until your ION Bitcoin service has started successfully.
 
-Start a new console and run the following commands:
 ```
 npm run core
 ```
-Give it some time to synchronize Sidetree transactions.
+
+Give it some time to synchronize ION transactions.
 
 Verify ION is running properly by checking the following DID resolution in your browser:
 
 testnet:
-[http://localhost:3000/identifiers/did:ion:test:EiAc5-UlFot7NtK9Nq8Qc_iVQds8n78zO3gE2bUuZdOIlA](http://localhost:3000/did:ion:test:EiAc5-UlFot7NtK9Nq8Qc_iVQds8n78zO3gE2bUuZdOIlA)
+[http://localhost:3000/identifiers/did:ion:test:EiBFsUlzmZ3zJtSFeQKwJNtngjmB51ehMWWDuptf9b4Bag](http://localhost:3000/did:ion:test:EiBFsUlzmZ3zJtSFeQKwJNtngjmB51ehMWWDuptf9b4Bag)
+
+mainnet:
+[http://localhost:3000/identifiers/did:ion:EiBV7EKenyHIXk1ERG0aXTmwxV7QrVeX_PG3WI4XYfxbjg](http://localhost:3000/did:ion:EiBV7EKenyHIXk1ERG0aXTmwxV7QrVeX_PG3WI4XYfxbjg)

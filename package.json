@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "main": "dist/src/core.js",
   "dependencies": {
-    "@decentralized-identity/sidetree": "0.10.0",
+    "@decentralized-identity/sidetree": "0.10.0-unstable.a84f079",
     "chalk": "4.0.0",
     "koa": "2.7.0",
     "koa-router": "7.4.0",
@@ -45,8 +45,7 @@
     "lint": "tslint --fix --project .",
     "start": "node dist/src/core.js",
     "core": "node dist/src/core.js",
-    "bitcoin": "node dist/src/bitcoin.js",
-    "ipfs": "node dist/src/ipfs.js"
+    "bitcoin": "node dist/src/bitcoin.js"
   },
   "nyc": {
     "all": true,
