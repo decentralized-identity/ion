@@ -193,4 +193,4 @@ testnet:
 [http://localhost:3000/identifiers/did:ion:test:EiBFsUlzmZ3zJtSFeQKwJNtngjmB51ehMWWDuptf9b4Bag](http://localhost:3000/did:ion:test:EiBFsUlzmZ3zJtSFeQKwJNtngjmB51ehMWWDuptf9b4Bag)
 
 mainnet:
-[http://localhost:3000/identifiers/did:ion:EiBV7EKenyHIXk1ERG0aXTmwxV7QrVeX_PG3WI4XYfxbjg](http://localhost:3000/did:ion:EiBV7EKenyHIXk1ERG0aXTmwxV7QrVeX_PG3WI4XYfxbjg)
+[http://localhost:3000/identifiers/did:ion:EiB18LV2dAdALwCVx10mnLxIFd3XhrlhFOqel7v5wVpNEA](http://localhost:3000/identifiers/did:ion:EiB18LV2dAdALwCVx10mnLxIFd3XhrlhFOqel7v5wVpNEA)
