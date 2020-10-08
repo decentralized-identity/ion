@@ -61,4 +61,4 @@ After those ran succesfully, navigate to the docker directory and run the config
 
 The setup will take around 24-30 hours, based on your machine and internet connectivity speed.  This is primarily because the bitcoin mainnet full node will be required to be synced before starting ION.  A simple progress indicator will be shown to give status on the sync operation. The sync of mainnet can take around 24 hours.
 
-`NOTE: This configuration is using a test key for bitcoin.  You can find this in the json file mainnet-bitcoin-config.json file with the parameter, bitcoinWalletOrImportString.  This should be changed to a real key that is appropriately secured for production workloads if you want to be able to write to the network. If you want to only resolve did's the keys works fine!`
+`NOTE: This configuration is using a test key for bitcoin.  You can find this in the json file mainnet-bitcoin-docker-config.json file with the parameter, bitcoinWalletOrImportString.  This should be changed to a real key that is appropriately secured for production workloads if you want to be able to write to the network. If you want to only resolve did's the keys works fine!`
