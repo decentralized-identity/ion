@@ -41,7 +41,7 @@ services:
     working_dir: /ion
     environment: 
       - ION_BITCOIN_CONFIG_FILE_PATH=/ion/json/mainnet-bitcoin-docker-config.json
-      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/ion/json/mainnet-versioning.json
+      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/ion/json/mainnet-bitcoin-versioning.json
     links:
       - "bitcoin-core-mainnet"
       - "mongo"
