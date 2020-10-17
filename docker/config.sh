@@ -71,12 +71,14 @@ echo "
   \"bitcoinWalletOrImportString\": \"cMibhWKqpn1DzkuiiKLsMzZorFgdh545mBR9FLhbyjX7f2kHxPiK\",
   \"sidetreeTransactionFeeMarkupPercentage\": 5,
   \"sidetreeTransactionPrefix\": \"ion:\",
-  \"genesisBlockNumber\": 1723000,
+  \"genesisBlockNumber\": 1764000,
   \"databaseName\": \"sidetree-bitcoin\",
-  \"transactionFetchPageSize\": 100,
   \"mongoDbConnectionString\": \"mongodb://mongo:27017/\",
   \"port\": 3002,
-  \"valueTimeLockAmountInBitcoins\": 0
+  \"valueTimeLockUpdateEnabled\": false,
+  \"valueTimeLockAmountInBitcoins\": 0,
+  \"valueTimeLockPollPeriodInSeconds\": 600,
+  \"valueTimeLockTransactionFeesAmountInBitcoins\": 0.0001
 }" > json/bitcoin-config.json
 
 echo "

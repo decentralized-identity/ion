@@ -137,7 +137,7 @@ router.get('/locks/:identifier', async (ctx, _next) => {
 });
 
 router.get('/writerlock', async (ctx, _next) => {
-  const requestHandler = async () => blockchainService.getActiveValueTimeLockForThisNode();
+  const requestHandler = () => blockchainService.getActiveValueTimeLockForThisNode();
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
