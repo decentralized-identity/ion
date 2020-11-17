@@ -145,9 +145,9 @@ Update the configuration for the ION Bitcoin microservice under `json/testnet-bi
       - mainnet: exactly the same as the `datadir` value configured for Bitcoin Core.
       - testnet: `<datadir>/testnet3`.
   - `bitcoinWalletImportString`
-    - Populated it with your private key if you intend to write DID operations, else just use any generated import string without any bitcoin.
+    - Populate it with your private key if you intend to write DID operations, else just use any generated import string without any bitcoin.
   - `bitcoinRpcUsername` & `bitcoinPrcPassword`
-    - Official Bitcoin Core client PRC API requires authentication, so make sure the are populated correctly.
+    - Official Bitcoin Core client PRC API requires authentication, so make sure they are populated correctly.
   - `mongoDbConnectionString`
     - Point to your MongoDB if you need to change the endpoint. The existing config points to the default endpoint: `mongodb://localhost:27017/`.
   
