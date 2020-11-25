@@ -44,7 +44,7 @@ DATA_VOL=$bitcoinDataDirectory DB_VOL=$coreDataDirectory IPFS_VOL=$ipfsDataDirec
 
 #start IPFS and Mongo. This gives IPFS time to start finding peers
 docker start mongo
-docker start IPFS
+docker start ipfs 
 #start bitcoin main, this can take 24 hours to complete, the script will wait for it to finish
 #start ion-bitcoin, this can take 12 hours
 #lastly start ion-core to start the service
