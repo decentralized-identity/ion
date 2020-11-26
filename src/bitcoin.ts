@@ -6,7 +6,7 @@ import LogColor from '../bin/LogColor';
 import {
   ISidetreeBitcoinConfig,
   SidetreeBitcoinProcessor,
-  SidetreeVersionModel
+  SidetreeBitcoinVersionModel
 } from '@decentralized-identity/sidetree';
 
 /** Bitcoin service configuration parameters */
@@ -71,7 +71,7 @@ if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
   versioningConfigFilePath = process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH;
   console.log(LogColor.lightBlue(`Loading ION bitcoin versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
 }
-const ionBitcoinVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
+const ionBitcoinVersions: SidetreeBitcoinVersionModel[] = require(versioningConfigFilePath);
 
 const config: IBitcoinServiceConifg = require(configFilePath);
 const app = new Koa();
@@ -155,13 +155,13 @@ const port = process.env.SIDETREE_BITCOIN_PORT || config.port;
 let server: any;
 let blockchainService: SidetreeBitcoinProcessor;
 try {
-  blockchainService = new SidetreeBitcoinProcessor(config, ionBitcoinVersions);
+  blockchainService = new SidetreeBitcoinProcessor(config, );
 
   // SIDETREE_TEST_MODE enables unit testing of this file by bypassing blockchain service initialization.
   if (process.env.SIDETREE_TEST_MODE === 'true') {
     server = app.listen(port);
   } else {
-    blockchainService.initialize()
+    blockchainService.initialize(ionBitcoinVersions)
     .then(() => {
       server = app.listen(port, () => {
         console.log(`Sidetree-Bitcoin node running on port: ${port}`);

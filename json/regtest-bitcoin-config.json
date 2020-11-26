@@ -12,6 +12,7 @@
   "port": 3002,
   "sidetreeTransactionFeeMarkupPercentage": 1,
   "sidetreeTransactionPrefix": "ion:",
+  "transactionPollPeriodInSeconds": 60,
   "valueTimeLockUpdateEnabled": false,
   "valueTimeLockAmountInBitcoins": 0,
   "valueTimeLockPollPeriodInSeconds": 600 ,
