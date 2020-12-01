@@ -9,7 +9,7 @@ import ResponseStatus from '@decentralized-identity/sidetree/dist/lib/common/enu
 import { blockchainService, server } from '../../src/bitcoin';
 
 describe('Bitcoin service', async () => {
-  it('should return 400 with error code when transaction fecth throws invalid hash error.', async () => {
+  it('should return 400 with error code when transaction fetch throws invalid hash error.', async () => {
     const fakeGetTransactionsMethod = async () => { throw new RequestError(ResponseStatus.BadRequest, ErrorCode.InvalidTransactionNumberOrTimeHash); };
     spyOn(blockchainService, 'transactions').and.callFake(fakeGetTransactionsMethod);
 
