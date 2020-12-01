@@ -7,10 +7,15 @@
   "bitcoinRpcPassword": "",
   "bitcoinWalletOrImportString": "[FILL THIS IN!]",
   "databaseName": "ion-testnet-bitcoin",
-  "genesisBlockNumber": 1764000,
+  "genesisBlockNumber": 1870000,
+  "logRequestError": true,
   "mongoDbConnectionString": "mongodb://localhost:27017/",
   "port": 3002,
   "sidetreeTransactionFeeMarkupPercentage": 1,
   "sidetreeTransactionPrefix": "ion:",
-  "valueTimeLockAmountInBitcoins": 0
+  "transactionPollPeriodInSeconds": 60,
+  "valueTimeLockUpdateEnabled": false,
+  "valueTimeLockAmountInBitcoins": 0,
+  "valueTimeLockPollPeriodInSeconds": 600,
+  "valueTimeLockTransactionFeesAmountInBitcoins": 0.0001
 }
