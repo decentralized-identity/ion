@@ -39,17 +39,19 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
     if ('status' in error) {
       koaResponse.status = error.status;
     } else {
+      // This is an unknown/unexpected error.
       koaResponse.status = 500;
+
+      // Log error if the config flag is switched on.
+      if (config.logRequestError) {
+        console.error(error);
+      }
     }
 
     if ('code' in error) {
       koaResponse.body = JSON.stringify({
         code: error.code
       });
-    }
-
-    if (config.logRequestError) {
-      console.error(error);
     }
   }
 }
