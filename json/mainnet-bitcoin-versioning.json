@@ -3,9 +3,9 @@
     "startingBlockchainTime": 633700,
     "version": "latest",
     "protocolParameters": {
-      "feeLookBackWindowInBlocks": 1000,
+      "feeLookBackWindowInBlocks": 100,
       "feeMaxFluctuationMultiplierPerBlock": 0.00001,
-      "initialNormalizedFeeInSatoshis": 400,
+      "initialNormalizedFeeInSatoshis": 1000,
       "valueTimeLockDurationInBlocks": 4500
     }
   }

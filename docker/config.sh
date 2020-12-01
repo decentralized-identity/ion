@@ -71,7 +71,7 @@ echo "
   \"bitcoinWalletOrImportString\": \"cMibhWKqpn1DzkuiiKLsMzZorFgdh545mBR9FLhbyjX7f2kHxPiK\",
   \"sidetreeTransactionFeeMarkupPercentage\": 5,
   \"sidetreeTransactionPrefix\": \"ion:\",
-  \"genesisBlockNumber\": 1764000,
+  \"genesisBlockNumber\": 1870000,
   \"databaseName\": \"sidetree-bitcoin\",
   \"mongoDbConnectionString\": \"mongodb://mongo:27017/\",
   \"port\": 3002,
