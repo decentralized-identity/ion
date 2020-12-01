@@ -6,7 +6,7 @@ import LogColor from '../bin/LogColor';
 import {
   ISidetreeBitcoinConfig,
   SidetreeBitcoinProcessor,
-  SidetreeVersionModel
+  SidetreeBitcoinVersionModel
 } from '@decentralized-identity/sidetree';
 
 /** Bitcoin service configuration parameters */
@@ -39,17 +39,19 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
     if ('status' in error) {
       koaResponse.status = error.status;
     } else {
+      // This is an unknown/unexpected error.
       koaResponse.status = 500;
+
+      // Log error if the config flag is switched on.
+      if (config.logRequestError) {
+        console.error(error);
+      }
     }
 
     if ('code' in error) {
       koaResponse.body = JSON.stringify({
         code: error.code
       });
-    }
-
-    if (config.logRequestError) {
-      console.error(error);
     }
   }
 }
@@ -71,7 +73,7 @@ if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
   versioningConfigFilePath = process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH;
   console.log(LogColor.lightBlue(`Loading ION bitcoin versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
 }
-const ionBitcoinVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
+const ionBitcoinVersions: SidetreeBitcoinVersionModel[] = require(versioningConfigFilePath);
 
 const config: IBitcoinServiceConifg = require(configFilePath);
 const app = new Koa();
@@ -137,7 +139,7 @@ router.get('/locks/:identifier', async (ctx, _next) => {
 });
 
 router.get('/writerlock', async (ctx, _next) => {
-  const requestHandler = async () => blockchainService.getActiveValueTimeLockForThisNode();
+  const requestHandler = () => blockchainService.getActiveValueTimeLockForThisNode();
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
@@ -155,13 +157,13 @@ const port = process.env.SIDETREE_BITCOIN_PORT || config.port;
 let server: any;
 let blockchainService: SidetreeBitcoinProcessor;
 try {
-  blockchainService = new SidetreeBitcoinProcessor(config, ionBitcoinVersions);
+  blockchainService = new SidetreeBitcoinProcessor(config, );
 
   // SIDETREE_TEST_MODE enables unit testing of this file by bypassing blockchain service initialization.
   if (process.env.SIDETREE_TEST_MODE === 'true') {
     server = app.listen(port);
   } else {
-    blockchainService.initialize()
+    blockchainService.initialize(ionBitcoinVersions)
     .then(() => {
       server = app.listen(port, () => {
         console.log(`Sidetree-Bitcoin node running on port: ${port}`);

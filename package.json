@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "main": "dist/src/core.js",
   "dependencies": {
-    "@decentralized-identity/sidetree": "0.11.0",
+    "@decentralized-identity/sidetree": "0.11.0-unstable.9f3b565",
     "chalk": "4.0.0",
     "koa": "2.7.0",
     "koa-router": "7.4.0",
@@ -38,7 +38,6 @@
     "ion": "./dist/bin/index.js"
   },
   "scripts": {
-    "precommit": "npm run lint",
     "build": "tsc && copyfiles \"json/**/*.json\" dist && copyfiles \"tests/**/*.json\" dist && copyfiles \"tests/**/*.js*\" dist",
     "test": "jasmine --config=./tests/jasmine.json",
     "cc": "npm run build && nyc jasmine --config=./tests/jasmine.json",
