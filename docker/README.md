@@ -2,7 +2,7 @@
 
 This directory contains the automated Docker deployment of ION.  This will create 5 docker containers that contain the core components to run ION.
 
-- bitcoin-core - This container will run the bitcoin-core client.  `NOTE: This is currenlty using testnet as the source chain`
+- bitcoin-core - This container will run the bitcoin-core client.  `NOTE: This is currently using testnet as the source chain`
 
 - ion-bitcoin - This is the bitcoin sidetree node for ION.
 
