@@ -157,7 +157,7 @@ const port = process.env.SIDETREE_BITCOIN_PORT || config.port;
 let server: any;
 let blockchainService: SidetreeBitcoinProcessor;
 try {
-  blockchainService = new SidetreeBitcoinProcessor(config, );
+  blockchainService = new SidetreeBitcoinProcessor(config);
 
   // SIDETREE_TEST_MODE enables unit testing of this file by bypassing blockchain service initialization.
   if (process.env.SIDETREE_TEST_MODE === 'true') {
