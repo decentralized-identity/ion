@@ -14,7 +14,7 @@ ION is a public, permissionless, Decentralized Identifier (DID) network that imp
 
 ## Operations
 
-See the [operations](docs/operations.md) document on processes and activities performed to maintain ION.
+See the [operating model](docs/operating-model.md) document on processes and activities performed to maintain ION.
 
 ## How does ION work?
 
