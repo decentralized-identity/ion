@@ -10,7 +10,7 @@ import {
 } from '@decentralized-identity/sidetree';
 
 /** Bitcoin service configuration parameters */
-interface IBitcoinServiceConifg extends ISidetreeBitcoinConfig {
+interface IBitcoinServiceConfig extends ISidetreeBitcoinConfig {
   /** Boolean to control if error thrown by request handler is logged. */
   logRequestError?: boolean;
   /** Port number used by the service. */
@@ -75,7 +75,7 @@ if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
 }
 const ionBitcoinVersions: SidetreeBitcoinVersionModel[] = require(versioningConfigFilePath);
 
-const config: IBitcoinServiceConifg = require(configFilePath);
+const config: IBitcoinServiceConfig = require(configFilePath);
 const app = new Koa();
 
 // Raw body parser.

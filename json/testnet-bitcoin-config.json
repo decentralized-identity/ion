@@ -7,7 +7,7 @@
   "bitcoinRpcPassword": "",
   "bitcoinWalletOrImportString": "[FILL THIS IN!]",
   "databaseName": "ion-testnet-bitcoin",
-  "genesisBlockNumber": 1870000,
+  "genesisBlockNumber": 1900000,
   "logRequestError": true,
   "mongoDbConnectionString": "mongodb://localhost:27017/",
   "port": 3002,
