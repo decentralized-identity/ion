@@ -1,7 +1,7 @@
 [
   {
-    "startingBlockchainTime": 654400,
-    "version": "latest",
+    "startingBlockchainTime": 667000,
+    "version": "1.0",
     "protocolParameters": {
       "feeLookBackWindowInBlocks": 100,
       "feeMaxFluctuationMultiplierPerBlock": 0.00001,

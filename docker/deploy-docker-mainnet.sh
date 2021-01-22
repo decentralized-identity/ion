@@ -81,7 +81,7 @@ echo "
   \"bitcoinRpcPassword\": \"$password\",
   \"bitcoinWalletOrImportString\": \"5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF\",
   \"databaseName\": \"ion-mainnet-bitcoin\",
-  \"genesisBlockNumber\": 654400,
+  \"genesisBlockNumber\": 667000,
   \"mongoDbConnectionString\": \"mongodb://mongo:27017/\",
   \"port\": 3002,
   \"sidetreeTransactionFeeMarkupPercentage\": 1,
