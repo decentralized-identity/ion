@@ -8,7 +8,7 @@ In the spirit of David Clark's famous quote from the early days of IETF, we beli
 
 ## ION's Relationship with Sidetree
 
-ION is an implementation of the Sidetree specification's protocols, another active work item in the DIF. ION utilizes the core components of the Sidetree reference implementation within it to maximize shared code and interop. 
+ION is an implementation of the Sidetree specification's protocols, another active work item in the [DIF](https://github.com/decentralized-identity). ION utilizes the core components of the Sidetree reference implementation within it to maximize shared code and interop. 
 
 ## Development and Decisions
 
