@@ -23,7 +23,7 @@ services:
       - ${DB_VOL}:/data/db
   ipfs:
     container_name: ipfs
-#this image doesn't work on ARM64 yet    
+#this image doesn't work on ARM64 yet, use mhoekstra/go-ipfs:v0.7.0 if you want to deploy on ARM    
     image: ipfs/go-ipfs
     environment: 
       - IPFS_PATH=/data/ipfs
@@ -36,7 +36,7 @@ services:
   
   ion-bitcoin-mainnet:
     container_name: ion-bitcoin-mainnet
-    image: node:10.20.1-alpine3.11
+    image: node:14.15.4-alpine3.11
     command: "npm run bitcoin"
     working_dir: /ion
     environment: 
@@ -54,7 +54,7 @@ services:
 
   ion-core-mainnet:
     container_name: ion-core-mainnet
-    image: node:10.20.1-alpine3.11
+    image: node:14.15.4-alpine3.11
     command: "npm run core"
     working_dir: /ion
     environment: 
