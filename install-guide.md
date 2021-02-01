@@ -43,9 +43,9 @@ source ~/.bash_profile
 
 ##### Node.js
 
-Services within ION rely on Node.js version 12. Run the following command to install Node v12:
+Services within ION rely on Node.js version 14. Run the following command to install Node v14:
 ```
-sudo snap install node --classic --channel=12
+sudo snap install node --classic --channel=14
 ```
 
 ##### build-essential
@@ -58,7 +58,7 @@ sudo apt install build-essential
 
 #### Windows Environment Setup
 
-Go go https://nodejs.org, download and install the latest v12 of Node.js.
+Go go https://nodejs.org, download and install the latest v14 of Node.js.
 
 ### Inbound Ports to Open
 
@@ -190,7 +190,7 @@ Give it some time to synchronize ION transactions.
 Verify ION is running properly by checking the following DID resolution in your browser:
 
 testnet:
-[http://localhost:3000/identifiers/did:ion:test:EiBFsUlzmZ3zJtSFeQKwJNtngjmB51ehMWWDuptf9b4Bag](http://localhost:3000/did:ion:test:EiBFsUlzmZ3zJtSFeQKwJNtngjmB51ehMWWDuptf9b4Bag)
+[http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw](http://localhost:3000/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw)
 
 mainnet:
-[http://localhost:3000/identifiers/did:ion:EiB18LV2dAdALwCVx10mnLxIFd3XhrlhFOqel7v5wVpNEA](http://localhost:3000/identifiers/did:ion:EiB18LV2dAdALwCVx10mnLxIFd3XhrlhFOqel7v5wVpNEA)
+[http://localhost:3000/identifiers/did:ion:EiClkZMDxPKqC9c-umQfTkR8vvZ9JPhl_xLDI9Nfk38w5w](http://localhost:3000/identifiers/did:ion:EiClkZMDxPKqC9c-umQfTkR8vvZ9JPhl_xLDI9Nfk38w5w)
