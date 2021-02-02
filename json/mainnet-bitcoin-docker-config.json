@@ -15,7 +15,6 @@
   "transactionPollPeriodInSeconds": 60,
   "valueTimeLockAmountInBitcoins": 0,
   "valueTimeLockUpdateEnabled": false,
-  "valueTimeLockAmountInBitcoins": 0,
   "valueTimeLockPollPeriodInSeconds": 600,
   "valueTimeLockTransactionFeesAmountInBitcoins": 0.0001
 }
