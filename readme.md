@@ -12,7 +12,7 @@ ION is a public, permissionless, Decentralized Identifier (DID) network that imp
 - ION is not a sidechain or consensus system - the network nodes do not require any additional consensus mechanism.
 - See [design](docs/design.md) document for specific design details and decisions.
 
-## Operations
+## Operating Model
 
 See the [operating model](docs/operating-model.md) document on processes and activities performed to maintain ION.
 
