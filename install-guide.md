@@ -59,7 +59,7 @@ sudo apt install build-essential
 #### Windows Environment Setup
 
 Go go https://nodejs.org, download and install the latest v14 of Node.js.
-  
+
 ### Inbound Ports to Open
 
 If you wish to run a node that writes ION DID operations, you will need to enable uPnP on your router or open ports `4002` and `4003` so that the operation data files can be served to others via IPFS.
@@ -76,7 +76,7 @@ An ION node needs a trusted Bitcoin peer for fetching and writing ION transactio
 
 If you would like to install and start Bitcoin Core automatically on Linux, you can review and run the automated script committed in the [Sidetree repo](https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/setup.sh).
 
-> NOTE: Initial synchronization takes ~2 hours for `testnet` on a 2 core machine with an SSD.
+> NOTE: Initial synchronization takes ~2 hours for testnet on a 2 core machine with an SSD.
 
 ### Installing Bitcoin Core Manually
 
@@ -194,7 +194,6 @@ Update the configuration for the ION core service under `json/testnet-core-confi
   - `didMethodName`
     - testnet: `ion:test`
     - mainnet: `ion`
-
 
 Run the following commands to build ION:
 ```
