@@ -62,7 +62,7 @@ Go go https://nodejs.org, download and install the latest v14 of Node.js.
 
 If you wish to run a node that writes ION DID operations, you will need to enable uPnP on your router or open ports `4002` and `4003` so that the operation data files can be served to others via IPFS.
 
-#### Deciding on Testnet or Mainnet
+### Testnet or Mainnet
 
 > NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet configs for mainnet.
 
