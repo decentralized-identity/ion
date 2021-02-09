@@ -224,6 +224,12 @@ npm run bitcoin
 
 ## 7. Run ION core service
 
+### (Optional) Create your configuration files from templates
+
+> NOTE: This is not required when using `testnet` because the defaults are sufficient
+
+Copy the configuration files `<testnet or mainnet>-core-config.json` and `<testnet or mainnet>-core-versioning.json` to another directory, (e.g. `/etc/ion/` or `~`)
+
 Start a new console and run the following command to start the core service. 
 
 ```
