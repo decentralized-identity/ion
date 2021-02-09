@@ -6,7 +6,7 @@ The ION node reference implementation is currently in beta phase, operators shou
 
 The ION node implementation is composed of a collection of microservices. Of these components, the major dependencies are Bitcoin Core, IPFS, and MongoDB (for local persistence of data).
 
-## 0. Preparing your development environment
+## 1. Preparing your development environment
 
 ### Hardware
 
@@ -62,9 +62,9 @@ Go go https://nodejs.org, download and install the latest v14 of Node.js.
 
 If you wish to run a node that writes ION DID operations, you will need to enable uPnP on your router or open ports `4002` and `4003` so that the operation data files can be served to others via IPFS.
 
-## 1. Deciding on Testnet or Mainnet
+#### Deciding on Testnet or Mainnet
 
-> NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet variables to mainnet.
+> NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet configs for mainnet.
 
 Bitcoin and ION need to be configured to use either `testnet` (for development) or `mainnet` (for production). If you change one service from `testnet` to `mainnet` or vice versa, the other services will also need to be rebuilt to match. Default config values for `testnet` are not valid for `mainnet` and services will fail to start if they are mismatched.
 
@@ -86,7 +86,7 @@ You can find Windows and Linux binaries for Bitcoin Core releases [here.](https:
 
 Create a configuration file (`bitcoin.conf`) designating 
 1. the path you would like the Bitcoin data to be stored in (the `[datadir]`)
-2. a username (`admin` must match `ion-bitcoin`'s configuration later)
+2. a username (e.g. `admin`)
 3. a password (must match `ion-bitcoin`'s configuration later)
 
 <table>
@@ -134,7 +134,7 @@ Start Bitcoin Core and let it sync:
 Running Bitcoin Core with friendly UI after install:
 
 ```
-bitcoin-qt.exe -testnet -datadir=<path-to-store-data> -server -rpcuser=<you-rpc-username> -rpcpassword=<your-rpc-password> -txindex=1
+bitcoin-qt.exe -testnet -datadir=<path-to-store-data> -server -rpcuser=<your-rpc-username> -rpcpassword=<your-rpc-password> -txindex=1
 ```
 
 
@@ -174,7 +174,7 @@ Example configuration files for both `testnet-` and `mainnet-` can be found unde
 
 ### Create your configuration files from templates
 
-Copy the configuration files `<testnet or mainnet>-bitcoin-config.json` and `<testnet or mainnet>-bitcoin-versioning.json` to another directory, (e.g. `/etc/ion/` or `~`)
+Copy the configuration files `<testnet-or-mainnet>-bitcoin-config.json` and `<testnet-or-mainnet>-bitcoin-versioning.json` to another directory, (e.g. `/etc/ion/`)
 
 ### Update configuration files
 
@@ -186,8 +186,8 @@ Update the ION Bitcoin microservice (e.g. `/etc/ion/testnet-bitcoin-config.json`
      - mainnet: `http://localhost:8332` (assuming default Bitcoin Core configuration from Step 2)
   - `bitcoinDataDirectory`
     - It needs to point to the block files folder:
-     - testnet: `<datadir>/testnet3`.
-     - mainnet: exactly the same as the `datadir` value configured for Bitcoin Core in Step 2.
+     - testnet: `[datadir]/testnet3`.
+     - mainnet: exactly the same as the `[datadir]` value configured for Bitcoin Core in Step 2.
   - `bitcoinWalletImportString`
     - if you intend to write DID operations, populate it with your private key, else use any [generated import string](https://learnmeabitcoin.com/technical/wif) **without any bitcoin**
      - testnet: (a valid `testnet` example wallet will be generated each time `ion-bitcoin` fails to load a valid WIF string on startup as part of its error message. You can use one of those values for testing as well
