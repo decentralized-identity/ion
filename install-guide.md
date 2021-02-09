@@ -6,8 +6,6 @@ The ION node reference implementation is currently in beta phase, operators shou
 
 The ION node implementation is composed of a collection of microservices. Of these components, the major dependencies are Bitcoin Core, IPFS, and MongoDB (for local persistence of data).
 
-> NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet variables to mainnet.
-
 ## 0. Preparing your development environment
 
 ### Hardware
@@ -66,7 +64,9 @@ If you wish to run a node that writes ION DID operations, you will need to enabl
 
 ## 1. Deciding on Testnet or Mainnet
 
-Bitcoin and ION Services need to be configured to use either `testnet` (for development) or `mainnet` (for production). If you change one service from `testnet` to `mainnet` or vice versa, the other services will also need to be rebuilt to match. Default config values for `testnet` are not valid for `mainnet` and services will fail to start if they are mismatched.
+> NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet variables to mainnet.
+
+Bitcoin and ION need to be configured to use either `testnet` (for development) or `mainnet` (for production). If you change one service from `testnet` to `mainnet` or vice versa, the other services will also need to be rebuilt to match. Default config values for `testnet` are not valid for `mainnet` and services will fail to start if they are mismatched.
 
 ## 2. Setting up Bitcoin Core
 
@@ -172,18 +172,22 @@ Example configuration files for both `testnet-` and `mainnet-` can be found unde
 
 > NOTE: If not specified, **`json/testnet-*-*.json` files are used as default configuration values**. Be sure to start with whichever config template (`testnet-` or `mainnet-`) is right for your use case.
 
-Copy the configuration files `<net>-bitcoin-config.json` and `<net>-bitcoin-versioning.json` to another directory, (e.g. `/etc/ion/`)
+### Create your configuration files from templates
 
-Update the configuration for the ION Bitcoin microservice (e.g. `/etc/ion/testnet-bitcoin-config.json`):
+Copy the configuration files `<testnet or mainnet>-bitcoin-config.json` and `<testnet or mainnet>-bitcoin-versioning.json` to another directory, (e.g. `/etc/ion/` or `~`)
+
+### Update configuration files
+
+Update the ION Bitcoin microservice (e.g. `/etc/ion/testnet-bitcoin-config.json`):
 
   - `bitcoinPeerUri`
     - Ensure it points to the RPC endpoint of the Bitcoin Core client you setup earlier in this guide
      - testnet: `http://localhost:18332`
-     - mainnet: `http://localhost:8332` (with default Bitcoin Core configuration)
+     - mainnet: `http://localhost:8332` (assuming default Bitcoin Core configuration from Step 2)
   - `bitcoinDataDirectory`
     - It needs to point to the block files folder:
      - testnet: `<datadir>/testnet3`.
-     - mainnet: exactly the same as the `datadir` value configured for Bitcoin Core.
+     - mainnet: exactly the same as the `datadir` value configured for Bitcoin Core in Step 2.
   - `bitcoinWalletImportString`
     - if you intend to write DID operations, populate it with your private key, else use any [generated import string](https://learnmeabitcoin.com/technical/wif) **without any bitcoin**
      - testnet: (a valid `testnet` example wallet will be generated each time `ion-bitcoin` fails to load a valid WIF string on startup as part of its error message. You can use one of those values for testing as well
@@ -220,7 +224,7 @@ npm run bitcoin
 
 ## 7. Run ION core service
 
-Start a new console and run the following command to start the core service. This service will fail to start until your ION Bitcoin service has started successfully.
+Start a new console and run the following command to start the core service. 
 
 ```
 ION_CORE_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-config.json
@@ -228,11 +232,13 @@ ION_CORE_VERSIONING_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-versio
 npm run core
 ```
 
+> NOTE: This service will fail to start until your ION Bitcoin service has started successfully.
+
 Give it some time to synchronize ION transactions.
 
 ## 8. Verify ION is working properly
 
-Check the following DID resolution in your local browser:
+Check the following DID resolution in your browser:
 
  * testnet:
 [http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw](http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw)
