@@ -121,12 +121,13 @@ rpcpassword=<your-rpc-password>
 </tr>
 </table>
 
-Start Bitcoin Core and let it sync with Testnet:
+Start Bitcoin Core and let it sync:
 
 ```
 ./bin/bitcoind --config bitcoin.conf
 ```
-> You can add `--daemon` to run bitcoind as a daemon process.
+
+> NOTE: You can add `--daemon` to run bitcoind as a daemon process.
 
 #### On Windows:
 
@@ -188,7 +189,7 @@ Update the configuration for the ION Bitcoin microservice (e.g. `/etc/ion/testne
      - testnet: (a valid `testnet` example wallet will be generated each time `ion-bitcoin` fails to load a valid WIF string on startup as part of its error message. You can use one of those values for testing as well
      - mainnet: (must be a mainnet-compatible WIF)
   - `bitcoinRpcUsername` & `bitcoinPrcPassword`
-    - Official Bitcoin Core client PRC API requires authentication, so make sure they are populated correctly.
+    - must match what was set in `bitcoin.conf` from step 2.
 
 Update the configuration for the ION core service under `json/testnet-core-config.json`:
   - `didMethodName`
@@ -206,7 +207,8 @@ npm run build
 
 ## 6. Run ION Bitcoin microservice
 
-Update the paths below to where you editted and saved the config files from the previous step.
+*Update the paths below* to where you editted and saved the config files from the previous step.
+
 ```
 ION_BITCOIN_CONFIG_FILE_PATH=/etc/ion/testnet-bitcoin-config.json
 ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/etc/ion/testnet-bitcoin-versioning.json
@@ -228,9 +230,9 @@ npm run core
 
 Give it some time to synchronize ION transactions.
 
-## 8. Verify ION is running properly
+## 8. Verify ION is working properly
 
-Check the following DID resolution in your browser:
+Check the following DID resolution in your local browser:
 
  * testnet:
 [http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw](http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw)
