@@ -192,7 +192,7 @@ Update the ION Bitcoin microservice (e.g. `/etc/ion/testnet-bitcoin-config.json`
     - if you intend to write DID operations, populate it with your private key, else use any [generated import string](https://learnmeabitcoin.com/technical/wif) **without any bitcoin**
      - testnet: (a valid `testnet` example wallet will be generated each time `ion-bitcoin` fails to load a valid WIF string on startup as part of its error message. You can use one of those values for testing as well
      - mainnet: (must be a mainnet-compatible WIF)
-  - `bitcoinRpcUsername` & `bitcoinPrcPassword`
+  - `bitcoinRpcUsername` & `bitcoinRpcPassword`
     - must match what was set in `bitcoin.conf` from step 2.
 
 Update the configuration for the ION core service under `json/testnet-core-config.json`:
