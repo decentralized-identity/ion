@@ -1,0 +1,95 @@
+
+
+:root:not([route*="view="]) #sidebar [href*="view=timeline"],
+:root[route*="view=timeline"] #sidebar [href*="view=timeline"],
+:root[route*="view=search"] #sidebar [href*="view=search"] {
+  color: var(--primary-blue);
+  background: radial-gradient(circle, rgb(255 255 255 / 100%) 48%, rgba(0,0,0,0) 50%);
+}
+
+#dummy {
+  min-height: 2000px;
+}
+
+main {
+  min-height: calc(100vh - var(--header-height));
+  margin-top: var(--header-height);
+  z-index: 2;
+}
+
+#header {
+  padding: 0;
+  transform: none !important;
+}
+
+#header:before, #logo {
+  padding: 0;
+  opacity: 1 !important;
+}
+
+#main_nav {
+  max-width: none;
+}
+
+#sidebar {
+  padding: calc(var(--sidebar-width) / 4) 0 !important;
+}
+
+#sidebar nav > * {
+  padding: 1em 0;
+}
+
+#sidebar nav a:hover {
+  background: radial-gradient(circle, rgb(255 255 255 / 4%) 50%, rgba(0,0,0,0) 50%),
+              radial-gradient(circle, rgba(0,0,0,0) 48%, rgba(255,255,255,0.3) 50%, rgba(0,0,0,0) 52%);
+}
+
+slide-panels {
+  position: relative;
+  z-index: 0;
+  height: auto;
+  min-height: calc(100vh - var(--header-height));
+}
+
+slide-panel {
+  width: 100%;
+  background: inherit;
+}
+
+slide-panel[open] {
+  pointer-events: auto;
+}
+
+
+slide-panel > header {
+  background: #282c34;
+}
+
+slide-panel > section > * {
+  max-width: 1400px;
+}
+
+/* Panels */
+
+#timeline > section {
+  height: 100%;
+}
+
+#timeline_chart {
+  box-sizing: border-box;
+  height: 50vh;
+  margin: 1.5em;
+  box-shadow: var(--element-shadow-mid);
+  border-radius: var(--element-border-radius);
+}
+
+#timeline_list {
+  margin: 1.5em;
+}
+
+#timeline_list li {
+  padding: 0.75em;
+  margin: 0 0 0.5em;
+  background: var(--body-bk);
+  box-shadow: var(--element-shadow-low);
+}
