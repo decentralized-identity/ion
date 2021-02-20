@@ -1,0 +1,71 @@
+
+{% set no_footer = true %}
+{% set css = ['explorer'] %}
+{% set js = [{ path: 'compiled/charts' }, { path: 'explorer', module: true }] %}
+
+{% extends "default.html" %}
+
+{% block svg %}
+<symbol id="docker" viewBox="0 0 640 512">
+  <path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/>
+</symbol>
+{% endblock %}
+
+
+{% block sidebar %}
+
+<nav>
+  <a href="/explorer?view=timeline">
+    <svg><use xlink:href="#line-chart-icon"></use></svg></a>
+  <a href="/explorer?view=search">
+    <svg><use xlink:href="#magnifier-icon"></use></svg></a>
+  <a>
+    <svg><use xlink:href="#github-icon"></use></svg></a>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+
+<slide-panels id="explorer_panels">
+
+  <slide-panel id="timeline" options="bottom fade">
+    <header>
+      <h2><i class="fas fa-user"></i>Timeline</h2>
+      <nav class="toolbar">
+        <a class="button" timeline-action="zoom-latest">Zoom to Latest</a>
+        <a class="button" timeline-action="zoom-out">Zoom Out</a>
+        <a class="button" id="moar_data">More Data!</a>
+      </nav>
+    </header>
+
+    <section>
+
+      <div id="timeline_chart"></div>
+      <ul id="timeline_list"></ul>
+
+    </section>
+  </slide-panel>
+
+  <slide-panel id="search" options="bottom fade">
+    <header>
+      <h2><i class="fas fa-user"></i>Search</h2>
+      <nav class="toolbar">
+        <a class="button" timeline-action="zoom-latest">Zoom to Latest</a>
+        <a class="button" timeline-action="zoom-out">X</a>
+      </nav>
+    </header>
+
+    <section>
+
+      TEST
+
+    </section>
+  </slide-panel>
+
+</slide-panels>
+
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+{% endblock %}
