@@ -10,6 +10,11 @@ ION is a public, permissionless, Decentralized Identifier (DID) network that imp
 - ION is public and permissionless - the system is decentralized, no company, organization, or group owns/controls the identifiers and DPKI entries in the system, and no one dictates who can participate.
 - ION doesn't introduce new tokens/coins - Bitcoin is the only unit of value relevant in the operation of the on-chain aspects of the ION network.
 - ION is not a sidechain or consensus system - the network nodes do not require any additional consensus mechanism.
+- See [design](docs/design.md) document for specific design details and decisions.
+
+## Operating Model
+
+See the [operating model](docs/operating-model.md) document on processes and activities performed to maintain ION.
 
 ## How does ION work?
 
@@ -21,4 +26,4 @@ Please use the following guide to setup the various services that comprise an IO
 
 ## Partner Organizations:
 
-- ION (a instantiation of Sidetree on Bitcoin) has been developed as a part of the [Decentralized Identity Foundation](https://identity.foundation/)
+ION (a instantiation of Sidetree on Bitcoin) has been developed as a part of the [Decentralized Identity Foundation](https://identity.foundation/)

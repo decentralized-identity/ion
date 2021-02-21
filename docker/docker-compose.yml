@@ -1,49 +1,70 @@
 version: "3"
 services:
-  bitcoin-core:
-    container_name: bitcoin-core
-    image: ruimarinho/bitcoin-core:0.19.1-alpine
+  bitcoin-core-mainnet:
+    container_name: bitcoin-core-mainnet
+    image: ruimarinho/bitcoin-core:0.20.1
     command:
       -printtoconsole
-      -testnet=1
       -txindex=1
       -server=1
     environment:
       - BITCOIN_DATA=/data
     volumes:
       - ${DATA_VOL}:/data
-  bitcoin-ion:
-    container_name: ion-bitcoin
-    image: node:10.20.1-alpine3.11
-    command: "npm run bitcoin"
-    working_dir: /ion
-    links:
-      - "bitcoin-core"
-      - "mongo"
-    volumes:
-      - ./ion:/ion
-  ipfs:
-    container_name: ion-ipfs
-    image: node:10.20.1-alpine3.11
-    command: "npm run ipfs"
-    working_dir: /ion
-    depends_on:
-      - "ion-bitcoin"
-    volumes:
-      - ./ion:/ion
-  core:
-    container_name: ion-core
-    image: node:10.20.1-alpine3.11
-    command: "npm run core"
-    working_dir: /ion
-    links:
-      - "ion-bitcoin"
-      - "ion-ipfs"
-      - "mongo"
-    volumes:
-      - ./ion:/ion
+#    ports: 
+#      - "8332:8332"
+#      - "8333:8333"
   mongo:
     container_name: mongo
     image: mongo:3.6.18-xenial
+#    ports: 
+#      - "27017:27017"
     volumes:
       - ${DB_VOL}:/data/db
+  ipfs:
+    container_name: ipfs
+#this image doesn't work on ARM64 yet, use mhoekstra/go-ipfs:v0.7.0 if you want to deploy on ARM    
+    image: ipfs/go-ipfs
+    environment: 
+      - IPFS_PATH=/data/ipfs
+    volumes:
+      - ${IPFS_VOL}:/data/ipfs
+    ports:
+#      - "5001:5001"
+      - "4001:4001"
+#      - "8080:8080"
+  
+  ion-bitcoin-mainnet:
+    container_name: ion-bitcoin-mainnet
+    image: node:14.15.4-alpine3.11
+    command: "npm run bitcoin"
+    working_dir: /ion
+    environment: 
+      - ION_BITCOIN_CONFIG_FILE_PATH=/ion/json/mainnet-bitcoin-docker-config.json
+      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/ion/json/mainnet-bitcoin-versioning.json
+    links:
+      - "bitcoin-core-mainnet"
+      - "mongo"
+    volumes:
+      - ..:/ion
+      - ${DATA_VOL}:/bitcoindata
+    ports:
+      - "3002:3002"          
+      
+
+  ion-core-mainnet:
+    container_name: ion-core-mainnet
+    image: node:14.15.4-alpine3.11
+    command: "npm run core"
+    working_dir: /ion
+    environment: 
+      - ION_CORE_CONFIG_FILE_PATH=/ion/json/mainnet-core-docker-config.json
+      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/ion/json/mainnet-core-versioning.json    
+    links:
+      - "ion-bitcoin-mainnet"
+      - "ipfs"
+      - "mongo"
+    volumes:
+      - ..:/ion
+    ports:
+      - "3000:3000"

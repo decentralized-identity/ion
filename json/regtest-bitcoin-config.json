@@ -1,13 +1,13 @@
 {
-  "bitcoinDataDirectory": "[FILL THIS IN!]",
+  "bitcoinDataDirectory": "[FILL THIS IN]",
   "bitcoinFeeSpendingCutoffPeriodInBlocks": 1,
   "bitcoinFeeSpendingCutoff": 0.001,
-  "bitcoinPeerUri": "http://localhost:18332",
+  "bitcoinPeerUri": "http://localhost:18443",
   "bitcoinRpcUsername": "",
   "bitcoinRpcPassword": "",
-  "bitcoinWalletOrImportString": "[FILL THIS IN!]",
-  "databaseName": "ion-testnet-bitcoin",
-  "genesisBlockNumber": 1900000,
+  "bitcoinWalletOrImportString": "[FILL THIS IN]",
+  "databaseName": "ion-regtest-bitcoin",
+  "genesisBlockNumber": 100,
   "logRequestError": true,
   "mongoDbConnectionString": "mongodb://localhost:27017/",
   "port": 3002,
@@ -16,6 +16,6 @@
   "transactionPollPeriodInSeconds": 60,
   "valueTimeLockUpdateEnabled": false,
   "valueTimeLockAmountInBitcoins": 0,
-  "valueTimeLockPollPeriodInSeconds": 600,
+  "valueTimeLockPollPeriodInSeconds": 600 ,
   "valueTimeLockTransactionFeesAmountInBitcoins": 0.0001
 }
