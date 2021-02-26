@@ -10,20 +10,29 @@
   --text-color: 0,0%;
   --light-text: hsl(var(--text-color), 100%);
   --subtle-text: hsl(var(--text-color), 70%);
+  --placeholder-text: hsl(var(--text-color), 40%);
+  --highlight-text: #ece0b8;
 
   --link-color: #9abdea;
 
   --primary-blue: #203857;
   --dark-blue: #1f3758;
+  --light-blue: rgb(163 221 255);
   --bright-blue: rgb(28 102 190);
+  --neon-blue: #4a9bff;
   --grey-blue: #7d97b9;
+
+  --neon-purple: #ef00ff;
 
   --light-aqua: rgb(163 207 229);
 
-  --black-grey: 19 19 22;
-  --dark-grey: #2f3135;
-  --mid-grey: #2a3544;
   --light-grey: #566274;
+  --mid-grey: #2a3544;
+  --dark-grey: #2f3135;
+  --darker-grey: #24272d;
+  --black-grey: 19 19 22;
+  
+  
   
   --body-bk: #1a1d21;
 
@@ -32,6 +41,7 @@
   --no-color: 0,0,0;
   --tint-color: 50,50,50;
   --dim-color: 100,100,100;
+  --light-color: 150,150,150;
   --low-color: 200,200,200;
   --mid-color: 225,225,225;
   --high-color: 245,245,245;
@@ -47,6 +57,12 @@
   --element-shadow-low: 0 1px 2px 1px rgba(0,0,0, 0.3);
   --element-shadow-mid: 0 1px 4px 0px rgba(0,0,0, 0.4);
   --element-shadow-high: 0 1px 5px 0px rgba(0,0,0, 0.5);
+
+  --input-shadow: 0 0px 2px 1px rgb(0 0 0 / 15%);
+  --input-inner-shadow: 0 0 3px 1px rgb(0 0 0 / 30%) inset;
+  --input-outline: 1px solid #3a669f;
+
+  --panel-header-color: #30353e;
 }
 
 :root[route="/"] #main_nav [href="/"],
@@ -136,6 +152,30 @@ a {
   cursor: pointer;
 }
 
+input:focus {
+  outline: var(--input-outline);
+}
+
+input:not([type]),
+input[type="text"],
+input[type="search"] {
+  padding: .5em;
+  font-size: 1em;
+  color: var(--light-text);
+  background: rgba(0 0 0 / 30%);
+  border-radius: var(--element-border-radius);
+  border: 1px solid rgba(255 255 255 / 12%);
+  border-top-color: rgba(255 255 255 / 10%);
+  border-bottom-color: rgba(255 255 255 / 15%);
+  box-shadow: var(--input-inner-shadow);
+}
+
+input:not([type])::placeholder,
+input[type="text"]::placeholder {
+  color: var(--placeholder-text);
+  font-style: italic;
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -164,6 +204,7 @@ button, .button {
   display: flex;
   margin: 0 0.5em;
   padding: 0.75em 1em 0.7em;
+  border: none;
   background: var(--bright-blue);
   box-shadow: var(--element-shadow-ring), var(--element-shadow-low);
   border-radius: 2px;
@@ -171,6 +212,11 @@ button, .button {
   white-space: nowrap;
   user-select: none;
   cursor: pointer;
+}
+
+button:focus,
+.button:focus {
+  outline: var(--input-outline);
 }
 
 button[pressed],
@@ -199,6 +245,12 @@ svg[svg~="background"] + svg use {
   fill: var(--primary-blue);
 }
 
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: var(--darker-grey) !important;
+  border-radius: var(--element-border-radius);
+}
+
 hr {
   height: 1px;
   margin: 2em auto;
@@ -215,7 +267,9 @@ slide-panel > header {
   box-sizing: border-box;
   height: calc(var(--header-height) * 0.85);
   padding: 0.15em 0.9em 0;
+  background: var(--panel-header-color);
   box-shadow: var(--element-shadow-mid);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 slide-panel > header > * {
@@ -229,6 +283,16 @@ slide-panel > header > nav {
 
 slide-panels > slide-panel:not([open]) {
   transform: scale(0.995);
+}
+
+slide-panel {
+  background: none;
+}
+
+.highlighted-box {
+  border: 1px solid rgba(255,255,255,.07);
+  border-top-color: rgba(255,255,255,.08);
+  border-bottom-color: rgba(255,255,255,.07);
 }
 
 .toolbar > *:first-child {
@@ -380,6 +444,12 @@ body[scrolled] #header:before {
   margin-right: auto;
   opacity: 0;
   transition: opacity 0.25s;
+  color: #fff !important;
+  background: none !important;
+}
+
+#logo:hover {
+  box-shadow: none !important;
 }
   
 body[scrolled] #logo {
@@ -461,3 +531,36 @@ body[scrolled] #logo {
   max-width: var(--max-width);
   margin: 1em auto 1.5em;
 }
+
+
+/* Spinner */
+
+
+
+[loader] {
+  font-size: 3em;
+  height: 1em;
+  width: 1em;
+  background: #fff;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity ease, visibility linear;
+  transition-duration: 0.5s;
+  -webkit-mask-image: url("/images/puff.svg");
+  mask-image: var(--mask-svg);
+  -webkit-mask-size: 100%;
+  mask-size: 100%;
+  z-index: -1;
+}
+
+[loader="show"], [loaders="show"] [loader] {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+
+[loader="hide"], [loaders="hide"] [loader] {
+  transition-duration: 1s;
+}
+
+/* Keyframes */

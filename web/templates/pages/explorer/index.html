@@ -1,13 +1,13 @@
 
 {% set no_footer = true %}
-{% set css = ['explorer'] %}
-{% set js = [{ path: 'compiled/charts' }, { path: 'explorer', module: true }] %}
+{% set css = ['prism','explorer'] %}
+{% set js = [{ path: 'compiled/charts' }, { path: 'prism' }, { path: 'explorer', module: true }] %}
 
 {% extends "default.html" %}
 
 {% block svg %}
-<symbol id="docker" viewBox="0 0 640 512">
-  <path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/>
+<symbol id="search-placeholder-image" viewBox="9.824000000000055 -0.9998466425523276 494.35125 516.0001051284602">
+<defs><path d="M119.4 404.26C112.02 462.33 135.45 517.85 212.1 511.5C305.51 503.77 271.6 414.3 291.17 354.73C324.83 252.23 531.9 276.17 446.06 118.28C391.28 17.52 190.29 -44.04 97.15 38.23C-38.17 157.77 135.98 273.64 119.4 404.26Z" id="fK2rfBrn7"></path><linearGradient id="gradienta1Y21fy07S" gradientUnits="userSpaceOnUse" x1="45.28" y1="256" x2="466.73" y2="256"><stop style="stop-color: currentColor;stop-opacity: 0" offset="0%"></stop><stop style="stop-color: currentColor;stop-opacity: 1" offset="100%"></stop></linearGradient><path d="M373.97 326.17C388.35 307.68 398.91 286.08 404.46 262.54C410.06 262.54 454.94 262.54 460.55 262.54C466.07 262.54 470.55 258.06 470.55 252.54C470.55 246.96 470.55 202.32 470.55 196.74C470.55 191.21 466.07 186.74 460.55 186.74C454.96 186.74 410.19 186.74 404.6 186.74C387.56 113.2 321.64 58.39 242.92 58.39C164.2 58.39 98.28 113.2 81.25 186.74C75.7 186.74 31.37 186.74 25.82 186.74C20.3 186.74 15.82 191.21 15.82 196.74C15.82 202.32 15.82 246.96 15.82 252.54C15.82 258.06 20.3 262.54 25.82 262.54C31.38 262.54 75.83 262.54 81.39 262.54C98.64 335.78 164.41 390.3 242.92 390.3C281.3 390.3 316.63 377.27 344.74 355.39C356.36 367.01 449.29 459.94 460.91 471.56C468.98 479.63 482.06 479.63 490.13 471.56C498.2 463.49 498.2 450.4 490.13 442.33C466.9 419.1 385.59 337.78 373.97 326.17Z" id="frgf0mQjJ"></path><path d="M460.91 448.27C452.14 439.51 408.31 395.68 329.43 316.79L358.65 287.56C437.54 366.45 481.37 410.28 490.14 419.05C498.21 427.12 498.21 440.2 490.13 448.27C482.06 456.34 468.98 456.34 460.91 448.27Z" id="b1w1IZExk5"></path><path d="M386.86 373.59L416.08 344.37L428.81 357.09L399.58 386.32L386.86 373.59Z" id="c7chQyMkj"></path><path d="M329.36 316.08L358.58 286.86L404.53 332.81L375.31 362.04L329.36 316.08Z" id="a4DdTqxwn3"></path><path d="M242.92 35.11C151.27 35.11 76.97 109.41 76.97 201.06C76.97 292.72 151.27 367.02 242.92 367.02C334.58 367.02 408.88 292.72 408.88 201.06C408.88 109.41 334.58 35.1 242.92 35.11Z" id="f6clVTl69"></path><path d="M242.92 70.35C171.12 70.35 112.92 128.55 112.92 200.35C112.92 272.14 171.12 330.35 242.92 330.35C314.72 330.35 372.92 272.14 372.92 200.35C372.92 128.55 314.72 70.34 242.92 70.35Z" id="d1vgVY8nuB"></path><path d="M353.55 129.46C344.96 115.58 333.83 103.43 320.81 93.67C314.43 100.05 193.11 221.38 138.83 275.65C148.62 288.71 160.81 299.85 174.74 308.45C176.41 306.79 295.78 187.62 353.55 129.46Z" id="f2SkUikFJO"></path><path d="M115.13 224.19C116.63 232.3 118.87 240.15 121.8 247.66C177.95 191.52 234.09 135.37 290.24 79.23C282.81 76.33 275.05 74.1 267.04 72.59C254.12 85.42 152.79 186.42 115.13 224.19Z" id="c4Wi6oMPCl"></path><path d="M25.82 238.54C20.3 238.54 15.82 234.06 15.82 228.54C15.82 222.96 15.82 178.32 15.82 172.74C15.82 167.22 20.3 162.74 25.82 162.74C69.3 162.74 417.08 162.74 460.55 162.74C466.07 162.74 470.55 167.22 470.55 172.74C470.55 178.32 470.55 222.96 470.55 228.54C470.55 234.06 466.07 238.54 460.55 238.54C373.6 238.54 69.3 238.54 25.82 238.54Z" id="a3aXzrDqGR"></path><path d="M381.19 163.16L381.19 238.96C428.8 238.96 455.26 238.96 460.55 238.96C466.07 238.96 470.55 234.48 470.55 228.96C470.55 223.38 470.55 178.74 470.55 173.16C470.55 167.64 466.07 163.16 460.55 163.16C449.97 163.16 423.51 163.16 381.19 163.16Z" id="b2YpDn9pe"></path><path d="M177.12 443.47C176.02 442.37 167.22 433.57 166.12 432.47C164.17 430.52 164.17 427.35 166.12 425.4C167.22 424.3 176.02 415.5 177.12 414.4C179.08 412.45 182.24 412.45 184.19 414.4C185.29 415.5 194.09 424.3 195.19 425.4C197.15 427.35 197.15 430.52 195.19 432.47C194.09 433.57 185.29 442.37 184.19 443.47C183.22 444.45 181.94 444.94 180.66 444.94C179.38 444.94 178.1 444.45 177.12 443.47ZM176.73 428.94L180.66 432.86L184.59 428.94L180.66 425.01L176.73 428.94Z" id="afaI6qjcU"></path><path d="M432.28 121.63C431.18 120.53 422.38 111.73 421.28 110.63C419.33 108.68 419.33 105.51 421.28 103.56C422.38 102.46 431.18 93.66 432.28 92.56C434.23 90.61 437.4 90.61 439.35 92.56C440.45 93.66 449.25 102.46 450.35 103.56C452.3 105.51 452.3 108.68 450.35 110.63C449.25 111.73 440.45 120.53 439.35 121.63C438.38 122.61 437.1 123.1 435.82 123.1C434.54 123.1 433.26 122.61 432.28 121.63ZM431.89 107.1L435.82 111.03L439.74 107.1L435.82 103.17L431.89 107.1Z" id="a3G3C29PkH"></path><path d="M232.7 428.27C232.7 424.96 230.01 422.27 226.7 422.27C223.94 422.27 221.7 420.03 221.7 417.27C221.7 414.51 223.94 412.27 226.7 412.27C230.01 412.27 232.7 409.58 232.7 406.27C232.7 403.51 234.94 401.27 237.7 401.27C240.46 401.27 242.7 403.51 242.7 406.27C242.7 409.58 245.39 412.27 248.7 412.27C251.46 412.27 253.7 414.51 253.7 417.27C253.7 420.03 251.46 422.27 248.7 422.27C245.39 422.27 242.7 424.96 242.7 428.27C242.7 431.03 240.46 433.27 237.7 433.27C234.94 433.27 232.7 431.03 232.7 428.27Z" id="a1vMKAXTFg"></path><path d="M66.46 66.35C66.46 63.04 63.77 60.35 60.46 60.35C57.7 60.35 55.46 58.11 55.46 55.35C55.46 52.59 57.7 50.35 60.46 50.35C63.77 50.35 66.46 47.66 66.46 44.35C66.46 41.59 68.7 39.35 71.46 39.35C74.22 39.35 76.46 41.59 76.46 44.35C76.46 47.66 79.15 50.35 82.46 50.35C85.22 50.35 87.46 52.59 87.46 55.35C87.46 58.11 85.22 60.35 82.46 60.35C79.15 60.35 76.46 63.04 76.46 66.35C76.46 69.11 74.22 71.35 71.46 71.35C68.7 71.35 66.46 69.11 66.46 66.35Z" id="a1kT1ymgJ"></path><path d="M428.63 210.92C429.66 211.96 437.93 220.22 438.96 221.26C439.94 222.23 441.22 222.72 442.5 222.72C443.78 222.72 445.06 222.23 446.03 221.26C447.99 219.31 447.99 216.14 446.03 214.19C445 213.15 436.73 204.89 435.7 203.85C437.12 201.26 437.88 198.35 437.88 195.32C437.88 190.56 436.03 186.1 432.67 182.74C432.67 182.74 432.67 182.74 432.67 182.74C429.31 179.38 424.84 177.52 420.09 177.52C415.34 177.52 410.87 179.38 407.51 182.74C400.58 189.67 400.58 200.96 407.51 207.9C410.87 211.26 415.34 213.11 420.09 213.11C423.12 213.11 426.04 212.34 428.63 210.92ZM420.09 187.52C422.17 187.52 424.13 188.33 425.6 189.81C425.6 189.81 425.6 189.81 425.6 189.81C428.63 192.84 428.64 197.78 425.6 200.82C425.6 200.82 425.6 200.82 425.6 200.82C425.6 200.83 425.6 200.83 425.6 200.83C424.13 202.3 422.17 203.11 420.09 203.11C418.01 203.11 416.05 202.3 414.58 200.83C411.54 197.79 411.54 192.84 414.58 189.81C416.05 188.33 418.01 187.52 420.09 187.52Z" id="cK14CtkfE"></path><path d="M366 222.23C341.39 222.23 144.46 222.23 119.84 222.23C130.22 280.76 181.46 325.35 242.92 325.35C304.38 325.35 355.63 280.76 366 222.23Z" id="d1GIyuownr"></path><path d="M380.56 301.69C393.39 284.27 402.9 264.5 408.36 243.54C413.58 243.54 455.33 243.54 460.55 243.54C468.82 243.54 475.55 236.81 475.55 228.54C475.55 222.96 475.55 178.32 475.55 172.74C475.55 164.47 468.82 157.74 460.55 157.74C451.6 157.74 379.98 157.74 371.03 157.74C353.15 104.11 302.48 65.35 242.92 65.35C183.37 65.35 132.7 104.11 114.82 157.74C112.1 157.74 90.39 157.74 87.67 157.74C96.65 125.02 116.13 95.5 142.88 74.25C171.59 51.44 206.18 39.39 242.92 39.39C305.81 39.39 363.32 76.37 389.44 133.61C390.58 136.12 393.55 137.23 396.06 136.08C398.57 134.94 399.68 131.97 398.53 129.46C370.8 68.67 309.72 29.39 242.92 29.39C203.9 29.39 167.15 42.19 136.66 66.42C107.54 89.55 86.53 121.93 77.33 157.74C72.18 157.74 30.97 157.74 25.82 157.74C17.55 157.74 10.82 164.47 10.82 172.74C10.82 178.32 10.82 222.96 10.82 228.54C10.82 236.81 17.55 243.54 25.82 243.54C30.99 243.54 72.31 243.54 77.48 243.54C86.75 279.11 107.7 311.27 136.66 334.27C167.15 358.5 203.9 371.3 242.92 371.3C279.87 371.3 314.79 359.81 344.29 338.01C355.6 349.32 446.06 439.78 457.37 451.09C462.38 456.1 468.95 458.6 475.52 458.6C482.09 458.6 488.67 456.1 493.67 451.09C503.68 441.09 503.68 424.8 493.67 414.79C471.05 392.17 391.87 313 380.56 301.69ZM360.44 157.74C336.94 157.74 148.91 157.74 125.4 157.74C142.86 109.73 188.95 75.35 242.92 75.35C296.89 75.35 342.98 109.73 360.44 157.74ZM25.82 233.54C23.07 233.54 20.82 231.3 20.82 228.54C20.82 222.96 20.82 178.32 20.82 172.74C20.82 169.98 23.07 167.74 25.82 167.74C69.3 167.74 417.08 167.74 460.55 167.74C463.31 167.74 465.55 169.98 465.55 172.74C465.55 178.32 465.55 222.96 465.55 228.54C465.55 231.3 463.31 233.54 460.55 233.54C373.6 233.54 112.77 233.54 25.82 233.54ZM360.23 243.54C342.61 291.24 296.67 325.35 242.92 325.35C189.17 325.35 143.24 291.24 125.62 243.54C172.54 243.54 313.3 243.54 360.23 243.54ZM242.92 361.3C206.18 361.3 171.59 349.25 142.88 326.45C116.29 305.32 96.88 276.02 87.84 243.54C90.55 243.54 112.31 243.54 115.02 243.54C133.08 296.86 183.58 335.35 242.92 335.35C302.26 335.35 352.77 296.86 370.82 243.54C373.54 243.54 395.29 243.54 398.01 243.54C388.93 276.14 369.4 305.54 342.67 326.67C314.02 349.33 279.53 361.3 242.92 361.3ZM475.52 448.61C471.34 448.61 467.4 446.98 464.44 444.02C453.22 432.8 363.44 343.02 352.22 331.8C360.28 325.08 367.69 317.65 374.35 309.62C385.58 320.84 475.37 410.64 486.6 421.87C492.71 427.98 492.71 437.91 486.6 444.02C483.64 446.98 479.71 448.61 475.52 448.61Z" id="a1t6ddBVKe"></path></defs><g><g><use xlink:href="#fK2rfBrn7" opacity="1" fill="url(#gradienta1Y21fy07S)"></use><g><use xlink:href="#fK2rfBrn7" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#frgf0mQjJ" opacity="1" fill="currentColor" fill-opacity="1"></use><g><use xlink:href="#frgf0mQjJ" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#b1w1IZExk5" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#b1w1IZExk5" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#c7chQyMkj" opacity="1" fill="currentColor" fill-opacity="0.5"></use><g><use xlink:href="#c7chQyMkj" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#a4DdTqxwn3" opacity="1" fill="currentColor" fill-opacity="0.5"></use><g><use xlink:href="#a4DdTqxwn3" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#f6clVTl69" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#f6clVTl69" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#d1vgVY8nuB" opacity="1" fill="currentColor" fill-opacity="0.5"></use><g><use xlink:href="#d1vgVY8nuB" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#f2SkUikFJO" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#f2SkUikFJO" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#c4Wi6oMPCl" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#c4Wi6oMPCl" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#a3aXzrDqGR" opacity="1" fill="#ffffff" fill-opacity="1"></use><g><use xlink:href="#a3aXzrDqGR" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#b2YpDn9pe" opacity="1" fill="currentColor" fill-opacity="0.65"></use><g><use xlink:href="#b2YpDn9pe" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#afaI6qjcU" opacity="1" fill="currentColor" fill-opacity="0.5"></use><g><use xlink:href="#afaI6qjcU" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#a3G3C29PkH" opacity="1" fill="currentColor" fill-opacity="0.51"></use><g><use xlink:href="#a3G3C29PkH" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#a1vMKAXTFg" opacity="1" fill="currentColor" fill-opacity="0.5"></use><g><use xlink:href="#a1vMKAXTFg" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#a1kT1ymgJ" opacity="1" fill="currentColor" fill-opacity="0.5"></use><g><use xlink:href="#a1kT1ymgJ" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#cK14CtkfE" opacity="1" fill="currentColor" fill-opacity="1"></use><g><use xlink:href="#cK14CtkfE" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#d1GIyuownr" opacity="1" fill="#000000" fill-opacity="0"></use><g><use xlink:href="#d1GIyuownr" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g><g><use xlink:href="#a1t6ddBVKe" opacity="1" fill="currentColor" fill-opacity="1"></use><g><use xlink:href="#a1t6ddBVKe" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="0"></use></g></g></g>
 </symbol>
 {% endblock %}
 
@@ -16,11 +16,14 @@
 
 <nav>
   <a href="/explorer?view=timeline">
-    <svg><use xlink:href="#line-chart-icon"></use></svg></a>
+    <svg><use href="#line-chart-icon"></use></svg>
+  </a>
   <a href="/explorer?view=search">
-    <svg><use xlink:href="#magnifier-icon"></use></svg></a>
+    <svg><use href="#magnifier-icon"></use></svg>
+  </a>
   <a>
-    <svg><use xlink:href="#github-icon"></use></svg></a>
+    <svg><use href="#github-icon"></use></svg>
+  </a>
 </nav>
 
 {% endblock %}
@@ -32,33 +35,47 @@
   <slide-panel id="timeline" options="bottom fade">
     <header>
       <h2><i class="fas fa-user"></i>Timeline</h2>
-      <nav class="toolbar">
-        <a class="button" timeline-action="zoom-latest">Zoom to Latest</a>
-        <a class="button" timeline-action="zoom-out">Zoom Out</a>
-        <a class="button" id="moar_data">More Data!</a>
-      </nav>
+      
     </header>
 
     <section>
+      <div id="timeline_chart_wrap" class="highlighted-box">
+        <nav id="timeline_chart_nav" class="toolbar">
+          <a class="button" timeline-action="zoom-latest">Zoom to Latest</a>
+          <a class="button" timeline-action="zoom-out">Zoom Out</a>
+          <a class="button" id="moar_data">More Data!</a>
+        </nav>
+        <div id="timeline_chart"></div>
+      </div>
 
-      <div id="timeline_chart"></div>
       <ul id="timeline_list"></ul>
 
     </section>
   </slide-panel>
 
-  <slide-panel id="search" options="bottom fade">
+  <slide-panel id="search" options="bottom fade" loaders>
     <header>
       <h2><i class="fas fa-user"></i>Search</h2>
       <nav class="toolbar">
-        <a class="button" timeline-action="zoom-latest">Zoom to Latest</a>
-        <a class="button" timeline-action="zoom-out">X</a>
+
       </nav>
     </header>
 
     <section>
 
-      TEST
+      <form id="did_search_bar" class="highlighted-box">
+        <nav class="toolbar">
+          <input id="did_search_input" type="search" placeholder="Enter DID to lookup" value="did:ion:EiCDH_AvDSARtctF5LvPmkKH7soYJdO_8NNZBS9xWpTdLQ:eyJkZWx0YSI6eyJwYXRjaGVzIjpbeyJhY3Rpb24iOiJyZXBsYWNlIiwiZG9jdW1lbnQiOnsicHVibGljS2V5cyI6W3siaWQiOiJzaWdfMjM3OTgzNjgiLCJwdWJsaWNLZXlKd2siOnsiY3J2Ijoic2VjcDI1NmsxIiwia3R5IjoiRUMiLCJ4IjoiU1BqdnREYkRRMzFzS0trNmVOMXRGOVBZeG5LYkhtUWhaOW9naVY1VWtBVSIsInkiOiI4Njk5TFhUekRuNUFpcEN4NEdEOXNkRFJncW9QTFFROGZXMmctMWthYWdjIn0sInB1cnBvc2VzIjpbImF1dGhlbnRpY2F0aW9uIiwiYXNzZXJ0aW9uTWV0aG9kIl0sInR5cGUiOiJFY2RzYVNlY3AyNTZrMVZlcmlmaWNhdGlvbktleTIwMTkifV0sInNlcnZpY2VzIjpbeyJpZCI6ImxpbmtlZGRvbWFpbnMiLCJzZXJ2aWNlRW5kcG9pbnQiOnsib3JpZ2lucyI6WyJodHRwczovL3N1YmRvbWFpbi50ZXN0LmNvbS8iXX0sInR5cGUiOiJMaW5rZWREb21haW5zIn1dfX1dLCJ1cGRhdGVDb21taXRtZW50IjoiRWlBQkpTMkIxWmI5RHFoc2p0QkZtTmFSTU94ZmJXbjNDQkxsZ0x4TUc5ekVMZyJ9LCJzdWZmaXhEYXRhIjp7ImRlbHRhSGFzaCI6IkVpQmpLS0phdG5pSVNxQlVEQ3dka1htUlNEdFFaM19xajZvejlRdHpEaWhoV0EiLCJyZWNvdmVyeUNvbW1pdG1lbnQiOiJFaUN3UHQzVmQ5SmpuOUM5TjFsSkM3bmNoaHJOM2hxUDZrSThlMHV3eFFhUHRnIn19" />
+          <button>Search</button>
+        </nav>
+      </form>
+
+      <div id="did_search_result">
+        <svg id="did_search_placeholder"><use href="#search-placeholder-image"></use></svg>
+        <div id="did_search_spinner" loader></div>
+        <ul id="did_overview"></ul>
+        <pre id="did_document" class="language-json highlighted-box"></pre>
+      </div>
 
     </section>
   </slide-panel>

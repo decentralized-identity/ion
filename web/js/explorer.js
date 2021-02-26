@@ -1,6 +1,8 @@
 
 import '/js/modules/router.js';
+import '/js/modules/dom.js';
 
+var currentDidSearch;
 var panels = {
   timeline: false,
   search: false
@@ -60,26 +62,34 @@ function intBetween(min, max) { // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-var listShift = 0;
-var listItemTemplate = data => `
-  <strong>Anchor String: </strong><a href="/explorer?view=timeline&anchor=${data.anchor_string}">${data.anchor_string}</a> 
-  <strong>Block Number: </strong> <span>${data.block_number}</span>
-  <strong>Operation Count: </strong> <span>${data.op_count}</span>
-`;
-var listItemGenerator = items => items.map(item => {
-  let node = document.createElement('li');
-  node.innerHTML = listItemTemplate({
-    anchor_string: '56g3567h56rnb564r68r68rrn86nr78r6g5wfq32wgw6e7n',
-    block_number: item[0],
-    op_count: intBetween(1, 10000)
-  });
-  return node;
-})
-function addListItems(items){
-  timeline_list.style.setProperty('--item-shift', listShift = listShift + items.length);
-  let nodes = listItemGenerator(items);
+var maxLengths = {
+  block: 0,
+  txn: 0,
+  op: 0
+};
+
+function addListItems(items) {
+  let nodes = items.reduce((acc, item) => {
+    let opCount = intBetween(1, 600000);
+    let box = document.createElement('detail-box');
+        box.setAttribute('data-txns', item[1]);
+        box.innerHTML = `
+          <header class="highlighted-box">
+            <div><svg><use href="#box-icon"></use></svg>Block: <strong>${item[0]}</strong></div>
+            <div><svg><use href="#hexagons-icon"></use></svg>Transactions: <strong>${item[1]}</strong></div>
+            <div><svg><use href="#puzzle-icon"></use></svg>Operations: <strong>${opCount}</strong></div>
+          </header>
+          <section></section>
+        `;
+    if (item[0] > maxLengths.block) maxLengths.block = item[0];
+    if (item[1] > maxLengths.txn) maxLengths.txn = item[1];
+    if (opCount > maxLengths.op) maxLengths.op = opCount;
+    acc.unshift(box);
+    return acc;
+  }, []);
+  for (let z in maxLengths) timeline_list.style.setProperty('--max-' + z, String(maxLengths[z]).length + 'ch');
   timeline_list.prepend(...nodes);
-}
+};
 
 var lastBlock;
 async function getLatestAnchors(){
@@ -90,9 +100,8 @@ async function getLatestAnchors(){
   let blockCount = intBetween(1, 6);
   while (blockCount--) { 
     lastBlock = intBetween(lastBlock + 1, lastBlock + intBetween(1, 6));
-    let anchor = [lastBlock, intBetween(1, 54)];
+    let anchor = [lastBlock, intBetween(1, 10)];
     chart.series[0].addPoint(anchor, false);
-    //anchors.push(anchor);
   }
   chart.redraw();
   addListItems(anchors.slice(lastBlockIndex));
@@ -110,7 +119,7 @@ Highcharts.getJSON('https://demo-live-data.highcharts.com/aapl-c.json', function
 
   chart = Highcharts.stockChart('timeline_chart', {
     chart: {
-      backgroundColor: 'var(--body-bk)'
+      backgroundColor: 'var(--darker-grey)'
     },
     rangeSelector: {
       enabled: false
@@ -255,6 +264,8 @@ Highcharts.getJSON('https://demo-live-data.highcharts.com/aapl-c.json', function
   
   //getTestData();
 
+  addListItems(anchors);
+
   moar_data.addEventListener('pointerup', e => {
     getLatestAnchors();
   })
@@ -270,3 +281,84 @@ Highcharts.getJSON('https://demo-live-data.highcharts.com/aapl-c.json', function
   });
 
 });
+
+/* DID Search */
+
+
+DOM.delegateEvent('transitionend', '[loaders="show"] [loader], [loaders="hide"] [loader]', (e, node) => {
+  DOM.fireEvent(e.target, 'loadersready');
+});
+
+async function showLoadingUI(container, min = 1500){
+  return Promise.all([
+    new Promise(resolve => setTimeout(e => resolve(), min)),
+    new Promise(resolve => {
+      container.addEventListener('loadersready', e => resolve(), { once: true });
+      container.setAttribute('loaders', 'show');
+    })
+  ]);
+}
+
+async function hideLoadingUI(container, gap = 0){
+  return new Promise(resolve => {
+    container.addEventListener('loadersready', e => {
+      setTimeout(e => resolve(), gap)
+    }, { once: true });
+    container.setAttribute('loaders', 'hide');
+  })
+}
+
+did_search_bar.addEventListener('submit', async e => {
+  e.preventDefault();
+  let didURI = (did_search_input.value || '').trim();
+  if (currentDidSearch !== didURI) {
+    await showLoadingUI(search, 1500);
+    let result;
+    try {
+      result = await fetch('https://beta.discover.did.microsoft.com/1.0/identifiers/' + didURI)
+        .then(async response => {
+          if (response.code >= 400) throw '';
+          await hideLoadingUI(search);
+          return response.json();
+        })
+        .catch(e => console.log(e))
+      currentDidSearch = didURI;
+    }
+    catch(e){
+      console.log(e);
+      return;
+    }
+    console.log(result);
+
+    let ddo = result.didDocument;
+    let meta = result.didDocumentMetadata;
+    let services = ddo.service || [];
+    let keys = Object.values(ddo).reduce((keys, items) => {
+      if (Array.isArray(items)) {
+        items.forEach(entry => entry.publicKeyJwk && keys.push(entry));
+      }
+      return keys;
+    }, []);
+    
+    did_overview.innerHTML = `
+      <li>
+        <div class="highlighted-box"><svg><use href="#tag-icon"></use></svg> Type</div>
+        <strong data-type="${ddo.type || ''}"></strong>
+      </li>
+      <li>
+        <div class="highlighted-box"><svg><use href="#network-icon"></use></svg> Published</div>
+        <strong data-published="${meta.method.published}"></strong>
+      </li>
+      <li>
+        <div class="highlighted-box"><svg><use href="#key-icon"></use></svg> Keys</div>
+        <strong data-keys="${keys.length}"></strong>
+      </li>
+      <li>
+        <div class="highlighted-box"><svg><use href="#endpoints-icon"></use></svg> Endpoints</div>
+        <strong data-services="${services.length}"></strong>
+      </li>
+    `
+    did_document.innerHTML = JSON.stringify(result, null, 2);
+    Prism.highlightElement(did_document, true);
+  }
+})
