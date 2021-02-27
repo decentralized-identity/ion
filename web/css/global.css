@@ -23,7 +23,8 @@
   --grey-blue: #7d97b9;
 
   --neon-purple: #ef00ff;
-
+  
+  --neon-aqua: #00ffc8;
   --light-aqua: rgb(163 207 229);
 
   --light-grey: #566274;
@@ -62,6 +63,7 @@
   --input-inner-shadow: 0 0 3px 1px rgb(0 0 0 / 30%) inset;
   --input-outline: 1px solid #3a669f;
 
+  --panel-header-height: calc(var(--header-height) * .85);
   --panel-header-color: #30353e;
 }
 
@@ -261,11 +263,19 @@ hr {
 
 /* Custom Elements */
 
+slide-panel {
+  background: none;
+}
+
+slide-panels > slide-panel:not([open]) {
+  transform: scale(0.995);
+}
+
 slide-panel > header {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  height: calc(var(--header-height) * 0.85);
+  height: var(--panel-header-height);
   padding: 0.15em 0.9em 0;
   background: var(--panel-header-color);
   box-shadow: var(--element-shadow-mid);
@@ -281,13 +291,10 @@ slide-panel > header > nav {
   margin-left: auto;
 }
 
-slide-panels > slide-panel:not([open]) {
-  transform: scale(0.995);
+slide-panel > section {
+  min-height: calc(100% - var(--panel-header-height));
 }
 
-slide-panel {
-  background: none;
-}
 
 .highlighted-box {
   border: 1px solid rgba(255,255,255,.07);

@@ -333,6 +333,7 @@ did_search_bar.addEventListener('submit', async e => {
     let ddo = result.didDocument;
     let meta = result.didDocumentMetadata;
     let services = ddo.service || [];
+    let domains = services.filter(service => service.type === 'LinkedDomains')
     let keys = Object.values(ddo).reduce((keys, items) => {
       if (Array.isArray(items)) {
         items.forEach(entry => entry.publicKeyJwk && keys.push(entry));
@@ -342,20 +343,24 @@ did_search_bar.addEventListener('submit', async e => {
     
     did_overview.innerHTML = `
       <li>
-        <div class="highlighted-box"><svg><use href="#tag-icon"></use></svg> Type</div>
-        <strong data-type="${ddo.type || ''}"></strong>
+        <div class="highlighted-box"><svg><use href="#tag-icon"></use></svg></div>
+        <span>Type<strong data-type="${ddo.type || ''}"></strong></span>
       </li>
       <li>
-        <div class="highlighted-box"><svg><use href="#network-icon"></use></svg> Published</div>
-        <strong data-published="${meta.method.published}"></strong>
+        <div class="highlighted-box"><svg><use href="#network-icon"></use></svg></div>
+        <span>Published<strong data-published="${meta.method.published}"></strong></span>
       </li>
       <li>
-        <div class="highlighted-box"><svg><use href="#key-icon"></use></svg> Keys</div>
-        <strong data-keys="${keys.length}"></strong>
+        <div class="highlighted-box"><svg><use href="#key-icon"></use></svg></div>
+        <span>Keys<strong data-keys="${keys.length}"></strong></span>
       </li>
       <li>
-        <div class="highlighted-box"><svg><use href="#endpoints-icon"></use></svg> Endpoints</div>
-        <strong data-services="${services.length}"></strong>
+        <div class="highlighted-box"><svg><use href="#endpoints-icon"></use></svg></div>
+        <span>Endpoints<strong data-services="${services.length}"></strong></span>
+      </li>
+      <li>
+        <div class="highlighted-box"><svg><use href="#endpoints-icon"></use></svg></div>
+        <span>Linked Domains<strong data-domains="${domains.length}"></strong></span>
       </li>
     `
     did_document.innerHTML = JSON.stringify(result, null, 2);
