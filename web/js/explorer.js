@@ -13,8 +13,8 @@ Router.filters = [
     path: '/explorer',
     params: ['view'],
     async listener(state, oldState){
-      let lastView = oldState.params.view || 'timeline';
-      let currentView = state.params.view || 'timeline';
+      let lastView = oldState.params.view || 'search';
+      let currentView = state.params.view || 'search';
       //await initializePanel(currentView);
       explorer_panels.open(currentView);
     }
