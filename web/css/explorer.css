@@ -392,6 +392,11 @@ slide-panel > section {
 
 #did_code_viewer pre {
   margin: 0;
+  white-space: pre-wrap;
+}
+
+#did_code_viewer pre .token.string {
+  word-break: break-word;
 }
 
 #linked_domains_tabs > section[selected] {

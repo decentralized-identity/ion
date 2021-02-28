@@ -322,7 +322,7 @@ function clearSearchUI(){
 
 async function getLinkedDomain(origin){
   origin = origin.trim();
-  let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration';
+  let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration.json';
   return fetch(path, { mode: 'cors' }).then(raw => raw.json());
 }
 
@@ -412,7 +412,7 @@ linked_domains_tabs.addEventListener('tabselected', async e => {
     let json = await getLinkedDomain(origin);
     panel._linked_domain = json;
     panel.innerHTML = `<pre class=" language-json">${JSON.stringify(json, null, 2)}</pre>`;
-    Prism.highlightElement(panel, true);
+    Prism.highlightElement(panel.firstElementChild, true);
   }
   catch(e){
     console.log(e);
