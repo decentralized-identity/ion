@@ -135,38 +135,22 @@ detail-box[open] > section {
 /* TAB-PANELS */
 
 
+tab-panels {
+  display: block;
+}
+
 tab-panels > nav {
   display: flex;
 }
 
 tab-panels > nav > * {
   padding: 0.5em 1em;
-  background: #e0e0e0;
-  border: 1px solid #aaa;
-  border-radius: 0px;
-  margin-left: -2px;
   cursor: pointer;
 }
 
-tab-panels > nav > *:focus {
-  outline: none;
-  background: #ccc;
-}
-
-tab-panels > nav > *:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-tab-panels > nav > *:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
 tab-panels > nav > *[selected] {
+  text-decoration: underline;
   color: #fff;
-  background: var(--dif-blue);
-  border-color: #004c8a;
   opacity: 0.9999;
 }
 

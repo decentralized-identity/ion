@@ -23,7 +23,7 @@
   --grey-blue: #7d97b9;
 
   --neon-purple: #ef00ff;
-  
+
   --neon-aqua: #00ffc8;
   --light-aqua: rgb(163 207 229);
 
@@ -560,7 +560,7 @@ body[scrolled] #logo {
   z-index: -1;
 }
 
-[loader="show"], [loaders="show"] [loader] {
+[loader^="show"], [loaders^="show"] [loader] {
   visibility: visible;
   opacity: 1;
   z-index: 1;

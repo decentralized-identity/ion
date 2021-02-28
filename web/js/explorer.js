@@ -293,7 +293,10 @@ async function showLoadingUI(container, min = 1500){
   return Promise.all([
     new Promise(resolve => setTimeout(e => resolve(), min)),
     new Promise(resolve => {
-      container.addEventListener('loadersready', e => resolve(), { once: true });
+      container.addEventListener('loadersready', e => {
+        container.setAttribute('loaders', 'showing');
+        resolve();
+      }, { once: true });
       container.setAttribute('loaders', 'show');
     })
   ]);
@@ -302,29 +305,39 @@ async function showLoadingUI(container, min = 1500){
 async function hideLoadingUI(container, gap = 0){
   return new Promise(resolve => {
     container.addEventListener('loadersready', e => {
-      setTimeout(e => resolve(), gap)
+      setTimeout(e => {
+        container.setAttribute('loaders', 'hidden');
+        resolve()
+      }, gap)
     }, { once: true });
     container.setAttribute('loaders', 'hide');
   })
+}
+
+function clearSearchUI(){
+  did_overview.innerHTML = '';
+  did_document.innerHTML = '';
+  linked_domains_tabs.innerHTML = '<nav id="linked_domains_nav"></nav>';
 }
 
 did_search_bar.addEventListener('submit', async e => {
   e.preventDefault();
   let didURI = (did_search_input.value || '').trim();
   if (currentDidSearch !== didURI) {
-    await showLoadingUI(search, 1500);
+    await showLoadingUI(search);
+    clearSearchUI();
     let result;
     try {
       result = await fetch('https://beta.discover.did.microsoft.com/1.0/identifiers/' + didURI)
         .then(async response => {
           if (response.code >= 400) throw '';
-          await hideLoadingUI(search);
           return response.json();
         })
         .catch(e => console.log(e))
       currentDidSearch = didURI;
     }
     catch(e){
+      hideLoadingUI(search);
       console.log(e);
       return;
     }
@@ -333,7 +346,14 @@ did_search_bar.addEventListener('submit', async e => {
     let ddo = result.didDocument;
     let meta = result.didDocumentMetadata;
     let services = ddo.service || [];
-    let domains = services.filter(service => service.type === 'LinkedDomains')
+    let domains = services.reduce((origins, entry) => {
+      if (entry.type === 'LinkedDomains') {
+        let endpoint = entry.serviceEndpoint;
+        if (typeof endpoint === 'string') origins.push(endpoint);
+        else return origins.concat(endpoint.origins || endpoint);
+      }
+      return origins;
+    }, []);
     let keys = Object.values(ddo).reduce((keys, items) => {
       if (Array.isArray(items)) {
         items.forEach(entry => entry.publicKeyJwk && keys.push(entry));
@@ -359,11 +379,19 @@ did_search_bar.addEventListener('submit', async e => {
         <span>Endpoints<strong data-services="${services.length}"></strong></span>
       </li>
       <li>
-        <div class="highlighted-box"><svg><use href="#endpoints-icon"></use></svg></div>
+        <div class="highlighted-box"><svg><use href="#dot-com-icon"></use></svg></div>
         <span>Linked Domains<strong data-domains="${domains.length}"></strong></span>
       </li>
-    `
+    `;
+    
+    linked_domains_nav.innerHTML = domains.map(domain => `<li data-origin="${domain}">${domain}</li>`);
+    linked_domains_tabs.append(...domains.map(() => document.createElement('section')));
+
     did_document.innerHTML = JSON.stringify(result, null, 2);
+
     Prism.highlightElement(did_document, true);
+
+    hideLoadingUI(search);
+
   }
 })

@@ -76,7 +76,7 @@ slide-panel > section {
 #timeline_chart_wrap,
 #did_search_bar,
 #did_overview div,
-#did_document {
+#did_code_viewer {
   background: var(--darker-grey);
   box-shadow: var(--element-shadow-mid);
   border-radius: var(--element-border-radius);
@@ -202,12 +202,16 @@ slide-panel > section {
   flex: 1;
   margin: 0 1em 0 0;
   padding: 0 0.75em 0.75em;
+  white-space: nowrap;
   background: rgba(0,0,0,0.3);
   border: 1px solid rgba(255,255,255,0.05);
   border-top-color: rgba(255,255,255,0.06);
   border-radius: var(--element-border-radius);
   box-shadow: var(--element-shadow-low);
   opacity: 0;
+}
+
+[loaders="hidden"] #did_overview > li {
   animation: 0.4s fade-down 0s ease forwards;
 }
 
@@ -258,7 +262,6 @@ slide-panel > section {
   color: var(--neon-blue);
 }
 
-
 #did_overview [data-type=""]:before {
   content: "None";
   color: #d4bf74;
@@ -300,15 +303,73 @@ slide-panel > section {
   color: var(--neon-aqua);
 }
 
-#did_document {
+#did_code_viewer {
   opacity: 0;
   transform: translateY(3em);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-[loaders="hide"] #did_document:not(:empty) {
+[loaders="hidden"] #did_code_viewer {
   opacity: 1;
   transform: translateY(0em);
+}
+
+#did_code_viewer > nav {
+  position: relative;
+  justify-content: flex-start;
+  margin: -1px -1px 0;
+  padding: 0.8em;
+  background: rgba(255,255,255,0.05);
+  box-shadow: var(--element-shadow-low);
+  border-top-left-radius: var(--element-border-radius);
+  border-top-right-radius: var(--element-border-radius);
+  z-index: 1;
+}
+
+#did_code_viewer > nav > a,
+#linked_domains_nav > li {
+  padding: 0.3em 0.6em 0.25em;
+  transition: background 0.35s ease;
+  border-radius: var(--element-border-radius);
+}
+
+#did_code_viewer > nav > a {
+  flex-direction: column;
+  margin: 0 0.75em 0 0;
+}
+
+#did_code_viewer > nav > a[selected],
+#linked_domains_nav > li[selected] {
+  text-decoration: none;
+  background: var(--bright-blue);
+  cursor: default;
+  user-select: none;
+}
+
+#did_code_viewer > nav > a[selected] {
+  
+}
+
+#did_code_viewer > nav > a:not([selected]):hover,
+#linked_domains_nav > li:not([selected]):hover {
+  background: rgba(var(--full-color), 0.15);
+}
+
+#did_code_viewer pre {
+  margin: 0;
+}
+
+#linked_domains_panel[selected] {
+  display: flex;
+}
+
+#linked_domains_tabs > section[selected] {
+  display: flex;
+  flex: 1;
+}
+
+#linked_domains_nav {
+  padding: 1em 0.8em;
 }
 
 #did_search_result {
@@ -317,8 +378,8 @@ slide-panel > section {
 
 #did_search_spinner {
   position: absolute;
-  font-size: 4em;
-  top: 1em;
+  font-size: 10em;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
 }
