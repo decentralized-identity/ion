@@ -65,6 +65,7 @@ slide-panel > section > * {
 
 slide-panel > section {
   padding: 2.5em 2.25em;
+  overflow-y: scroll;
 }
 
 #sidebar {
@@ -148,6 +149,19 @@ slide-panel > section {
 
 /** Search **/
 
+#search > section {
+  display: flex;
+  flex-direction: column;
+}
+
+#search > section > * {
+  width: 100%;
+}
+
+#did_search_bar {
+  margin-bottom: 5em;
+}
+
 #did_search_bar nav {
   display: flex;
   align-items: center;
@@ -165,6 +179,7 @@ slide-panel > section {
   flex-direction: column;
   align-items: center;
   position: absolute;
+  top: 5vh;
   left: 50%;
   width: 90%;
   height: 40vh;
@@ -175,8 +190,12 @@ slide-panel > section {
   transform: translateX(-50%);
 }
 
+  [loaders=""] #did_search_placeholder {
+    display: flex;
+  }
+
 #did_search_placeholder h2 {
-  margin: 2em auto 1.5em;
+  margin: 0 auto 1.5em;
 }
 
 #did_search_placeholder svg {
@@ -184,16 +203,21 @@ slide-panel > section {
   min-height: 60%;
 }
 
-[loaders=""] #did_search_placeholder {
+#did_search_result {
+  position: relative;
   display: flex;
+  flex-direction: column;
+  flex: 1;
 }
+
+/**** Overview ****/
 
 #did_overview {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3.5em auto 1em;
+  margin-bottom: 1.5em;
   font-size: 1.5em;
   text-align: center;
 }
@@ -211,9 +235,9 @@ slide-panel > section {
   opacity: 0;
 }
 
-[loaders="hidden"] #did_overview > li {
-  animation: 0.4s fade-down 0s ease forwards;
-}
+  [loaders="hidden"] #did_overview > li {
+    animation: 0.4s fade-down 0s ease forwards;
+  }
 
 #did_overview > li:last-child {
   margin: 0;
@@ -303,16 +327,22 @@ slide-panel > section {
   color: var(--neon-aqua);
 }
 
+/**** Code Viewer ****/
+
+
 #did_code_viewer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   opacity: 0;
   transform: translateY(3em);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-[loaders="hidden"] #did_code_viewer {
-  opacity: 1;
-  transform: translateY(0em);
-}
+  [loaders="hidden"] #did_code_viewer {
+    opacity: 1;
+    transform: translateY(0em);
+  }
 
 #did_code_viewer > nav {
   position: relative;
@@ -346,21 +376,22 @@ slide-panel > section {
   user-select: none;
 }
 
-#did_code_viewer > nav > a[selected] {
-  
-}
-
 #did_code_viewer > nav > a:not([selected]):hover,
 #linked_domains_nav > li:not([selected]):hover {
   background: rgba(var(--full-color), 0.15);
 }
 
-#did_code_viewer pre {
-  margin: 0;
+#did_code_viewer > section {
+  overflow: hidden;
 }
 
-#linked_domains_panel[selected] {
+#did_code_viewer > section[selected] {
   display: flex;
+  flex: 1;
+}
+
+#did_code_viewer pre {
+  margin: 0;
 }
 
 #linked_domains_tabs > section[selected] {
@@ -369,17 +400,52 @@ slide-panel > section {
 }
 
 #linked_domains_nav {
-  padding: 1em 0.8em;
+  box-sizing: border-box;
+  align-items: flex-start;
+  height: 100%;
+  padding: 1.75em 1.3em;
+  background: rgba(var(--full-color), 0.02);
+  box-shadow: var(--element-shadow-low);
 }
 
-#did_search_result {
-  position: relative;
+#linked_domains_tabs {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
 }
+
+#linked_domains_tabs > section {
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+#linked_domains_tabs > section[data-unresolvable] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.25em;
+}
+
+#linked_domains_tabs > section[data-unresolvable]:before {
+  content: "This Linked Domain could not be resolved or verified.";
+  font-size: 1.1em;
+  margin: 0 0 2em;
+}
+
+#linked_domains_tabs > section[data-unresolvable] svg {
+  height: 10em;
+  width: 10em;
+  color: var(--muted-red);
+}
+
+/** Loading Styles **/
 
 #did_search_spinner {
   position: absolute;
   font-size: 10em;
-  top: 0;
+  top: 5vh;
   left: 50%;
   transform: translateX(-50%);
 }

@@ -320,6 +320,12 @@ function clearSearchUI(){
   linked_domains_tabs.innerHTML = '<nav id="linked_domains_nav"></nav>';
 }
 
+async function getLinkedDomain(origin){
+  origin = origin.trim();
+  let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration';
+  return fetch(path, { mode: 'cors' }).then(raw => raw.json());
+}
+
 did_search_bar.addEventListener('submit', async e => {
   e.preventDefault();
   let didURI = (did_search_input.value || '').trim();
@@ -395,3 +401,23 @@ did_search_bar.addEventListener('submit', async e => {
 
   }
 })
+
+linked_domains_tabs.addEventListener('tabselected', async e => {
+  let tab = e.detail.tab;
+  if (tab.hasAttribute('data-loaded')) return;
+  let panel = e.detail.panel;
+  let origin = tab.getAttribute('data-origin');
+  if (!panel) return;
+  try {
+    let json = await getLinkedDomain(origin);
+    panel._linked_domain = json;
+    panel.innerHTML = `<pre class=" language-json">${JSON.stringify(json, null, 2)}</pre>`;
+    Prism.highlightElement(panel, true);
+  }
+  catch(e){
+    console.log(e);
+    panel.setAttribute('data-unresolvable', '');
+    panel.innerHTML = `<svg><use href="#doc-error-icon"></use></svg>`;
+  }
+  tab.setAttribute('data-loaded', '');
+});

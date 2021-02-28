@@ -32,6 +32,7 @@ class TabPanels extends HTMLElement {
               }
             })[index];
             if (panel) panel.setAttribute('selected', '');
+            DOM.fireEvent(this, 'tabselected', { detail: { index: index, tab: selected, panel: panel }});
           }
           break;
       }
