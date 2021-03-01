@@ -68,6 +68,22 @@ slide-panel > section {
   overflow-y: scroll;
 }
 
+button[clipboard] {
+  position: absolute;
+  font-size: 0.75em;
+  right: 0.5em;
+  top: 0.75em;
+  margin: 0;
+  padding: 0.35em 0.5em;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  
+}
+
+button[clipboard]:hover {
+  opacity: 1;
+}
+
 #sidebar {
   border-right: 1px solid rgba(255,255,255,.065);
 }
@@ -390,6 +406,11 @@ slide-panel > section {
   flex: 1;
 }
 
+#did_document_panel,
+#linked_domains_tabs > section {
+  position: relative;
+}
+
 #did_code_viewer pre {
   margin: 0;
   white-space: pre-wrap;
@@ -411,6 +432,7 @@ slide-panel > section {
   padding: 1.75em 1.3em;
   background: rgba(var(--full-color), 0.02);
   box-shadow: var(--element-shadow-low);
+  z-index: 1;
 }
 
 #linked_domains_tabs {

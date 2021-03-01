@@ -1,7 +1,7 @@
 
 import '/js/modules/dom.js';
 
-class DetailBox extends HTMLElement {
+var DetailBox = globalThis.DetailBox = class DetailBox extends HTMLElement {
   static get observedAttributes() {
     return ['open'];
   }

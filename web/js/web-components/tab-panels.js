@@ -1,7 +1,7 @@
 
 import '/js/modules/dom.js';
 
-class TabPanels extends HTMLElement {
+var TabPanels = globalThis.TabPanels = class TabPanels extends HTMLElement {
   constructor() {
     super();
     DOM.delegateEvent('click', 'tab-panels > nav > *', (e, delegate) => {

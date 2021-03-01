@@ -1,7 +1,7 @@
 
 import '/js/modules/dom.js';
 
-class NoticeBar extends HTMLElement {
+var NoticeBar = globalThis.NoticeBar = class NoticeBar extends HTMLElement {
   static get observedAttributes() {
     return ['open'];
   }

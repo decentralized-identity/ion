@@ -1,7 +1,7 @@
 
 import '/js/modules/dom.js';
 
-class ModalOverlay extends HTMLElement {
+var ModalOverlay = globalThis.ModalOverlay = class ModalOverlay extends HTMLElement {
   static get observedAttributes() {
     return ['open'];
   }

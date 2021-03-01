@@ -15,6 +15,13 @@
 
   --link-color: #9abdea;
 
+  --note-color: 255, 247, 203;
+  --success-color: rgb(0, 141, 71);
+  --warning-color: rgb(226, 192, 0);
+  --error-color: rgb(182, 47, 47);
+  --error-color-light: hsl(0, 100%, 85%);
+  --info-color: rgb(0, 93, 155);
+
   --primary-blue: #203857;
   --dark-blue: #1f3758;
   --light-blue: rgb(163 221 255);
@@ -295,6 +302,38 @@ slide-panel > section {
   min-height: calc(100% - var(--panel-header-height));
 }
 
+/*** NOTICE-BAR ***/
+
+notice-bar {
+  text-shadow: 0 1px 2px rgb(0 0 0 / 70%);
+  box-shadow: 0 -1px 6px 0px rgb(0 0 0 / 55%);
+}
+
+notice-bar > header {
+  font-size: 1.15em;
+  font-weight: 500 !important;
+}
+
+notice-bar[notice-type="success"] {
+  color: #fff;
+  background-color: var(--success-color);
+}
+
+notice-bar[notice-type="warning"] {
+  background-color: var(--warning-color);
+}
+
+notice-bar[notice-type="error"] {
+  color: #fff;
+  background-color: var(--error-color);
+}
+
+notice-bar[notice-type="info"] {
+  color: #fff;
+  background-color: var(--info-color);
+}
+
+/*** Classes ***/
 
 .highlighted-box {
   border: 1px solid rgba(255,255,255,.07);

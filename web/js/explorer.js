@@ -320,12 +320,6 @@ function clearSearchUI(){
   linked_domains_tabs.innerHTML = '<nav id="linked_domains_nav"></nav>';
 }
 
-async function getLinkedDomain(origin){
-  origin = origin.trim();
-  let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration.json';
-  return fetch(path, { mode: 'cors' }).then(raw => raw.json());
-}
-
 did_search_bar.addEventListener('submit', async e => {
   e.preventDefault();
   let didURI = (did_search_input.value || '').trim();
@@ -392,7 +386,6 @@ did_search_bar.addEventListener('submit', async e => {
     
     linked_domains_nav.innerHTML = domains.map(domain => `<li data-origin="${domain}">${domain}</li>`);
     linked_domains_tabs.append(...domains.map(() => document.createElement('section')));
-
     did_document.innerHTML = JSON.stringify(result, null, 2);
 
     Prism.highlightElement(did_document, true);
@@ -406,13 +399,16 @@ linked_domains_tabs.addEventListener('tabselected', async e => {
   let tab = e.detail.tab;
   if (tab.hasAttribute('data-loaded')) return;
   let panel = e.detail.panel;
-  let origin = tab.getAttribute('data-origin');
+  let origin = (tab.getAttribute('data-origin') || '').trim();
   if (!panel) return;
   try {
-    let json = await getLinkedDomain(origin);
-    panel._linked_domain = json;
-    panel.innerHTML = `<pre class=" language-json">${JSON.stringify(json, null, 2)}</pre>`;
-    Prism.highlightElement(panel.firstElementChild, true);
+    let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration.json';
+    let json = await fetch(path, { mode: 'cors' }).then(raw => raw.json());
+    panel.innerHTML = `
+      <button clipboard>Copy to Clipboard</button>
+      <pre class="language-json" data-src="${path}">${JSON.stringify(json, null, 2)}</pre>
+    `;
+    Prism.highlightElement(panel.lastElementChild, true);
   }
   catch(e){
     console.log(e);
@@ -420,4 +416,18 @@ linked_domains_tabs.addEventListener('tabselected', async e => {
     panel.innerHTML = `<svg><use href="#doc-error-icon"></use></svg>`;
   }
   tab.setAttribute('data-loaded', '');
+});
+
+DOM.delegateEvent('click', 'button[clipboard]', (e, node) => {
+  navigator.clipboard.writeText(node.nextElementSibling.textContent).then(() => {
+    new NoticeBar({
+      type: 'success',
+      title: 'Copied to clipboard!'
+    }).notify();
+  }, () => {
+    new NoticeBar({
+      type: 'error',
+      title: "Copy to clipboard failed 😭"
+    }).notify();
+  });
 });
