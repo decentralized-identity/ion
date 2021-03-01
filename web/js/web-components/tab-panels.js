@@ -1,5 +1,5 @@
 
-import '/js/modules/dom.js';
+import '../modules/dom.js';
 
 var TabPanels = globalThis.TabPanels = class TabPanels extends HTMLElement {
   constructor() {

@@ -1,5 +1,5 @@
 
-import('/js/modules/router.js');
+import('../modules/router.js');
 
 (function(){
 

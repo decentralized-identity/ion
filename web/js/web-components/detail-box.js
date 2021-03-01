@@ -1,5 +1,5 @@
 
-import '/js/modules/dom.js';
+import '../modules/dom.js';
 
 var DetailBox = globalThis.DetailBox = class DetailBox extends HTMLElement {
   static get observedAttributes() {
