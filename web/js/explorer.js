@@ -338,10 +338,8 @@ did_search_bar.addEventListener('submit', async e => {
     }
     catch(e){
       hideLoadingUI(search);
-      console.log(e);
       return;
     }
-    console.log(result);
 
     let ddo = result.didDocument;
     let meta = result.didDocumentMetadata;

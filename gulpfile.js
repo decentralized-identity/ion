@@ -71,19 +71,24 @@ const getRepoInfo = async () => {
 
 const repoFetch = getRepoInfo();
 
-async function compileAssets(){
+async function compileJS(){
   return new Promise(async resolve => {
-    await Promise.all([
-      fs.ensureDir(compiledJS),
-      fs.ensureDir(compiledCSS)
-    ]);
+    await fs.ensureDir(compiledJS);
     mergeStreams(
       ...Object.keys(assets.js).map(file => {
         return gulp.src(assets.js[file])
                    .pipe(terser())
                    .pipe(concat(file + '.js'))
                    .pipe(gulp.dest(compiledJS))
-      }),
+      })
+    ).on('finish', () => resolve())
+  });
+}
+
+async function compileCSS(){
+  return new Promise(async resolve => {
+    await fs.ensureDir(compiledCSS);
+    mergeStreams(
       ...Object.keys(assets.css).map(file => {
         return gulp.src(assets.css[file])
                    .pipe(cleanCSS())
@@ -105,10 +110,11 @@ async function renderTemplates() {
     .pipe(gulp.dest('./web'))
 };
 
-gulp.task('build', gulp.series(compileAssets, renderTemplates));
+gulp.task('build', gulp.series(compileCSS, compileJS, renderTemplates));
 
 gulp.task('watch', () => {
-  gulp.watch([root + 'js/**/*', '!' + root + 'js/compiled/**/*', root + 'css/**/*', '!' + root + 'css/compiled/**/*'], compileAssets);
+  gulp.watch([root + 'js/**/*', '!' + root + 'js/compiled/**/*'], compileJS);
+  gulp.watch([root + 'css/**/*', '!' + root + 'css/compiled/**/*'], compileCSS);
   gulp.watch([root + 'templates/**/*'], gulp.parallel(renderTemplates));
 });
 
