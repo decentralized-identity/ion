@@ -22,7 +22,7 @@ var Router = globalThis.Router = Object.assign({
       __state__: true,
       href: location.href,
       origin: location.origin,
-      path: location.pathname,
+      path: location.pathname.replace(/\/$/, ''),
       search: location.search,
       params: Object.fromEntries(new URLSearchParams(location.search))
     }
