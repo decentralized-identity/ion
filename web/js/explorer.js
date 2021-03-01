@@ -1,6 +1,6 @@
 
-import '/js/modules/router.js';
-import '/js/modules/dom.js';
+import '../js/modules/router.js';
+import '../js/modules/dom.js';
 
 var currentDidSearch;
 var panels = {
