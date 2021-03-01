@@ -74,9 +74,9 @@
   --panel-header-color: #30353e;
 }
 
-:root[route="/"] #main_nav [href="/"],
-:root[route^="/explorer"] #main_nav [href^="/explorer"],
-:root[route^="/install-guide"] #main_nav [href^="/install-guide"] {
+:root[route^="/ion"] #main_nav [href="/ion"],
+:root[route^="/ion/explorer"] #main_nav [href^="/ion/explorer"],
+:root[route^="/ion/install-guide"] #main_nav [href^="/ion/install-guide"] {
   color: var(--primary-blue);
   background: var(--light-text);
 }
