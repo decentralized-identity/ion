@@ -78,8 +78,11 @@
 :root[route^="/ion"] #main_nav [href="/ion"],
 :root[route^="/ion/explorer"] #main_nav [href^="/ion/explorer"],
 :root[route^="/ion/install-guide"] #main_nav [href^="/ion/install-guide"] {
-  color: var(--primary-blue);
-  background: var(--light-text);
+  color: rgb(var(--full-color));
+  -webkit-filter: drop-shadow( 0px 2px 2px rgba(0, 0, 0, 0.8));
+  filter: drop-shadow( 0px 2px 2px rgba(0, 0, 0, 0.8));
+  cursor: default;
+  transition: none;
 }
 
 html, body, #sidebar, main, #footer {
@@ -461,28 +464,29 @@ body[scrolled] #header:before {
 }
 
 #main_nav {
+  display: flex;
+  align-items: center;
   position: relative;
   width: 100%;
   height: 100%;
   max-width: var(--max-width);
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 0 1em;
+  padding: 0 0.25em 0 1em;
   z-index: 1;
 }
 
-#main_nav > * {
+#main_nav > nav > * {
   white-space: nowrap;
+  margin-left: 0.5em;
   padding: .4em .55em;
   border-radius: 3px;
+  color: rgba(var(--full-color), 0.55);
+  transition: color 0.3s ease;
 }
 
-#main_nav > *:hover {
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 30%) inset;
-}
-
-#main_nav > *:not(:first-child) {
-  margin-left: 1em;
+#main_nav > nav > *:hover {
+  color: rgba(var(--full-color), 0.9);
 }
 
 #logo {
@@ -607,7 +611,7 @@ body[scrolled] #logo {
 }
 
 [loader="hide"], [loaders="hide"] [loader] {
-  transition-duration: 1s;
+  transition-duration: 0.6s;
 }
 
 /* Keyframes */
