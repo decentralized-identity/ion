@@ -190,8 +190,8 @@ button[clipboard]:hover {
   font-family: monospace;
 }
 
-#did_search_placeholder {
-  display: none;
+.status-graphic {
+  display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
@@ -204,17 +204,25 @@ button[clipboard]:hover {
   color: #fff;
   text-align: center;
   transform: translateX(-50%);
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+  transition: visibility 0s 0.6s, opacity 0.6s ease;
 }
 
-  [loaders=""] #did_search_placeholder {
-    display: flex;
+  [loaders=""] #did_search_placeholder,
+  [status^="4"] #did_search_404 {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+    transition: visibility 0s, opacity 0.6s ease;
   }
 
-#did_search_placeholder h2 {
+.status-graphic h2 {
   margin: 0 auto 1.5em;
 }
 
-#did_search_placeholder svg {
+.status-graphic svg {
   width: 90%;
   min-height: 60%;
 }
@@ -251,7 +259,7 @@ button[clipboard]:hover {
   opacity: 0;
 }
 
-  [loaders="hidden"] #did_overview > li {
+  [loaders="hidden"]:not([status^="4"]) #did_overview > li {
     animation: 0.4s fade-down 0s ease forwards;
   }
 
@@ -260,19 +268,19 @@ button[clipboard]:hover {
 }
 
 #did_overview > li:nth-child(2) {
-  animation-delay: 0.1s;
+  animation-delay: 0.1s !important;
 }
 
 #did_overview > li:nth-child(3) {
-  animation-delay: 0.2s;
+  animation-delay: 0.2s !important;
 }
 
 #did_overview > li:nth-child(4) {
-  animation-delay: 0.3s;
+  animation-delay: 0.3s !important;
 }
 
 #did_overview > li:nth-child(5) {
-  animation-delay: 0.4s;
+  animation-delay: 0.4s !important;
 }
 
 #did_overview div {
@@ -309,7 +317,7 @@ button[clipboard]:hover {
 
 #did_overview [data-published="true"]:before {
   content: "Yes";
-  color: green;
+  color: rgb(0 185 5);
 }
 
 #did_overview [data-published="false"]:before {
@@ -355,7 +363,7 @@ button[clipboard]:hover {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-  [loaders="hidden"] #did_code_viewer {
+  [loaders="hidden"]:not([status^="4"]) #did_code_viewer {
     opacity: 1;
     transform: translateY(0em);
   }
@@ -475,6 +483,10 @@ button[clipboard]:hover {
   top: 5vh;
   left: 50%;
   transform: translateX(-50%);
+}
+
+[status^="4"] #did_search_spinner {
+  transition-duration: 0.6s;
 }
 
 @keyframes fade-in {

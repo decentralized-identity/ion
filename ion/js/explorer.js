@@ -16,6 +16,10 @@ Router.filters = [
       let lastView = oldState.params.view || 'search';
       let currentView = state.params.view || 'search';
       //await initializePanel(currentView);
+      if (state.params.did) {
+        did_search_input.value = state.params.did;
+        if (currentView === 'search') searchForDID();
+      }
       explorer_panels.open(currentView);
     }
   }
@@ -317,77 +321,79 @@ function clearSearchUI(){
   linked_domains_tabs.innerHTML = '<nav id="linked_domains_nav"></nav>';
 }
 
+async function searchForDID(){
+  let didURI = (did_search_input.value || '').trim();
+  if (currentDidSearch === didURI) return;
+  search.removeAttribute('status');
+  await showLoadingUI(search);
+  clearSearchUI();
+  let result;
+  try {
+    result = await fetch('https://beta.discover.did.microsoft.com/1.0/identifiers/' + didURI).then(async response => {
+      search.setAttribute('status', response.status);
+      if (response.status >= 400) throw '';
+      currentDidSearch = didURI;
+      return response.json();
+    });
+  }
+  catch(e){
+    hideLoadingUI(search);
+    return;
+  }
+
+  let ddo = result.didDocument;
+  let meta = result.didDocumentMetadata;
+  let services = ddo.service || [];
+  let domains = services.reduce((origins, entry) => {
+    if (entry.type === 'LinkedDomains') {
+      let endpoint = entry.serviceEndpoint;
+      if (typeof endpoint === 'string') origins.push(endpoint);
+      else return origins.concat(endpoint.origins || endpoint);
+    }
+    return origins;
+  }, []);
+  let keys = Object.values(ddo).reduce((keys, items) => {
+    if (Array.isArray(items)) {
+      items.forEach(entry => entry.publicKeyJwk && keys.push(entry));
+    }
+    return keys;
+  }, []);
+  
+  did_overview.innerHTML = `
+    <li>
+      <div class="highlighted-box"><svg><use href="#tag-icon"></use></svg></div>
+      <span>Type<strong data-type="${ddo.type || ''}"></strong></span>
+    </li>
+    <li>
+      <div class="highlighted-box"><svg><use href="#network-icon"></use></svg></div>
+      <span>Published<strong data-published="${meta.method.published}"></strong></span>
+    </li>
+    <li>
+      <div class="highlighted-box"><svg><use href="#key-icon"></use></svg></div>
+      <span>Keys<strong data-keys="${keys.length}"></strong></span>
+    </li>
+    <li>
+      <div class="highlighted-box"><svg><use href="#endpoints-icon"></use></svg></div>
+      <span>Endpoints<strong data-services="${services.length}"></strong></span>
+    </li>
+    <li>
+      <div class="highlighted-box"><svg><use href="#dot-com-icon"></use></svg></div>
+      <span>Linked Domains<strong data-domains="${domains.length}"></strong></span>
+    </li>
+  `;
+  
+  linked_domains_nav.innerHTML = domains.map(domain => `<li data-origin="${domain}">${domain}</li>`);
+  linked_domains_tabs.append(...domains.map(() => document.createElement('section')));
+  did_document.innerHTML = JSON.stringify(result, null, 2);
+
+  Prism.highlightElement(did_document, true);
+
+  hideLoadingUI(search);
+}
+
 did_search_bar.addEventListener('submit', async e => {
   e.preventDefault();
-  let didURI = (did_search_input.value || '').trim();
-  if (currentDidSearch !== didURI) {
-    await showLoadingUI(search);
-    clearSearchUI();
-    let result;
-    try {
-      result = await fetch('https://beta.discover.did.microsoft.com/1.0/identifiers/' + didURI)
-        .then(async response => {
-          if (response.code >= 400) throw '';
-          return response.json();
-        })
-        .catch(e => console.log(e))
-      currentDidSearch = didURI;
-    }
-    catch(e){
-      hideLoadingUI(search);
-      return;
-    }
-
-    let ddo = result.didDocument;
-    let meta = result.didDocumentMetadata;
-    let services = ddo.service || [];
-    let domains = services.reduce((origins, entry) => {
-      if (entry.type === 'LinkedDomains') {
-        let endpoint = entry.serviceEndpoint;
-        if (typeof endpoint === 'string') origins.push(endpoint);
-        else return origins.concat(endpoint.origins || endpoint);
-      }
-      return origins;
-    }, []);
-    let keys = Object.values(ddo).reduce((keys, items) => {
-      if (Array.isArray(items)) {
-        items.forEach(entry => entry.publicKeyJwk && keys.push(entry));
-      }
-      return keys;
-    }, []);
-    
-    did_overview.innerHTML = `
-      <li>
-        <div class="highlighted-box"><svg><use href="#tag-icon"></use></svg></div>
-        <span>Type<strong data-type="${ddo.type || ''}"></strong></span>
-      </li>
-      <li>
-        <div class="highlighted-box"><svg><use href="#network-icon"></use></svg></div>
-        <span>Published<strong data-published="${meta.method.published}"></strong></span>
-      </li>
-      <li>
-        <div class="highlighted-box"><svg><use href="#key-icon"></use></svg></div>
-        <span>Keys<strong data-keys="${keys.length}"></strong></span>
-      </li>
-      <li>
-        <div class="highlighted-box"><svg><use href="#endpoints-icon"></use></svg></div>
-        <span>Endpoints<strong data-services="${services.length}"></strong></span>
-      </li>
-      <li>
-        <div class="highlighted-box"><svg><use href="#dot-com-icon"></use></svg></div>
-        <span>Linked Domains<strong data-domains="${domains.length}"></strong></span>
-      </li>
-    `;
-    
-    linked_domains_nav.innerHTML = domains.map(domain => `<li data-origin="${domain}">${domain}</li>`);
-    linked_domains_tabs.append(...domains.map(() => document.createElement('section')));
-    did_document.innerHTML = JSON.stringify(result, null, 2);
-
-    Prism.highlightElement(did_document, true);
-
-    hideLoadingUI(search);
-
-  }
+  searchForDID();
 })
 
 linked_domains_tabs.addEventListener('tabselected', async e => {
