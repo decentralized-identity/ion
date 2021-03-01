@@ -1,5 +1,5 @@
 
-:root:not([route*="view="]) #sidebar [href*="view=timeline"],
+:root:not([route*="view="]) #sidebar [href*="view=search"],
 :root[route*="view=timeline"] #sidebar [href*="view=timeline"],
 :root[route*="view=search"] #sidebar [href*="view=search"] {
   color: var(--primary-blue);
