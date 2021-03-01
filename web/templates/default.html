@@ -26,11 +26,11 @@
     
 
     {% block scripts %}
-      <script src="/js/compiled/body.js"></script>
+      <script src="js/compiled/body.js"></script>
     {% endblock %}
 
     {% for file in js %}
-      <script src="/js/{{file.path}}.js" {{ 'type=module' if file.module else '' }}></script>
+      <script src="js/{{file.path}}.js" {{ 'type=module' if file.module else '' }}></script>
     {% endfor %}
 
   </body>
