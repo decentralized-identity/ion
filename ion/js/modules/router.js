@@ -42,8 +42,9 @@ var Router = globalThis.Router = Object.assign({
     let routeMatched;
     let oldState = Router.last;
     Router.filters.forEach(filter => {
-      let pathMatched = filter.path && filter.path === newState.path;
-      let pathChanged = pathMatched && filter.path !== oldState.path;
+      let path = filter.path.replace(/\/$/, '');
+      let pathMatched = path && path === newState.path;
+      let pathChanged = pathMatched && path !== oldState.path;
       let paramsChanged = filter.params ? filter.params.some(param => {
         return oldState.params[param] !== newState.params[param];
       }) : false;
