@@ -1,5 +1,5 @@
 
-import '../modules/dom.js';
+import '/ion/js/modules/dom.js';
 
 var TabPanels = globalThis.TabPanels = class TabPanels extends HTMLElement {
   constructor() {

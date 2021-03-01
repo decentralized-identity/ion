@@ -11,7 +11,7 @@ const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt({ linkify: true });
 const encoder = require('@root/encoding');
 
-const root = 'web/';
+const root = 'ion/';
 const compiledJS = root + 'js/compiled/';
 const compiledCSS = root + 'css/compiled/';
 
@@ -107,7 +107,7 @@ async function renderTemplates() {
         code: code || await getRepoInfo()
       }
     }))
-    .pipe(gulp.dest('./web'))
+    .pipe(gulp.dest('./ion'))
 };
 
 gulp.task('build', gulp.series(compileCSS, compileJS, renderTemplates));

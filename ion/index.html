@@ -10,23 +10,19 @@
   <title>ION - an open, public, permissionless decentralized identifier network</title>
 
   <!-- <meta name="google-site-verification" content="8yJCkbG9ayv7Vbjgjk525YTGbDVCvUZ_Moviopr6f1M" /> -->
-  <link rel="icon" href="../images/favicon.ico" />
-  <link rel="icon" type="image/png" href="../images/favicon.png?r1">
+  <link rel="icon" href="/ion/images/favicon.ico" />
+  <link rel="icon" type="image/png" href="/ion/images/favicon.png?r1">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
 
-  <link href="../css/compiled/head.css" rel="stylesheet">
+  <link href="/ion/css/compiled/head.css" rel="stylesheet">
   
-    <link href="../css/imports/hero.css" rel="stylesheet" />
+    <link href="/ion/css/imports/hero.css" rel="stylesheet" />
   
-    <link href="../css/imports/page.css" rel="stylesheet" />
-  
-    <link href="../css/imports/markdown.css" rel="stylesheet" />
-  
-    <link href="../css/guide.css" rel="stylesheet" />
+    <link href="/ion/css/home.css" rel="stylesheet" />
   
 
-  <script src="../js/compiled/web-components.js" type="module"></script>
+  <script src="/ion/js/compiled/web-components.js" type="module"></script>
 
 </head>
 
@@ -145,14 +141,14 @@
     
   <header id="header">
     <nav id="main_nav">
-      <a id="logo" href="/">
-        <img class="logo" src="images/logo-white.svg" />
+      <a id="logo" href="/ion">
+        <img class="logo" src="/ion/images/logo-white.svg" />
       </a>
-      <a href="install-guide">
+      <a href="/ion/install-guide">
         <svg><use href="#guide-icon"></use></svg>
         Install Guide
       </a>
-      <a href="explorer">
+      <a href="/ion/explorer">
         <svg><use href="#network-icon"></use></svg>
         Network Explorer
       </a>
@@ -172,174 +168,78 @@
 <section id="hero" full-width>
   <div id="hero_content">
     <object data="images/logo-white.svg"></object>
-    <h2>Install Guide for v1.0.1</h2>
+    <!-- 
+      <div class="release_version">v1.0.1</div>
+     -->
+    <!-- <h1>Open - Public - Permissionless</h1> -->
+    <p>ION is an open, public, permissionless Layer 2 Decentralized Identifier 
+      network that runs atop the Bitcoin blockchain</p>
+    <nav>
+      <a class="button">
+        <svg><use href="#guide-icon"></use></svg>
+        Install Guide
+      </a>
+      <a class="button">
+        <svg><use href="#docker-icon"></use></svg>
+        Docker Image
+      </a>
+      <a class="button">
+        <svg><use href="#sdk-icon"></use></svg>
+        Client SDK
+      </a>
+    </nav>
   </div>
 </section>
 
-<section id="content" class="markdown">
-  <h1>ION Installation Guide</h1>
-<p>ION is a decentralized Layer 2 network for Decentralized Identifiers that runs atop the Bitcoin blockchain. Running an ION node minimizes trust in external parties for resolving ION DIDs, helps make the network more resilient and reliable, and provides the operator with better DID resolution performance.</p>
-<p>The ION node reference implementation is currently in beta phase, operators should expect potential breaking changes and resets of the network's state. Presently, we are only recommending that experienced developers invest the time in running, testing, and contributing to the code base. This recommendation will change as the implementation progresses into more stable stages of development, which contributors will communicate to the community via blog posts and communications from DIF and collaborating organizations.</p>
-<p>The ION node implementation is composed of a collection of microservices. Of these components, the major dependencies are Bitcoin Core, IPFS, and MongoDB (for local persistence of data).</p>
-<blockquote>
-<p>NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet variables to mainnet.</p>
-</blockquote>
-<h2>1. Preparing your development environment</h2>
-<h3>Hardware</h3>
-<p>We recommend you run ION on a machine with the following minimum specs:</p>
-<ul>
-<li>i5 processor (2017+ models)</li>
-<li>6GB of RAM</li>
-<li>1TB of storage</li>
-</ul>
-<h3>Operating System</h3>
-<p>Both Linux and Windows are supported and tested. For Linux, the setup is verified on Ubuntu 18, so we recommend Debian-based distros for Linux setup.</p>
-<h4>Linux Environment Setup</h4>
-<h5>Snap</h5>
-<p>We use snap to simplify installation of certain services. Run the following command to install snap:</p>
-<pre><code>sudo apt install snapd
-</code></pre>
-<p>You may need to add the snap binaries directory to your path by adding the following line in ~/.bash_profile</p>
-<pre><code>PATH=&quot;$PATH:/snap/bin&quot;
-</code></pre>
-<p>To ensure that the path changes go into effect immediately:</p>
-<pre><code>source ~/.bash_profile
-</code></pre>
-<h5>Node.js</h5>
-<p>Services within ION rely on Node.js version 14. Run the following command to install Node v14:</p>
-<pre><code>sudo snap install node --classic --channel=14
-</code></pre>
-<h5>build-essential</h5>
-<p>Building ION requires your distro's equivalent of Ubuntu's 'build-essential', e.g. make, g++, etc.</p>
-<pre><code>sudo apt install build-essential
-</code></pre>
-<h4>Windows Environment Setup</h4>
-<p>Go go <a href="https://nodejs.org">https://nodejs.org</a>, download and install the latest v14 of Node.js.</p>
-<h3>Inbound Ports to Open</h3>
-<p>If you wish to run a node that writes ION DID operations, you will need to enable uPnP on your router or open ports <code>4002</code> and <code>4003</code> so that the operation data files can be served to others via IPFS.</p>
-<h2>2. Setting up Bitcoin Core</h2>
-<p>An ION node needs a trusted Bitcoin peer for fetching and writing ION transactions. We use Bitcoin Core for this.</p>
-<h3>Automated script for installing Bitcoin Core on Linux</h3>
-<p>If you would like to install and start Bitcoin Core automatically on Linux, you can review and run the automated script committed in the <a href="https://github.com/decentralized-identity/sidetree/blob/master/lib/bitcoin/setup.sh">Sidetree repo</a>.</p>
-<blockquote>
-<p>NOTE: Initial synchronization takes ~2 hours for testnet on a 2 core machine with an SSD.</p>
-</blockquote>
-<h3>Installing Bitcoin Core Manually</h3>
-<p>You can find Windows and Linux binaries for Bitcoin Core releases <a href="https://bitcoincore.org/en/releases/">here.</a></p>
-<h4>On Linux:</h4>
-<p>Create a configuration file (<code>bitcoin.conf</code>) designating the path you would like the Bitcoin data to be stored in (<code>[datadir]</code>):</p>
-<pre><code class="language-yaml">testnet=1
-server=1
-datadir=~/.bitcoin
-rpcuser=&lt;your-rpc-username&gt;
-rpcpassword=&lt;your-rpc-password&gt;
-txindex=1
-</code></pre>
-<p>Start Bitcoin Core and let it sync with Testnet:</p>
-<pre><code>./bin/bitcoind --config bitcoin.conf
-</code></pre>
-<blockquote>
-<p>You can add <code>--daemon</code> to run bitcoind as a daemon process.</p>
-</blockquote>
-<h4>On Windows:</h4>
-<p>Running Bitcoin Core with friendly UI after install:</p>
-<pre><code>bitcoin-qt.exe -testnet -datadir=&lt;path-to-store-data&gt; -server -rpcuser=&lt;you-rpc-username&gt; -rpcpassword=&lt;your-rpc-password&gt; -txindex=1
-</code></pre>
-<h2>3. Installing Go-IPFS</h2>
-<p>Follow the instruction found at <a href="https://docs.ipfs.io/install/">IPFS website</a> to install Go-IPFS, you can install the IPFS Desktop which internally installs Go-IPFS, it provides you with a user friendly UI.</p>
-<h2>4. Setting up MongoDB</h2>
-<h3>On Linux:</h3>
-<p>The default persistence option for storing data locally is MongoDB, though it is possible to create adapters for other datastores. To use the default MongoDB option, you'll need to install MongoDB community build:</p>
-<ul>
-<li>Download as a <code>deb</code> package: <a href="https://www.mongodb.com/download-center/community">https://www.mongodb.com/download-center/community</a>.</li>
-<li>Installation doc: <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/</a></li>
-</ul>
-<blockquote>
-<p>NOTE: You may not have all the dependencies required to run MongoDB, if so you can run <code>sudo apt-get install -f</code> to bring them in.</p>
-</blockquote>
-<p>You'll probably want to store the data from the Mongo instance in the same drive you chose to store the blockchain data, due to the large amount of storage required. Set the directory for this by creating a <code>db</code> folder in the location you chose and run <code>mongod --dbpath ~/YOUR_LOCATION/db</code></p>
-<h3>On Windows:</h3>
-<p>Download and install MongoDB from <a href="https://www.mongodb.com/download-center/community">https://www.mongodb.com/download-center/community</a>.</p>
-<blockquote>
-<p>NOTE: To view MongoDB files with a more approachable GUI, download and install MongoDB Compass: <a href="https://docs.mongodb.com/compass/master/install/">https://docs.mongodb.com/compass/master/install/</a></p>
-</blockquote>
-<h2>5. Configure &amp; Build ION Microservices</h2>
-<p>Clone <a href="https://github.com/decentralized-identity/ion:">https://github.com/decentralized-identity/ion:</a></p>
-<pre><code>git clone https://github.com/decentralized-identity/ion
-</code></pre>
-<p>Update the configuration for the ION Bitcoin microservice under <code>json/testnet-bitcoin-config.json</code>:</p>
-<ul>
-<li><code>bitcoinPeerUri</code>
-<ul>
-<li>Ensure it points to the RPC endpoint of the Bitcoin Core client you setup earlier in this guide (e.g. <code>http://localhost:18332</code> for testnet and <code>http://localhost:8332</code> for mainnet with default Bitcoin Core configuration).</li>
-</ul>
-</li>
-<li><code>bitcoinDataDirectory</code>
-<ul>
-<li>It needs to point to the block files folder:
-<ul>
-<li>mainnet: exactly the same as the <code>datadir</code> value configured for Bitcoin Core.</li>
-<li>testnet: <code>&lt;datadir&gt;/testnet3</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>bitcoinWalletImportString</code>
-<ul>
-<li>Populate it with your private key if you intend to write DID operations, else just use any generated import string without any bitcoin.</li>
-</ul>
-</li>
-<li><code>bitcoinRpcUsername</code> &amp; <code>bitcoinPrcPassword</code>
-<ul>
-<li>Official Bitcoin Core client PRC API requires authentication, so make sure they are populated correctly.</li>
-</ul>
-</li>
-<li><code>mongoDbConnectionString</code>
-<ul>
-<li>Point to your MongoDB if you need to change the endpoint. The existing config points to the default endpoint: <code>mongodb://localhost:27017/</code>.</li>
-</ul>
-</li>
-</ul>
-<p>Update the configuration for the ION core service under <code>json/testnet-core-config.json</code>:</p>
-<ul>
-<li><code>didMethodName</code>
-<ul>
-<li>testnet: <code>ion:test</code></li>
-<li>mainnet: <code>ion</code></li>
-</ul>
-</li>
-<li><code>ipfsHttpApiEndpointUri</code>
-<ul>
-<li>Point it to the Go-IPFS HTTP API endpoint. The existing config points to the default endpoint: <code>http://127.0.0.1:5001</code>.</li>
-</ul>
-</li>
-<li><code>mongoDbConnectionString</code>
-<ul>
-<li>Point to your MongoDB if you need to change the endpoint. The existing config points to the default endpoint: <code>mongodb://localhost:27017/</code>.</li>
-</ul>
-</li>
-</ul>
-<p>Run the following commands to build ION:</p>
-<pre><code>npm i
-npm run build
-</code></pre>
-<blockquote>
-<p>NOTE: You must rerun <code>npm run build</code> every time a configuration JSON file is modified.</p>
-</blockquote>
-<h2>6. Run ION Bitcoin microservice</h2>
-<pre><code>npm run bitcoin
-</code></pre>
-<p>This service will fail to start until your Bitcoin Core client has blocks past the ION genesis block. Please wait and try again later if this happens.</p>
-<h2>7. Run ION core service</h2>
-<p>Start a new console and run the following command to start the core service. This service will fail to start until your ION Bitcoin service has started successfully.</p>
-<pre><code>npm run core
-</code></pre>
-<p>Give it some time to synchronize ION transactions.</p>
-<p>Verify ION is running properly by checking the following DID resolution in your browser:</p>
-<p>testnet:
-<a href="http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw">http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw</a></p>
-<p>mainnet:
-<a href="http://localhost:3000/identifiers/did:ion:EiClkZMDxPKqC9c-umQfTkR8vvZ9JPhl_xLDI9Nfk38w5w">http://localhost:3000/identifiers/did:ion:EiClkZMDxPKqC9c-umQfTkR8vvZ9JPhl_xLDI9Nfk38w5w</a></p>
+<section id="highlights">
+
+  <ul max-width>
+    <li>
+      <div>
+        <svg shape="hexagon"><use href="#network-2-icon"></use></svg>
+      </div>
+      <div>
+        <h2>Decentralized</h2>
+        <p>
+          ION is a Layer 2 open, permissionless network based on the purely deterministic 
+          Sidetree protocol, which requires no special tokens, trusted validators, or 
+          additional consensus mechanisms; the linear progression of Bitcoin's 
+          timechain is all that's required for its operation.
+        </p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h2>Scalable</h2>
+        <p>
+          ION is designed for scale, supporting thousands of DID operations 
+          per second across the network. ION is based on a strongly eventually 
+          consistent architecture that enables embarassingly parallel ingest, 
+          processing, and resolution of DID operations. 
+        </p>
+      </div>
+      <div>
+        <svg shape="hexagon"><use href="#gauge-icon"></use></svg>
+      </div>
+    </li>
+    <li>
+      <div>
+        <svg shape="hexagon"><use href="#shield-lock-icon"></use></svg>
+      </div>
+      <div>
+        <h2>Censorship & Tamper Evasive</h2>
+        <ul list> 
+          <li>ION DIDs can only be deactivated by their owners, protecting people from digital depersoning.</li>
+          <li>ION includes registry capabilities to support decentralized package managers, app stores, etc.</li>
+          <li>ION enables DID owners to securely connect to each other through decentralized routing endpoints.</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+
+</section>
+
+<section id="features">
 
 </section>
 
@@ -397,14 +297,14 @@ npm run build
 
     
   
-      <script src="../js/compiled/body.js"></script>
+      <script src="/ion/js/compiled/body.js"></script>
     
 
 
     
-      <script src="../js/imports/hero.js" ></script>
+      <script src="/ion/js/imports/hero.js" ></script>
     
-      <script src="../js/guide.js" type=module></script>
+      <script src="/ion/js/home.js" type=module></script>
     
 
   </body>
