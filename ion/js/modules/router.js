@@ -38,6 +38,7 @@ var Router = globalThis.Router = Object.assign({
     Router.setState(state, options.event || null);
   },
   setState (newState, event){
+    console.log(arguments);
     if (!newState.__state__) newState = Router.generateState(newState);
     let routeMatched;
     let oldState = Router.last;
