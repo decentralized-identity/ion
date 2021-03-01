@@ -1,6 +1,6 @@
 
-import '../js/modules/router.js';
-import '../js/modules/dom.js';
+import '/ion/js/modules/router.js';
+import '/ion/js/modules/dom.js';
 
 var currentDidSearch;
 var panels = {
@@ -10,7 +10,7 @@ var panels = {
 
 Router.filters = [
   {
-    path: '/explorer',
+    path: '/ion/explorer',
     params: ['view'],
     async listener(state, oldState){
       let lastView = oldState.params.view || 'search';

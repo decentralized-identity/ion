@@ -1,5 +1,5 @@
 
-import '../modules/dom.js';
+import '/ion/js/modules/dom.js';
 
 var Router = globalThis.Router = Object.assign({
   initialized: false,

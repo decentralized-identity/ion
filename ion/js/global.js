@@ -1,5 +1,5 @@
 
-import('../modules/router.js');
+import('/ion/js/modules/router.js');
 
 (function(){
 

@@ -1,5 +1,5 @@
 
-import '../modules/dom.js';
+import '/ion/js/modules/dom.js';
 
 var NoticeBar = globalThis.NoticeBar = class NoticeBar extends HTMLElement {
   static get observedAttributes() {
