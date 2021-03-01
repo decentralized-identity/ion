@@ -32,7 +32,20 @@
     "ts-node": "8.3.0",
     "tslint": "6.1.2",
     "tslint-config-standard": "8.0.1",
-    "typescript": "3.9.6"
+    "typescript": "3.9.6",
+    "fs-extra": "9.1.0",
+    "gulp": "4.0.2",
+    "gulp-concat": "2.6.1",
+    "gulp-terser": "1.2.0",
+    "gulp-connect": "5.7.0",
+    "merge-stream": "2.0.0",
+    "gulp-clean-css": "4.3.0",
+    "gulp-nunjucks-render": "2.2.3",
+    "axios": "0.21.1",
+    "markdown-it": "12.0.4",
+    "@root/encoding": "1.0.1",
+    "highcharts": "^9.0.0",
+    "prismjs": "1.21.0"
   },
   "bin": {
     "ion": "./dist/bin/index.js"
