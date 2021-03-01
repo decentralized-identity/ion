@@ -107,179 +107,176 @@ async function getLatestAnchors(){
   addListItems(anchors.slice(lastBlockIndex));
 }
 
-Highcharts.getJSON('https://demo-live-data.highcharts.com/aapl-c.json', function (data) {
 
-  var textBright = '#fff';
-  const axisLabels = {
-    format: '{value}',
+var textBright = '#fff';
+const axisLabels = {
+  format: '{value}',
+  style: {
+    color: textBright
+  }
+};
+
+chart = Highcharts.stockChart('timeline_chart', {
+  chart: {
+    backgroundColor: 'var(--darker-grey)'
+  },
+  rangeSelector: {
+    enabled: false
+  },
+  scrollbar: {
+    enabled: false
+  },
+  tooltip: {
+    backgroundColor: 'rgba(0, 0, 0, 0.85)',
     style: {
       color: textBright
+    },
+    formatter: function() {
+      return `${this.y} anchors in block ${this.x}`
     }
-  };
-
-  chart = Highcharts.stockChart('timeline_chart', {
-    chart: {
-      backgroundColor: 'var(--darker-grey)'
+  },
+  colors: [
+    '#a6f0ff',
+    '#70d49e',
+    '#e898a5',
+    '#007faa',
+    '#f9db72',
+    '#f45b5b',
+    '#1e824c',
+    '#e7934c',
+    '#dadfe1',
+    '#a0618b'
+  ],
+  series: [
+    {
+      data: anchors,
+      shadow: true,
+      lineWidth: 0,
+      marker: {
+        enabled: true,
+        radius: 4
+      },
+      states: {
+        hover: {
+          lineWidthPlus: 0
+        }
+      },
+    }
+  ],
+  xAxis: {
+    title: {
+      text: 'Bitcoin Block Number',
+      style: {
+          color: textBright
+      }
     },
-    rangeSelector: {
-      enabled: false
+    crosshair: {
+      width: 24,
+      color: 'rgba(255,255,255, 0.075)'
     },
-    scrollbar: {
-      enabled: false
-    },
-    tooltip: {
-      backgroundColor: 'rgba(0, 0, 0, 0.85)',
+    range: anchors.slice(-1)[0][0] - anchors.slice(-5, -4)[0][0],
+    minRange: 10,
+    gridLineColor: '#707073',
+    labels: axisLabels,
+    lineColor: '#707073',
+    minorGridLineColor: '#505053',
+    tickColor: '#707073',
+  },
+  yAxis: {
+    title: {
+      text: 'ION Anchors',
       style: {
         color: textBright
-      },
-      formatter: function() {
-        return `${this.y} anchors in block ${this.x}`
       }
     },
-    colors: [
-      '#a6f0ff',
-      '#70d49e',
-      '#e898a5',
-      '#007faa',
-      '#f9db72',
-      '#f45b5b',
-      '#1e824c',
-      '#e7934c',
-      '#dadfe1',
-      '#a0618b'
-    ],
-    series: [
-      {
-        data: anchors,
-        shadow: true,
-        lineWidth: 0,
-        marker: {
-          enabled: true,
-          radius: 4
-        },
-        states: {
-          hover: {
-            lineWidthPlus: 0
-          }
-        },
+    gridLineColor: '#707073',
+    labels: axisLabels,
+    lineColor: '#707073',
+    minorGridLineColor: '#505053',
+    tickColor: '#707073',
+
+  },
+  plotOptions: {
+    series: {
+      dataLabels: {
+        color: textBright
+      },
+      marker: {
+        lineColor: '#333'
       }
-    ],
+    },
+    boxplot: {
+      fillColor: '#505053'
+    },
+    candlestick: {
+      lineColor: 'white'
+    },
+    errorbar: {
+      color: 'white'
+    },
+    map: {
+      nullColor: '#353535'
+    }
+  },
+  labels: {
+    style: {
+      color: '#707073'
+    }
+  },
+  drilldown: {
+    activeAxisLabelStyle: {
+      color: textBright
+    },
+    activeDataLabelStyle: {
+      color: textBright
+    }
+  },
+  navigator: {
+    height: 75,
+    adaptToUpdatedData: true,
+    handles: {
+      backgroundColor: '#666',
+      borderColor: '#AAA'
+    },
+    outlineColor: '#CCC',
+    maskFill: 'rgba(180,180,255,0.1)',
+    series: {
+      color: '#7798BF',
+      lineColor: '#A6C7ED'
+    },
     xAxis: {
-      title: {
-        text: 'Bitcoin Block Number',
-        style: {
-            color: textBright
-        }
-      },
-      crosshair: {
-        width: 24,
-        color: 'rgba(255,255,255, 0.075)'
-      },
-      range: anchors.slice(-1)[0][0] - anchors.slice(-5, -4)[0][0],
-      minRange: 10,
-      gridLineColor: '#707073',
-      labels: axisLabels,
-      lineColor: '#707073',
-      minorGridLineColor: '#505053',
-      tickColor: '#707073',
-    },
-    yAxis: {
-      title: {
-        text: 'ION Anchors',
-        style: {
-          color: textBright
-        }
-      },
-      gridLineColor: '#707073',
-      labels: axisLabels,
-      lineColor: '#707073',
-      minorGridLineColor: '#505053',
-      tickColor: '#707073',
-
-    },
-    plotOptions: {
-      series: {
-        dataLabels: {
-          color: textBright
-        },
-        marker: {
-          lineColor: '#333'
-        }
-      },
-      boxplot: {
-        fillColor: '#505053'
-      },
-      candlestick: {
-        lineColor: 'white'
-      },
-      errorbar: {
-        color: 'white'
-      },
-      map: {
-        nullColor: '#353535'
-      }
-    },
-    labels: {
-      style: {
-        color: '#707073'
-      }
-    },
-    drilldown: {
-      activeAxisLabelStyle: {
-        color: textBright
-      },
-      activeDataLabelStyle: {
-        color: textBright
-      }
-    },
-    navigator: {
-      height: 75,
-      adaptToUpdatedData: true,
-      handles: {
-        backgroundColor: '#666',
-        borderColor: '#AAA'
-      },
-      outlineColor: '#CCC',
-      maskFill: 'rgba(180,180,255,0.1)',
-      series: {
-        color: '#7798BF',
-        lineColor: '#A6C7ED'
-      },
-      xAxis: {
-        gridLineColor: '#505053',
-        labels: {
-          formatter: entry => entry.value
-        }
+      gridLineColor: '#505053',
+      labels: {
+        formatter: entry => entry.value
       }
     }
-
-  });
-
-  function getTestData(){
-    setTimeout(() => {
-      getLatestAnchors();
-      getTestData();
-    }, intBetween(5000, 15000))
   }
-  
-  //getTestData();
 
-  addListItems(anchors);
+});
 
-  moar_data.addEventListener('pointerup', e => {
+function getTestData(){
+  setTimeout(() => {
     getLatestAnchors();
-  })
+    getTestData();
+  }, intBetween(5000, 15000))
+}
 
-  DOM.delegateEvent('pointerup', '[timeline-action]', (e, node) => {
-    let attr = (node.getAttribute('timeline-action') || '').split(/\s+/);
-    if (attr.includes('zoom-out')){
-      chart.zoomOut();
-    }
-    else if (attr.includes('zoom-latest')) {
-      chart.xAxis[0].setExtremes(anchors.slice(-5, -4)[0][0])
-    }
-  });
+//getTestData();
 
+addListItems(anchors);
+
+moar_data.addEventListener('pointerup', e => {
+  getLatestAnchors();
+})
+
+DOM.delegateEvent('pointerup', '[timeline-action]', (e, node) => {
+  let attr = (node.getAttribute('timeline-action') || '').split(/\s+/);
+  if (attr.includes('zoom-out')){
+    chart.zoomOut();
+  }
+  else if (attr.includes('zoom-latest')) {
+    chart.xAxis[0].setExtremes(anchors.slice(-5, -4)[0][0])
+  }
 });
 
 /* DID Search */
