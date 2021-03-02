@@ -45,7 +45,7 @@
     "markdown-it": "12.0.4",
     "@root/encoding": "1.0.1",
     "highcharts": "^9.0.0",
-    "prismjs": "1.21.0"
+    "prismjs": "1.23.0"
   },
   "bin": {
     "ion": "./dist/bin/index.js"
