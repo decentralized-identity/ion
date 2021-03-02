@@ -6,10 +6,12 @@ import LogColor from '../bin/LogColor';
 import {
   SidetreeConfig,
   SidetreeCore,
+  SidetreeMonitor,
   SidetreeResponse,
   SidetreeResponseModel,
   SidetreeVersionModel
 } from '@decentralized-identity/sidetree';
+import ResponseStatus from '@decentralized-identity/sidetree/dist/lib/common/enums/ResponseStatus';
 
 /** Configuration used by this server. */
 interface ServerConfig extends SidetreeConfig {
@@ -43,6 +45,8 @@ const coreVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
 const ipfsFetchTimeoutInSeconds = 10;
 const cas = new Ipfs(config.ipfsHttpApiEndpointUri, ipfsFetchTimeoutInSeconds);
 const sidetreeCore = new SidetreeCore(config, coreVersions, cas);
+const sidetreeMonitor = new SidetreeMonitor();
+
 const app = new Koa();
 
 // Raw body parser.
@@ -70,6 +74,15 @@ router.get(`${resolvePath}:did`, async (ctx, _next) => {
   setKoaResponse(response, ctx.response);
 });
 
+router.get('/monitors/operation-queue-size', async (ctx, _next) => {
+  const operationQueueSize = await sidetreeMonitor.getOperationQueueSize();
+  const response = {
+    status: ResponseStatus.Succeeded,
+    body: { operationQueueSize },
+  };
+  setKoaResponse(response, ctx.response);
+});
+
 app.use(router.routes())
    .use(router.allowedMethods());
 
@@ -78,17 +91,20 @@ app.use((ctx, _next) => {
   ctx.response.status = 400;
 });
 
-sidetreeCore.initialize()
-.then(() => {
-  const port = config.port;
-  app.listen(port, () => {
-    console.log(`Sidetree node running on port: ${port}`);
-  });
-})
-.catch((error: Error) => {
-  console.log(`Sidetree node initialization failed with error ${error}`);
-  process.exit(1);
-});
+(async () => {
+  try {
+    await sidetreeCore.initialize();
+    await sidetreeMonitor.initialize(config);
+  
+    const port = config.port;
+    app.listen(port, () => {
+      console.log(`Sidetree node running on port: ${port}`);
+    });
+  } catch (error) {
+    console.log(`Sidetree node initialization failed with error ${error}`);
+    process.exit(1);
+  }
+})();
 
 /**
  * Sets the koa response according to the Sidetree response object given.
