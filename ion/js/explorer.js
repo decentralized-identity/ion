@@ -27,6 +27,14 @@ Router.filters = [
 
 Router.setState(location);
 
+addEventListener('routechange', e => {
+  let params = e.detail.current.params;
+  if (params.did) {
+    did_search_input.value = params.did;
+    searchForDID();
+  }
+})
+
 async function initializePanel(panel){
   if (panels[panel] === false) {
     try {
@@ -318,12 +326,13 @@ async function hideLoadingUI(container, gap = 0){
 function clearSearchUI(){
   did_overview.innerHTML = '';
   did_document.innerHTML = '';
+  did_code_viewer.removeAttribute('linked-domains');
   linked_domains_tabs.innerHTML = '<nav id="linked_domains_nav"></nav>';
 }
 
 async function searchForDID(){
   let didURI = (did_search_input.value || '').trim();
-  if (currentDidSearch === didURI) return;
+  if (!didURI.match('did:ion:') || currentDidSearch === didURI) return;
   search.removeAttribute('status');
   await showLoadingUI(search);
   clearSearchUI();
@@ -340,7 +349,11 @@ async function searchForDID(){
     hideLoadingUI(search);
     return;
   }
+  renderSearch(result);
+  hideLoadingUI(search);
+}
 
+function renderSearch(result){
   let ddo = result.didDocument;
   let meta = result.didDocumentMetadata;
   let services = ddo.service || [];
@@ -382,26 +395,26 @@ async function searchForDID(){
     </li>
   `;
   
+  did_code_viewer.setAttribute('linked-domains', domains.length);
   linked_domains_nav.innerHTML = domains.map(domain => `<li data-origin="${domain}">${domain}</li>`);
   linked_domains_tabs.append(...domains.map(() => document.createElement('section')));
   did_document.innerHTML = JSON.stringify(result, null, 2);
 
   Prism.highlightElement(did_document, true);
-
-  hideLoadingUI(search);
 }
 
 did_search_bar.addEventListener('submit', async e => {
   e.preventDefault();
+  Router.setState(location, false, { params: { did: did_search_input.value } });
   searchForDID();
 })
 
 linked_domains_tabs.addEventListener('tabselected', async e => {
   let tab = e.detail.tab;
-  if (tab.hasAttribute('data-loaded')) return;
   let panel = e.detail.panel;
+  if (!panel || panel.hasAttribute('data-status') || panel.hasAttribute('data-loading')) return;
   let origin = (tab.getAttribute('data-origin') || '').trim();
-  if (!panel) return;
+  panel.setAttribute('data-loading', '');
   try {
     let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration.json';
     let json = await fetch(path, { mode: 'cors' }).then(raw => raw.json());
@@ -410,13 +423,13 @@ linked_domains_tabs.addEventListener('tabselected', async e => {
       <pre class="language-json" data-src="${path}">${JSON.stringify(json, null, 2)}</pre>
     `;
     Prism.highlightElement(panel.lastElementChild, true);
+    panel.setAttribute('data-status', 'loaded');
   }
   catch(e){
-    console.log(e);
-    panel.setAttribute('data-unresolvable', '');
+    panel.setAttribute('data-status', 'unresolvable');
     panel.innerHTML = `<svg><use href="#doc-error-icon"></use></svg>`;
   }
-  tab.setAttribute('data-loaded', '');
+  panel.removeAttribute('data-loading');
 });
 
 DOM.delegateEvent('click', 'button[clipboard]', (e, node) => {

@@ -17,14 +17,19 @@ var Router = globalThis.Router = Object.assign({
     //   params: ['foo', 'bar']
     // }
   ],
-  generateState(location){
+  generateState(location, options = {}){
+    let url = new URL(location.href);
+    for (let o in options) url[o] = options[o];
+    if (options.params) {
+      for (let p in options.params) url.searchParams.set(p, options.params[p]);
+    }
     return {
       __state__: true,
-      href: location.href,
-      origin: location.origin,
-      path: location.pathname.replace(/\/$/, ''),
-      search: location.search,
-      params: Object.fromEntries(new URLSearchParams(location.search))
+      href: url.href,
+      origin: url.origin,
+      path: url.pathname.replace(/\/$/, ''),
+      search: url.search,
+      params: Object.fromEntries(url.searchParams)
     }
   },
   modifyState(options = {}) {
@@ -37,8 +42,8 @@ var Router = globalThis.Router = Object.assign({
     }
     Router.setState(state, options.event || null);
   },
-  setState (newState, event){
-    if (!newState.__state__) newState = Router.generateState(newState);
+  setState (newState, event, options){
+    if (!newState.__state__) newState = Router.generateState(newState, options);
     let routeMatched;
     let oldState = Router.last;
     Router.filters.forEach(filter => {
@@ -56,7 +61,7 @@ var Router = globalThis.Router = Object.assign({
     if (routeMatched) {
       if (event && event.type !== 'popstate') event.preventDefault();
       if (Router.initialized){
-        if ((newState.href !== oldState.href) && event && event.type !== 'popstate') {
+        if ((newState.href !== oldState.href) && (event ? event.type !== 'popstate' : event === false)) {
           history.pushState(newState, 'ION' + (newState.title ? ' - ' + newState.title : ''), newState.search);
         }
       }
@@ -65,7 +70,7 @@ var Router = globalThis.Router = Object.assign({
       }
       document.documentElement.setAttribute('route', newState.path + newState.search);
       Router.last = newState;
-      dispatchEvent(new Event('routechange', {
+      dispatchEvent(new CustomEvent('routechange', {
         detail: {
           current: newState,
           previous: oldState

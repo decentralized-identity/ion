@@ -218,6 +218,10 @@ button[clipboard]:hover {
     transition: visibility 0s, opacity 0.6s ease;
   }
 
+#did_search_404 svg {
+  color: var(--muted-red);
+}
+
 .status-graphic h2 {
   margin: 0 auto 1.5em;
 }
@@ -405,6 +409,10 @@ button[clipboard]:hover {
   background: rgba(var(--full-color), 0.15);
 }
 
+#did_code_viewer[linked-domains="0"] nav a:nth-child(2) {
+  display: none;
+}
+
 #did_code_viewer > section {
   overflow: hidden;
 }
@@ -454,7 +462,7 @@ button[clipboard]:hover {
   min-height: 100%;
 }
 
-#linked_domains_tabs > section[data-unresolvable] {
+#linked_domains_tabs > section[data-status="unresolvable"] {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -463,13 +471,13 @@ button[clipboard]:hover {
   padding: 1.25em;
 }
 
-#linked_domains_tabs > section[data-unresolvable]:before {
+#linked_domains_tabs > section[data-status="unresolvable"]:before {
   content: "This Linked Domain could not be resolved or verified.";
   font-size: 1.1em;
   margin: 0 0 2em;
 }
 
-#linked_domains_tabs > section[data-unresolvable] svg {
+#linked_domains_tabs > section[data-status="unresolvable"] svg {
   height: 10em;
   width: 10em;
   color: var(--muted-red);
