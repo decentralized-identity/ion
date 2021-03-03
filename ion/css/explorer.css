@@ -17,16 +17,14 @@ main {
 }
 
 #header {
-  padding: 0;
-  transform: none !important;
+  transform: translateY(calc(var(--header-shift) * -1));
 }
 
-#header:before, #logo {
-  padding: 0;
+#nav:before, #logo {
   opacity: 1 !important;
 }
 
-#main_nav {
+#nav {
   max-width: none;
 }
 
@@ -512,4 +510,20 @@ button[clipboard]:hover {
     opacity: 1;
     transform: translateY(0em)
   }
+}
+
+@media (max-width: 600px) {
+
+  :root {
+    --sidebar-width: 0;
+  }
+
+  slide-panel > section {
+    padding: 1.5em 1.25em;
+}
+
+  #sidebar {
+    display: none;
+  }
+
 }

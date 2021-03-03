@@ -28,8 +28,8 @@ Router.filters = [
 Router.setState(location);
 
 addEventListener('routechange', e => {
-  let params = e.detail.current.params;
-  if (params.did) {
+  let params = e.detail?.current?.params;
+  if (params?.did) {
     did_search_input.value = params.did;
     searchForDID();
   }
@@ -412,9 +412,9 @@ did_search_bar.addEventListener('submit', async e => {
 linked_domains_tabs.addEventListener('tabselected', async e => {
   let tab = e.detail.tab;
   let panel = e.detail.panel;
-  if (!panel || panel.hasAttribute('data-status') || panel.hasAttribute('data-loading')) return;
+  if (!panel || panel.hasAttribute('data-status')) return;
   let origin = (tab.getAttribute('data-origin') || '').trim();
-  panel.setAttribute('data-loading', '');
+  panel.setAttribute('data-status', 'loading');
   try {
     let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration.json';
     let json = await fetch(path, { mode: 'cors' }).then(raw => raw.json());
@@ -429,7 +429,6 @@ linked_domains_tabs.addEventListener('tabselected', async e => {
     panel.setAttribute('data-status', 'unresolvable');
     panel.innerHTML = `<svg><use href="#doc-error-icon"></use></svg>`;
   }
-  panel.removeAttribute('data-loading');
 });
 
 DOM.delegateEvent('click', 'button[clipboard]', (e, node) => {
