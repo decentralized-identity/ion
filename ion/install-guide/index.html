@@ -34,6 +34,30 @@
 
     <svg style="display: none">
       
+<!-- <svg class="preloader-icon" width="34" height="38" viewBox="0 0 34 38">
+  <path class="preloader-path" stroke-dashoffset="0" d="M29.437 8.114L19.35 2.132c-1.473-.86-3.207-.86-4.68 0L4.153 8.114C2.68 8.974 1.5 10.56 1.5 12.28v11.964c0 1.718 1.22 3.306 2.69 4.165l10.404 5.98c1.47.86 3.362.86 4.834 0l9.97-5.98c1.472-.86 2.102-2.45 2.102-4.168V12.28c0-1.72-.59-3.306-2.063-4.166z"></path>
+    
+  SVG
+    width: 64px;
+    height: 76px;
+
+  PATH
+    stroke-linejoin: round;
+    fill: none;
+    stroke: #f04955;
+    stroke-dasharray: 70 32;
+    animation: preloader 1s infinite linear;
+
+  KEYFRAME preloader
+    0% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: 6em;
+    }
+
+</svg> -->
+
 <symbol id="menu-icon" viewBox="0 0 512 512">
   <path d="m256 512c-68.378906 0-132.667969-26.628906-181.019531-74.980469-48.351563-48.351562-74.980469-112.640625-74.980469-181.019531s26.628906-132.667969 74.980469-181.019531c48.351562-48.351563 112.640625-74.980469 181.019531-74.980469s132.667969 26.628906 181.019531 74.980469c48.351563 48.351562 74.980469 112.640625 74.980469 181.019531s-26.628906 132.667969-74.980469 181.019531c-48.351562 48.351563-112.640625 74.980469-181.019531 74.980469zm0-472c-119.101562 0-216 96.898438-216 216s96.898438 216 216 216 216-96.898438 216-216-96.898438-216-216-216zm110 195.980469h-220v40h220zm0-79.980469h-220v40h220zm0 160h-220v40h220zm0 0"/>
 </symbol>
@@ -176,7 +200,7 @@
               <svg><use href="#magnifier-icon"></use></svg>
               DID Search
             </a>
-            <a href="/ion/explorer/?view=timeline">
+            <a class="prerelease" href="/ion/explorer/?view=timeline">
               <svg><use href="#line-chart-icon"></use></svg>
               Timeline
             </a>
@@ -211,9 +235,6 @@
 <p>ION is a decentralized Layer 2 network for Decentralized Identifiers that runs atop the Bitcoin blockchain. Running an ION node minimizes trust in external parties for resolving ION DIDs, helps make the network more resilient and reliable, and provides the operator with better DID resolution performance.</p>
 <p>The ION node reference implementation is currently in beta phase, operators should expect potential breaking changes and resets of the network's state. Presently, we are only recommending that experienced developers invest the time in running, testing, and contributing to the code base. This recommendation will change as the implementation progresses into more stable stages of development, which contributors will communicate to the community via blog posts and communications from DIF and collaborating organizations.</p>
 <p>The ION node implementation is composed of a collection of microservices. Of these components, the major dependencies are Bitcoin Core, IPFS, and MongoDB (for local persistence of data).</p>
-<blockquote>
-<p>NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet variables to mainnet.</p>
-</blockquote>
 <h2>1. Preparing your development environment</h2>
 <h3>Hardware</h3>
 <p>We recommend you run ION on a machine with the following minimum specs:</p>
@@ -247,6 +268,11 @@
 <p>Go go <a href="https://nodejs.org">https://nodejs.org</a>, download and install the latest v14 of Node.js.</p>
 <h3>Inbound Ports to Open</h3>
 <p>If you wish to run a node that writes ION DID operations, you will need to enable uPnP on your router or open ports <code>4002</code> and <code>4003</code> so that the operation data files can be served to others via IPFS.</p>
+<h3>Testnet or Mainnet</h3>
+<blockquote>
+<p>NOTE: This guide describes steps to setup an ION node targeting bitcoin testnet, but can be used to target the bitcoin mainnet by substituting testnet configs for mainnet.</p>
+</blockquote>
+<p>Bitcoin and ION need to be configured to use either <code>testnet</code> (for development) or <code>mainnet</code> (for production). If you change one service from <code>testnet</code> to <code>mainnet</code> or vice versa, the other services will also need to be rebuilt to match. Default config values for <code>testnet</code> are not valid for <code>mainnet</code> and services will fail to start if they are mismatched.</p>
 <h2>2. Setting up Bitcoin Core</h2>
 <p>An ION node needs a trusted Bitcoin peer for fetching and writing ION transactions. We use Bitcoin Core for this.</p>
 <h3>Automated script for installing Bitcoin Core on Linux</h3>
@@ -257,7 +283,19 @@
 <h3>Installing Bitcoin Core Manually</h3>
 <p>You can find Windows and Linux binaries for Bitcoin Core releases <a href="https://bitcoincore.org/en/releases/">here.</a></p>
 <h4>On Linux:</h4>
-<p>Create a configuration file (<code>bitcoin.conf</code>) designating the path you would like the Bitcoin data to be stored in (<code>[datadir]</code>):</p>
+<p>Create a configuration file (<code>bitcoin.conf</code>) designating</p>
+<ol>
+<li>the path you would like the Bitcoin data to be stored in (the <code>[datadir]</code>)</li>
+<li>a username (e.g. <code>admin</code>)</li>
+<li>a password (must match <code>ion-bitcoin</code>'s configuration later)</li>
+</ol>
+<p>&lt;table&gt;
+&lt;tr&gt;
+&lt;th&gt;Testnet&lt;/th&gt;
+&lt;th&gt;Mainnet&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;</p>
 <pre><code class="language-yaml">testnet=1
 server=1
 datadir=~/.bitcoin
@@ -265,15 +303,26 @@ rpcuser=&lt;your-rpc-username&gt;
 rpcpassword=&lt;your-rpc-password&gt;
 txindex=1
 </code></pre>
-<p>Start Bitcoin Core and let it sync with Testnet:</p>
+<p>&lt;/td&gt;
+&lt;td&gt;</p>
+<pre><code class="language-yaml">server=1
+txindex=1
+datadir=~/.bitcoin
+rpcuser=&lt;your-rpc-username&gt;
+rpcpassword=&lt;your-rpc-password&gt;
+</code></pre>
+<p>&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;</p>
+<p>Start Bitcoin Core and let it sync:</p>
 <pre><code>./bin/bitcoind --config bitcoin.conf
 </code></pre>
 <blockquote>
-<p>You can add <code>--daemon</code> to run bitcoind as a daemon process.</p>
+<p>NOTE: You can add <code>--daemon</code> to run bitcoind as a daemon process.</p>
 </blockquote>
 <h4>On Windows:</h4>
 <p>Running Bitcoin Core with friendly UI after install:</p>
-<pre><code>bitcoin-qt.exe -testnet -datadir=&lt;path-to-store-data&gt; -server -rpcuser=&lt;you-rpc-username&gt; -rpcpassword=&lt;your-rpc-password&gt; -txindex=1
+<pre><code>bitcoin-qt.exe -testnet -datadir=&lt;path-to-store-data&gt; -server -rpcuser=&lt;your-rpc-username&gt; -rpcpassword=&lt;your-rpc-password&gt; -txindex=1
 </code></pre>
 <h2>3. Installing Go-IPFS</h2>
 <p>Follow the instruction found at <a href="https://docs.ipfs.io/install/">IPFS website</a> to install Go-IPFS, you can install the IPFS Desktop which internally installs Go-IPFS, it provides you with a user friendly UI.</p>
@@ -297,36 +346,39 @@ txindex=1
 <p>Clone <a href="https://github.com/decentralized-identity/ion:">https://github.com/decentralized-identity/ion:</a></p>
 <pre><code>git clone https://github.com/decentralized-identity/ion
 </code></pre>
-<p>Update the configuration for the ION Bitcoin microservice under <code>json/testnet-bitcoin-config.json</code>:</p>
+<p>Example configuration files for both <code>testnet-</code> and <code>mainnet-</code> can be found under <a href="https://github.com/decentralized-identity/ion/tree/master/json">the top-level <code>json/</code> directory</a>.</p>
+<blockquote>
+<p>NOTE: If not specified, <strong><code>json/testnet-*-*.json</code> files are used as default configuration values</strong>. Be sure to start with whichever config template (<code>testnet-</code> or <code>mainnet-</code>) is right for your use case.</p>
+</blockquote>
+<h3>Create your configuration files from templates</h3>
+<p>Copy the configuration files <code>&lt;testnet-or-mainnet&gt;-bitcoin-config.json</code> and <code>&lt;testnet-or-mainnet&gt;-bitcoin-versioning.json</code> to another directory, (e.g. <code>/etc/ion/</code>)</p>
+<h3>Update configuration files</h3>
+<p>Update the ION Bitcoin microservice (e.g. <code>/etc/ion/testnet-bitcoin-config.json</code>):</p>
 <ul>
 <li><code>bitcoinPeerUri</code>
 <ul>
-<li>Ensure it points to the RPC endpoint of the Bitcoin Core client you setup earlier in this guide (e.g. <code>http://localhost:18332</code> for testnet and <code>http://localhost:8332</code> for mainnet with default Bitcoin Core configuration).</li>
+<li>Ensure it points to the RPC endpoint of the Bitcoin Core client you setup earlier in this guide</li>
+<li>testnet: <code>http://localhost:18332</code></li>
+<li>mainnet: <code>http://localhost:8332</code> (assuming default Bitcoin Core configuration from Step 2)</li>
 </ul>
 </li>
 <li><code>bitcoinDataDirectory</code>
 <ul>
-<li>It needs to point to the block files folder:
-<ul>
-<li>mainnet: exactly the same as the <code>datadir</code> value configured for Bitcoin Core.</li>
-<li>testnet: <code>&lt;datadir&gt;/testnet3</code>.</li>
-</ul>
-</li>
+<li>It needs to point to the block files folder:</li>
+<li>testnet: <code>[datadir]/testnet3</code>.</li>
+<li>mainnet: exactly the same as the <code>[datadir]</code> value configured for Bitcoin Core in Step 2.</li>
 </ul>
 </li>
 <li><code>bitcoinWalletImportString</code>
 <ul>
-<li>Populate it with your private key if you intend to write DID operations, else just use any generated import string without any bitcoin.</li>
+<li>if you intend to write DID operations, populate it with your private key, else use any <a href="https://learnmeabitcoin.com/technical/wif">generated import string</a> <strong>without any bitcoin</strong></li>
+<li>testnet: (a valid <code>testnet</code> example wallet will be generated each time <code>ion-bitcoin</code> fails to load a valid WIF string on startup as part of its error message. You can use one of those values for testing as well</li>
+<li>mainnet: (must be a mainnet-compatible WIF)</li>
 </ul>
 </li>
-<li><code>bitcoinRpcUsername</code> &amp; <code>bitcoinPrcPassword</code>
+<li><code>bitcoinRpcUsername</code> &amp; <code>bitcoinRpcPassword</code>
 <ul>
-<li>Official Bitcoin Core client PRC API requires authentication, so make sure they are populated correctly.</li>
-</ul>
-</li>
-<li><code>mongoDbConnectionString</code>
-<ul>
-<li>Point to your MongoDB if you need to change the endpoint. The existing config points to the default endpoint: <code>mongodb://localhost:27017/</code>.</li>
+<li>must match what was set in <code>bitcoin.conf</code> from step 2.</li>
 </ul>
 </li>
 </ul>
@@ -338,38 +390,46 @@ txindex=1
 <li>mainnet: <code>ion</code></li>
 </ul>
 </li>
-<li><code>ipfsHttpApiEndpointUri</code>
-<ul>
-<li>Point it to the Go-IPFS HTTP API endpoint. The existing config points to the default endpoint: <code>http://127.0.0.1:5001</code>.</li>
-</ul>
-</li>
-<li><code>mongoDbConnectionString</code>
-<ul>
-<li>Point to your MongoDB if you need to change the endpoint. The existing config points to the default endpoint: <code>mongodb://localhost:27017/</code>.</li>
-</ul>
-</li>
 </ul>
 <p>Run the following commands to build ION:</p>
 <pre><code>npm i
 npm run build
 </code></pre>
 <blockquote>
-<p>NOTE: You must rerun <code>npm run build</code> every time a configuration JSON file is modified.</p>
+<p>NOTE: You <strong>must rerun <code>npm run build</code></strong> every time a configuration JSON file is modified.</p>
 </blockquote>
 <h2>6. Run ION Bitcoin microservice</h2>
-<pre><code>npm run bitcoin
+<p><em>Update the paths below</em> to where you editted and saved the config files from the previous step.</p>
+<pre><code>ION_BITCOIN_CONFIG_FILE_PATH=/etc/ion/testnet-bitcoin-config.json
+ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/etc/ion/testnet-bitcoin-versioning.json
+npm run bitcoin
 </code></pre>
-<p>This service will fail to start until your Bitcoin Core client has blocks past the ION genesis block. Please wait and try again later if this happens.</p>
+<blockquote>
+<p>NOTE: This service will fail to start until your Bitcoin Core client has blocks past the ION genesis block. Please wait and try again later if this happens.</p>
+</blockquote>
 <h2>7. Run ION core service</h2>
-<p>Start a new console and run the following command to start the core service. This service will fail to start until your ION Bitcoin service has started successfully.</p>
-<pre><code>npm run core
+<h3>(Optional) Create your configuration files from templates</h3>
+<blockquote>
+<p>NOTE: This is not required when using <code>testnet</code> because the defaults are sufficient</p>
+</blockquote>
+<p>Copy the configuration files <code>&lt;testnet or mainnet&gt;-core-config.json</code> and <code>&lt;testnet or mainnet&gt;-core-versioning.json</code> to another directory, (e.g. <code>/etc/ion/</code> or <code>~</code>)</p>
+<p>Start a new console and run the following command to start the core service.</p>
+<pre><code>ION_CORE_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-config.json
+ION_CORE_VERSIONING_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-versioning.json
+npm run core
 </code></pre>
+<blockquote>
+<p>NOTE: This service will fail to start until your ION Bitcoin service has started successfully.</p>
+</blockquote>
 <p>Give it some time to synchronize ION transactions.</p>
-<p>Verify ION is running properly by checking the following DID resolution in your browser:</p>
-<p>testnet:
-<a href="http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw">http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw</a></p>
-<p>mainnet:
-<a href="http://localhost:3000/identifiers/did:ion:EiClkZMDxPKqC9c-umQfTkR8vvZ9JPhl_xLDI9Nfk38w5w">http://localhost:3000/identifiers/did:ion:EiClkZMDxPKqC9c-umQfTkR8vvZ9JPhl_xLDI9Nfk38w5w</a></p>
+<h2>8. Verify ION is working properly</h2>
+<p>Check the following DID resolution in your browser:</p>
+<ul>
+<li>testnet:
+<a href="http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw">http://localhost:3000/identifiers/did:ion:test:EiClWZ1MnE8PHjH6y4e4nCKgtKnI1DK1foZiP61I86b6pw</a></li>
+<li>mainnet:
+<a href="http://localhost:3000/identifiers/did:ion:EiClkZMDxPKqC9c-umQfTkR8vvZ9JPhl_xLDI9Nfk38w5w">http://localhost:3000/identifiers/did:ion:EiClkZMDxPKqC9c-umQfTkR8vvZ9JPhl_xLDI9Nfk38w5w</a></li>
+</ul>
 
 </section>
 

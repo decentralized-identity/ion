@@ -512,7 +512,7 @@ button[clipboard]:hover {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 
   :root {
     --sidebar-width: 0;
@@ -520,10 +520,27 @@ button[clipboard]:hover {
 
   slide-panel > section {
     padding: 1.5em 1.25em;
-}
+  }
 
   #sidebar {
     display: none;
   }
 
+}
+
+@media (max-width: 1000px) {
+
+  #did_overview {
+
+  }
+  
+}
+
+:root:not([origin*="localhost"]) {
+  --sidebar-width: 0;
+}
+
+:root:not([origin*="localhost"]) #sidebar,
+:root:not([origin*="localhost"]) .prerelease {
+  display: none;
 }
