@@ -30,6 +30,30 @@
 
     <svg style="display: none">
       
+<!-- <svg class="preloader-icon" width="34" height="38" viewBox="0 0 34 38">
+  <path class="preloader-path" stroke-dashoffset="0" d="M29.437 8.114L19.35 2.132c-1.473-.86-3.207-.86-4.68 0L4.153 8.114C2.68 8.974 1.5 10.56 1.5 12.28v11.964c0 1.718 1.22 3.306 2.69 4.165l10.404 5.98c1.47.86 3.362.86 4.834 0l9.97-5.98c1.472-.86 2.102-2.45 2.102-4.168V12.28c0-1.72-.59-3.306-2.063-4.166z"></path>
+    
+  SVG
+    width: 64px;
+    height: 76px;
+
+  PATH
+    stroke-linejoin: round;
+    fill: none;
+    stroke: #f04955;
+    stroke-dasharray: 70 32;
+    animation: preloader 1s infinite linear;
+
+  KEYFRAME preloader
+    0% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: 6em;
+    }
+
+</svg> -->
+
 <symbol id="menu-icon" viewBox="0 0 512 512">
   <path d="m256 512c-68.378906 0-132.667969-26.628906-181.019531-74.980469-48.351563-48.351562-74.980469-112.640625-74.980469-181.019531s26.628906-132.667969 74.980469-181.019531c48.351562-48.351563 112.640625-74.980469 181.019531-74.980469s132.667969 26.628906 181.019531 74.980469c48.351563 48.351562 74.980469 112.640625 74.980469 181.019531s-26.628906 132.667969-74.980469 181.019531c-48.351562 48.351563-112.640625 74.980469-181.019531 74.980469zm0-472c-119.101562 0-216 96.898438-216 216s96.898438 216 216 216 216-96.898438 216-216-96.898438-216-216-216zm110 195.980469h-220v40h220zm0-79.980469h-220v40h220zm0 160h-220v40h220zm0 0"/>
 </symbol>
@@ -172,7 +196,7 @@
               <svg><use href="#magnifier-icon"></use></svg>
               DID Search
             </a>
-            <a href="/ion/explorer/?view=timeline">
+            <a class="prerelease" href="/ion/explorer/?view=timeline">
               <svg><use href="#line-chart-icon"></use></svg>
               Timeline
             </a>
@@ -211,7 +235,7 @@
       </a>
       <a href="https://github.com/decentralized-identity/ion/tree/master/docker" class="button">
         <svg><use href="#docker-icon"></use></svg>
-        Docker Image
+        Docker
       </a>
       <a href="https://github.com/decentralized-identity/ion-sdk" class="button">
         <svg><use href="#sdk-icon"></use></svg>

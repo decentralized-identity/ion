@@ -3,8 +3,6 @@ import('/ion/js/modules/router.js');
 
 (function(){
 
- 
-
   const $ = s => document.querySelector(s);
   const $$ = s => document.querySelectorAll(s);
   const skipFrame = fn => requestAnimationFrame(() => requestAnimationFrame(fn));
@@ -43,5 +41,7 @@ import('/ion/js/modules/router.js');
   }, { passive: true });
 
   skipFrame(() => document.documentElement.setAttribute('ready', ''));
+
+  document.documentElement.setAttribute('origin', location.origin);
 
 })();
