@@ -540,7 +540,6 @@ button[clipboard]:hover {
   --sidebar-width: 0;
 }
 
-:root:not([origin*="localhost"]) #sidebar,
-:root:not([origin*="localhost"]) .prerelease {
+:root:not([origin*="localhost"]) #sidebar {
   display: none;
 }

@@ -732,3 +732,7 @@ body[scrolled] #logo {
     margin: 0;
   }
 }
+
+:root:not([origin*="localhost"]) .prerelease {
+  display: none;
+}
