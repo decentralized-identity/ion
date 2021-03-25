@@ -4,8 +4,18 @@ import '/ion/js/modules/dom.js';
 
 var currentDidSearch;
 var panels = {
-  timeline: false,
-  search: false
+  timeline: async () => {},
+  search: async () => {},
+  create: async () => {
+    return import('/ion/js/modules/ion.js');
+  }
+};
+
+async function initializePanel(currentView){
+  if (panels[currentView]) {
+    await panels[currentView]();
+    delete panels[currentView];
+  }
 };
 
 Router.filters = [
@@ -34,17 +44,6 @@ addEventListener('routechange', e => {
     searchForDID();
   }
 })
-
-async function initializePanel(panel){
-  if (panels[panel] === false) {
-    try {
-      let module = panels[panel] = await import(`./explorer/panels/${panel}.js`);
-      if (module.initialize) await panels[panel].initialize();
-    }
-    catch(e){ console.log(e) }
-    panels[panel] = true;
-  }
-}
 
 var chart;
 var anchors = [

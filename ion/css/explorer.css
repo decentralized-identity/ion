@@ -241,16 +241,17 @@ button[clipboard]:hover {
 #did_overview {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.5em;
   font-size: 1.5em;
   text-align: center;
 }
 
 #did_overview > li {
   flex: 1;
-  margin: 0 1em 0 0;
+  box-sizing: border-box;
+  margin: 0 1em 1.5em;
   padding: 0 0.75em 0.75em;
   white-space: nowrap;
   background: rgba(0,0,0,0.3);
@@ -264,10 +265,6 @@ button[clipboard]:hover {
   [loaders="hidden"]:not([status^="4"]) #did_overview > li {
     animation: 0.4s fade-down 0s ease forwards;
   }
-
-#did_overview > li:last-child {
-  margin: 0;
-}
 
 #did_overview > li:nth-child(2) {
   animation-delay: 0.1s !important;
@@ -291,7 +288,7 @@ button[clipboard]:hover {
   justify-content: center;
   height: 2.5em;
   width: 2.5em;
-  margin: -1.6em auto 0.75em;
+  margin: -1.3em auto 0.75em;
   border-radius: 100%;
 }
 
@@ -528,10 +525,11 @@ button[clipboard]:hover {
 
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1150px) {
 
-  #did_overview {
-
+  #did_overview li {
+    flex: 1 0 25%;
+    margin-top: 0.5em;
   }
   
 }
