@@ -37,9 +37,9 @@ This implementation is designed to be run with very little dependencies, on a Li
   sudo chmod +x /usr/local/bin/docker-compose
   ```
 
-- NodeJS - version 10.x   `NOTE: This has a requirement for version 10 of nodejs only`
+- NodeJS - version 14.x   `NOTE: This has a requirement for version 14 of nodejs only`
   ```
-  curl -sl https://deb.nodesource.com/setup_10.x | sudo bash -
+  curl -sl https://deb.nodesource.com/setup_14.x | sudo bash -
   ```
 
 - make - Build tool used for library this depends on.  `NOTE: You can get this as part of the build-essential package for debian based os`
