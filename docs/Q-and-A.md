@@ -110,7 +110,7 @@ We've done our best to protect the privacy of the Github by investigating the im
 - [Bitcoin and its blockchain](#qa-section-key-bitcoin-and-its-blockchain)
 - [ION operational](#qa-section-ion-operational)
 - [Userinterface](#qa-section-userinterface)
-- [Identifiers](#qa-section-identifiers)
+- [Identifiers and DIDs](#qa-section-identifiers-and-dids)
 - [Wallets](#qa-section-wallets)
 - [Docker](#qa-section-docker)
 - [Proofs](#qa-section-proofs)
@@ -218,8 +218,13 @@ https://matthijs.hoekstraonline.net/2021/03/25/running-an-ion-node-on-your-raspb
 
 
 # Q&A section Userinterface
-{TBW}
-# Q&A section Identifiers
+
+## **Q: How can I be a part of this or have my own DID?
+There's a really simple JS library that makes it easy to generate your own on your machine:
+[ion-tools](https://www.npmjs.com/package/@decentralized-identity/ion-tools#user-content-ionjs).\
+"The packages within are geared toward making interactions with ION maximally accessible for developers, with a primary focus on making their functionality dually available in both client Web and server environments."
+
+# Q&A section Identifiers and DIDs
 {TBW}
 # Q&A section Wallets
 {TBW}
@@ -230,7 +235,8 @@ https://matthijs.hoekstraonline.net/2021/03/25/running-an-ion-node-on-your-raspb
 # Q&A section Private Key Management
 {TBW}
 # Q&A section Nodes
-{TBW}
+## *Q: Does it pay rewards / Mine tokens for hosting a node?
+No, the value of running a node is accessing what may become the largest Web of identity for connecting to people, companies, apps, and services, which is the foundation of decentralized apps. One near term example: companies will run them so they can verify the DIDs /VC of customers.
 
 # Q&A section Sidetree
 
