@@ -159,8 +159,12 @@ An example of generating an ION DID with the ION.js library:
 
 <img src="./images/generate-ion-did-jslib.png" alt="generate ION DID example JS library.png" border="0" width="500">
 
-## *Q: Who owns the DIDs generated with ION?
-Ownership of your DIDs is based on keys you generate locally, and all ION operations are signed with those keys, so even if you use our node for anchoring DID operations (or any other node), you are always in sole control.\
+## *Q: Any YouTube clips from you as a tutorial?
+I'll try to get something together, but we don't have anything like that yet (the devs and I literally just finished/pushed out the library last night (March 25, 2021, ed.).\
+(_@csuwildcat_)
+
+## *Q: Will companies be able to create businesses to profit from the ION protocol?
+Sure, they can get DIDs and use them to sign/exchange proofs for all sorts of business processes, all without having to create manual federated identity and authorization connections between bespoke systems. This essentially standardizes and flattens all of that into one system.\
 (_@csuwildcat_)
 
 # Q&A section Bitcoin and its blockchain
@@ -226,6 +230,9 @@ There's a really simple JS library that makes it easy to generate your own on yo
 (_@csuwildcat_)
 
 # Q&A section Identifiers and DIDs
+## *Q: Who owns the DIDs generated with ION?
+Ownership of your DIDs is based on keys you generate locally, and all ION operations are signed with those keys, so even if you use our node for anchoring DID operations (or any other node), you are always in sole control.\
+(_@csuwildcat_)
 ## *Q: They probably already have my ID, why would i tokenize it?
 It's not tokenizing your identity, it provides Identifiers you own and control - for example: if you had a DID linked to a personal datastore, people could follow your DID and fetch tweets from you, meaning Twitter can't erase your ID or censor your posts.
 ## **Q: Where can I see what data points someone can set up around their own DID? 
@@ -244,6 +251,9 @@ _For example, name, address, driving licence. There must be a huge array of fiel
 # Q&A section Nodes
 ## *Q: Does it pay rewards / Mine tokens for hosting a node?
 No, the value of running a node is accessing what may become the largest Web of identity for connecting to people, companies, apps, and services, which is the foundation of decentralized apps. One near term example: companies will run them so they can verify the DIDs /VC of customers.
+
+## Have you got any instructions for regtest setup?
+You might find what yu need here: https://github.com/decentralized-identity/ion/tree/master/json
 
 # Q&A section Sidetree
 
