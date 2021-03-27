@@ -202,6 +202,12 @@ Node operators who anchor operation batches must pay BTC txn fees. Current we co
 I'd use prune on only the non-ion txns, because we haven't yet accounted for that. Totally on the roadmap to fully support a pruned node.\
 (_@csuwildcat_)
 
+## ***Q: What's different between ION and NameID (https://nameid.org) or XID (https://github.com/xaya/xid)? They're on different blockchains, but still based on Bitcoin Core.
+Two key differences:
+1. First and foremost: ION _is not_ another blockchain, it's a Layer 2 protocol that directly leverages Bitcoin's security
+2. It's a massively, provably scalable architecture, unlike those alt-chains\
+(_@csuwildcat_)
+
 # Q&A section ION operational
 
 ## *Q: Is ION a coin or an ICO?
@@ -238,6 +244,10 @@ There's a really simple JS library that makes it easy to generate your own on yo
 "The packages within are geared toward making interactions with ION maximally accessible for developers, with a primary focus on making their functionality dually available in both client Web and server environments."\
 (_@csuwildcat_)
 
+## *Q: Do you see wide-spread individual consumer adoption of the technology? What are the major hurdles and time-frame to get significant adoption across the U.S.?
+The **most significant** technical component left that we need is **standard encrypted personal datastores**, which we're working on now. Beyond that, there's probably a year or two more of basic integration and dev enablement work to get it into the web and other platforms.\
+(_@csuwildcat_)\
+_This is a giant leap forward for individuals and their privacy._(_@mkaplanPMP_)
 # Q&A section Identifiers and DIDs
 ## *Q: Who owns the DIDs generated with ION?
 Ownership of your DIDs is based on keys you generate locally, and all ION operations are signed with those keys, so even if you use our node for anchoring DID operations (or any other node), you are always in sole control.\
@@ -245,9 +255,14 @@ Ownership of your DIDs is based on keys you generate locally, and all ION operat
 ## *Q: They probably already have my ID, why would i tokenize it?
 It's not tokenizing your identity, it provides Identifiers you own and control - for example: if you had a DID linked to a personal datastore, people could follow your DID and fetch tweets from you, meaning Twitter can't erase your ID or censor your posts.
 ## **Q: Where can I see what data points someone can set up around their own DID? 
-_For example, name, address, driving licence. There must be a huge array of fields someone can include within their DID for it to be comprehensive?_
+_For example, name, address, driving licence. There must be a huge array of fields someone can include within their DID for it to be comprehensive?_\
 
 {TBW prio 2}
+## **Q: Do you believe the ION decentralized identifier network will have a big impact on IoT device identity? 
+_If so, can you provide a little color?_
+
+You can certainly register IDs for IoT devices, which can be used to sign data from them linked to their IDs, and connect them to a globally indexed decentralized registry (part of what ION provides)\
+(_@csuwildcat_)
 
 # Q&A section Wallets
 {TBW}
