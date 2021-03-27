@@ -99,7 +99,8 @@ We've done our best to protect the privacy of the Github by investigating the im
 - hierarchical deterministic derivation paths
 - Base58
 - Eliptic curves
-- {TBW}
+- Sidetree
+{TBW}
 ## Actions you should be comfortable with
 - Amend knowledge and keep existing knowledge up to date
 - create a key pair safely and back it up safely
@@ -185,6 +186,11 @@ The outcome:
 (_@TheHenryTsai_)
 
 ## *Q: How does it work? You need bitcoin transactions for DID, right? So how do BTC transaction fees come into play?
+_Each newly created ID will pay a transaction fee?_
+
+With ION can fit 10,000 ID operations in a single bitcoin transaction.\
+(_@csuwildcat_)
+
 ION doesn't bloat the bitcoin blockchain. It gathers multple proofs of identifier events and anchors them with one single small transaction (and dito fee) on the bitcoin blockchain.\
 (_@henkvancann_)
 
@@ -197,6 +203,9 @@ I'd use prune on only the non-ion txns, because we haven't yet accounted for tha
 (_@csuwildcat_)
 
 # Q&A section ION operational
+
+## *Q: Is ION a coin or an ICO?
+**This has absolutely nothing to do with** that abandoned ICO coin! ION has no token or blockchain of its own.
 
 ## **Q:  What would be the specs for an ION node, excluding Bitcoin Core ressources consumption?
 Not much, basically just storage growth as the network is utilized. There's hardly any computation on operation ingest, so it's not going to hit a CPU hard.\
