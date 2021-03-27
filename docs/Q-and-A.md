@@ -126,6 +126,12 @@ We've done our best to protect the privacy of the Github by investigating the im
 <img src="./images/what-is-ION.png" alt="What is ION?" border="0" width="500">
 
 ION is based on Sidetree - standard.
+#### 
+
+Imagine you have identifiers on the web that are yours. You control them and you can attach personal data to these IDs: 
+- privately: it's your choice to open up
+- non-censorable: Twitter or anyone can't shut your dig. ID down
+- temporary: you can revoke them
 
 ## *Q: Who owns ION?
 Just like Sidetree ION is [open source](https://github.com/decentralized-identity/ion/blob/master/LICENSE). Microsoft has been an important sustaining sponsor, but no more than that.
@@ -136,6 +142,12 @@ _"Bill Gates does not enter projects of this nature just because he's a good per
 In brief: ION is free, open source, uncensorable. Full stop.
 
 _@csuwildcat_ [on twitter](https://twitter.com/csuwildcat/status/1375125876736548870): "It's a deterministic protocol that only requires math + an internet connection, that's it. There are no authorities, intermediaries, validators, or other points of centralization in ION, so the only thing you need to trust is literally math itself. Have a look at the code and see."
+
+## *Q: What will this be used for?
+@LastCoinStandng: "Decentralized identity where you alone own all aspects of your identity. An example would be you go to a bar and need to confirm you're over 21; you can reveal/prove you are 21 without showing your driver's license (which has other data you don't need to reveal - eg address)."
+#### **Q: Is this an example of a zero-knowledge proof?
+Yes, that's an example of a zero-knowledge proof you might generate using the keys of a DID
+(_@csuwildcat_)
 
 ## *Q: When has ION been launched?
 March 2021 on the [Microsoft site](https://techcommunity.microsoft.com/t5/identity-standards-blog/ion-we-have-liftoff/ba-p/1441555): "We are excited to share that v1 of ION is complete and has been launched on Bitcoin mainnet".\
@@ -207,6 +219,11 @@ Two key differences:
 1. First and foremost: ION _is not_ another blockchain, it's a Layer 2 protocol that directly leverages Bitcoin's security
 2. It's a massively, provably scalable architecture, unlike those alt-chains\
 (_@csuwildcat_)
+
+## *Q: How do you even verify ID on BTC with the snales pace?
+With ION can fit 10,000 ID operations in a single bitcoin transaction.
+
+The operations on IDs in ION are near instant. The only thing that needs the snales pace of bitcoin is the anchoring of the whole set of ID operations on the most immutable and non-censorable and inclusive global ledger we have at the moment: bitcoin.
 
 # Q&A section ION operational
 
