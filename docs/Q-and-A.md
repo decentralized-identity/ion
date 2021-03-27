@@ -107,7 +107,7 @@ We've done our best to protect the privacy of the Github by investigating the im
 
 # Jump table to categories
 - [General](#qa-section-general)
-- [Bitcoin](#qa-section-key-blockchain)
+- [Bitcoin and its blockchain](#qa-section-key-bitcoin-and-its-blockchain)
 - [ION operational](#qa-section-ion-operational)
 - [Userinterface](#qa-section-userinterface)
 - [Identifiers](#qa-section-identifiers)
@@ -163,7 +163,7 @@ An example of generating an ION DID with the ION.js library:
 Ownership of your DIDs is based on keys you generate locally, and all ION operations are signed with those keys, so even if you use our node for anchoring DID operations (or any other node), you are always in sole control.\
 (_@csuwildcat_)
 
-# Q&A section Bitcoin
+# Q&A section Bitcoin and its blockchain
 
 ## Why is bitcoin chosen as the blockchain?
 While ledger-based consensus systems, on the surface, would seem to provide the same general features as one another, there are a few key differences that make some more suitable for critical applications, like the decentralized identifiers of human beings. Some of these considerations and features are:
@@ -186,6 +186,10 @@ ION doesn't bloat the bitcoin blockchain. It gathers multple proofs of identifie
 
 #### *Q: Who pays the fee if it's all decentralised?
 Node operators who anchor operation batches must pay BTC txn fees. Current we cover the cost for folks who want to anchor via our node, but you can just do it on your own node at home if you want. Ops are signed with keys only you hold, so it's not like another node has your keys.\
+(_@csuwildcat_)
+
+## **@: Can I prune the local bitcoin node?
+I'd use prune on only the non-ion txns, because we haven't yet accounted for that. Totally on the roadmap to fully support a pruned node.\
 (_@csuwildcat_)
 
 # Q&A section ION operational
