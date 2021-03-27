@@ -243,7 +243,10 @@ _For example, name, address, driving licence. There must be a huge array of fiel
 # Q&A section Wallets
 {TBW}
 # Q&A section Docker
-{TBW}
+
+## **Q: What ports need to be exposed for ION using docker?
+Have a look at the port mappings in the [yml-file](https://github.com/decentralized-identity/ion/blob/master/docker/docker-compose.yml) on this [explanatory github repo page](https://github.com/decentralized-identity/ion/tree/master/docker).
+
 # Q&A section Proofs
 {TBW}
 # Q&A section Private Key Management
