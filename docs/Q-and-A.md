@@ -245,8 +245,6 @@ This one class invocation will instantly create you an unpublished DID: [here](h
 I haven't had time to sort out getting it packaged for this. Would love some help with that from the community, else it will probably take a couple months before we can dig out.\
 (_@csuwildcat_)
 
-@louneskmt is working on an Umbrel implementation: [github](https://github.com/getumbrel/umbrel/issues/560)
-
 ## *Q: Is the data storage requirement of 1 TB on top of Bitcoin datadir requirements?
 No, including. And it doesn't really require that much, because there aren't really many IDs in the network, so you'll have about 60% of that unused. We said this, because it will consume that storage over years of time.\
 (_@csuwildcat_)
@@ -266,8 +264,11 @@ There's a really simple JS library that makes it easy to generate your own on yo
 ## *Q: Do you see wide-spread individual consumer adoption of the technology? What are the major hurdles and time-frame to get significant adoption across the U.S.?
 The **most significant** technical component left that we need is **standard encrypted personal datastores**, which we're working on now. Beyond that, there's probably a year or two more of basic integration and dev enablement work to get it into the web and other platforms.\
 (_@csuwildcat_)\
-_This is a giant leap forward for individuals and their privacy._(_@mkaplanPMP_)
+_This is a giant leap forward for individuals and their privacy._ - (_@mkaplanPMP_)
+
+
 # Q&A section Identifiers and DIDs
+
 ## *Q: Who owns the DIDs generated with ION?
 Ownership of your DIDs is based on keys you generate locally, and all ION operations are signed with those keys, so even if you use our node for anchoring DID operations (or any other node), you are always in sole control.\
 (_@csuwildcat_)
@@ -282,6 +283,12 @@ _If so, can you provide a little color?_
 
 You can certainly register IDs for IoT devices, which can be used to sign data from them linked to their IDs, and connect them to a globally indexed decentralized registry (part of what ION provides)\
 (_@csuwildcat_)
+
+## **Q: Will the different SSI decentralised blockchain based technologies work seemlessly together?
+_Or are relying parties and end users going to suffer whilst the product people don't interoperate?_
+
+There are some challenges in the DID field. The chain of interoperable DIDs are as strong as the weakest link. Having said that: W3C DIDs are intrinsically interoperable, yes.
+(_@henkvancann_)
 
 # Q&A section Wallets
 {TBW}
