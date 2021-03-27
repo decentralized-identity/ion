@@ -205,6 +205,10 @@ This one class invocation will instantly create you an unpublished DID: [here](h
 I haven't had time to sort out getting it packaged for this. Would love some help with that from the community, else it will probably take a couple months before we can dig out.\
 (_@csuwildcat_)
 
+## *Q: Is the data storage requirement of 1 TB on top of Bitcoin datadir requirements?
+No, including. And it doesn't really require that much, because there aren't really many IDs in the network, so you'll have about 60% of that unused. We said this, because it will consume that storage over years of time.\
+(_@csuwildcat_)
+
 ## **Q: How to install my ION node on a Raspberry Pi 4?
 https://matthijs.hoekstraonline.net/2021/03/25/running-an-ion-node-on-your-raspberry-4/
 
