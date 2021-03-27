@@ -44,7 +44,7 @@ None of the respondents in the **open** repo and presentations have been explici
 
 If there is no reference added to the answers, then its content stems from either one or more of these sources
 - [Github ION](https://github.com/decentralized-identity/ion)
-- [What bitcoin Did 231](https://www.whatbitcoindid.com/wbd231-daniel-buchner)
+- [Launch v1.0 on twitter](https://twitter.com/csuwildcat/status/1375125876736548870)
 - it's Daniel Buchner or Henry Tsai who answered the question. 
 Most of the editing is done by @henkvancann, which might have introduced ommission, errors, language glitches and such. Sorry for that, feel free to correct by submitting a pull request (PR).\
 For practical reasons educational images uploaded by Github members may have been downloaded. We de-personalised them by giving images a new name. Under these new names these images have been uploaded to github and used in the Q&A to clarify the questions and answers.
@@ -222,10 +222,17 @@ https://matthijs.hoekstraonline.net/2021/03/25/running-an-ion-node-on-your-raspb
 ## **Q: How can I be a part of this or have my own DID?
 There's a really simple JS library that makes it easy to generate your own on your machine:
 [ion-tools](https://www.npmjs.com/package/@decentralized-identity/ion-tools#user-content-ionjs).\
-"The packages within are geared toward making interactions with ION maximally accessible for developers, with a primary focus on making their functionality dually available in both client Web and server environments."
+"The packages within are geared toward making interactions with ION maximally accessible for developers, with a primary focus on making their functionality dually available in both client Web and server environments."\
+(_@csuwildcat_)
 
 # Q&A section Identifiers and DIDs
-{TBW}
+## *Q: They probably already have my ID, why would i tokenize it?
+It's not tokenizing your identity, it provides Identifiers you own and control - for example: if you had a DID linked to a personal datastore, people could follow your DID and fetch tweets from you, meaning Twitter can't erase your ID or censor your posts.
+## **Q: Where can I see what data points someone can set up around their own DID? 
+_For example, name, address, driving licence. There must be a huge array of fields someone can include within their DID for it to be comprehensive?_
+
+{TBW prio 2}
+
 # Q&A section Wallets
 {TBW}
 # Q&A section Docker
