@@ -9,7 +9,7 @@ This document relies on a [Glossary](./Glossary.md) file that has:
 - a alphabethically ordered list of **abbreviations**
 - a alphabethically ordered list of **definitions**
 
-Terminology specific for ION can be found [here](https://identity.foundation/ion/docs/spec). The following definitions are specificly listed to support the *Question and Answers* below on a simpler level, and to be able to put ION in relation to other fields of interest.
+Terminology specific for ION can be found [here](https://identity.foundation/ion). The following definitions are specificly listed to support the *Question and Answers* below on a simpler level, and to be able to put ION in relation to other fields of interest.
 Terminology specific for Sidetree (the basis of ION) can be found [here](https://identity.foundation/sidetree/docs/spec/#terminology). 
 
 **The questions are of a varied level: basic and detailed. The answers are mostly directed towards generally interested people and newbies.**\
