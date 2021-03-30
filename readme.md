@@ -22,7 +22,7 @@ By leveraging the blockchain-agnostic Sidetree protocol, ION makes it possible t
 
 ## Frequently Asked Questions
 
-See [FAQ](docs/faq.md).
+See [Q&A](docs/Q-and-A.md).
 
 ## Building the project:
 
