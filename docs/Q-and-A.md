@@ -22,7 +22,7 @@ Terminology specific for Sidetree (the basis of ION) can be found [here](https:/
 ```
 - [Q&A about ION](#qa-about-ion)
     + [Disclaimer](#disclaimer)
-    + [List of questions and definitions](#list-of-questions-and-definitions)
+    + [List of abbreviations and definitions](#list-of-abbreviations-and-definitions)
   * [Knowledge you should be confidently applying](#knowledge-you-should-be-confidently-applying)
   * [Actions you should be comfortable with](#actions-you-should-be-comfortable-with)
 - [Jump table to categories](#jump-table-to-categories)
@@ -108,7 +108,7 @@ We've done our best to protect the privacy of the Github by investigating the im
 
 # Jump table to categories
 - [General](#qa-section-general)
-- [Bitcoin and its blockchain](#qa-section-key-bitcoin-and-its-blockchain)
+- [Bitcoin and its blockchain](#qa-section-bitcoin-and-its-blockchain)
 - [ION operational](#qa-section-ion-operational)
 - [Userinterface](#qa-section-userinterface)
 - [Identifiers and DIDs](#qa-section-identifiers-and-dids)
