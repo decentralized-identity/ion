@@ -71,6 +71,7 @@ We've done our best to protect the privacy of the Github by investigating the im
       - [Entropy](./Glossary.md#entropy)
       - [Entity](./Glossary.md#entity)
       - [Identity](./Glossary.md#identity)
+      - [IPFS](./Glossary.md#inter-planetary-file-system)
       - [JSON Web Key](./Glossary.md#json-web-key)
       - [Key](./Glossary.md#key)
       - [Normative](./Glossary.md#normative)
