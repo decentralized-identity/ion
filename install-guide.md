@@ -207,6 +207,7 @@ npm run build
 ```
 
 > NOTE: You may nee to run `npm install tsc` before running `npm run build` to install TypeScript in Linux/Mac environments.
+
 > NOTE: You **must rerun `npm run build`** every time a configuration JSON file is modified.
 
 
