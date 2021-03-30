@@ -116,8 +116,8 @@ do
 done
 
 echo -ne "Starting ion-bitcoin, please wait the service finish scanning the bitcoin blockfiles before proceeding \n
-Run \" docker logs -f ion-bitcoin\" to tail the current logs from the node \n
-When the log shows an entry like \" bla bla \" the sync is complete \n"
+Run \"docker logs -f ion-bitcoin\" to tail the current logs from the node \n
+When the log shows an entry like \"Sidetree-Bitcoin node running on port:\" the sync is complete \n"
 docker start ion-bitcoin-mainnet
 #TODO, write piece of bash which monitors the log files and continues automatically when it's done scanning the blk files
 read
