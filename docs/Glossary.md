@@ -11,6 +11,7 @@ DDO = DID Document, look up W3D DID standardization for more info\
 DHT = Distributed Hash Table\
 DIF = Decentralized Identity Foundation, https://identity.foundation\
 DKMI = Decentralized Key Mangement Infrastructure\
+IPFS = [Inter Planetary File System](#inter-planetary-file-system)
 JWK = [JSON Web Key](#json-web-key)
 IPv4 = standard Internet Protocol, version 4\
 PKI = [Public Key Infrastructure](#public-key-infrastructure)\
@@ -76,6 +77,9 @@ Entities are not limited to natural persons but may include groups, organization
 
 #### Identity
 A unique entity. Typically represented with a unique identifier.
+
+#### Inter Planetary File System 
+Also IPFS; is a distributed system for storing and accessing files, websites, applications, and data. [More info](https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization)
 
 #### JSON Web Key
 A JSON Web Key (JWK) is a JavaScript Object Notation (JSON) data structure that represents a cryptographic key. [More info](https://tools.ietf.org/html/rfc7517).\

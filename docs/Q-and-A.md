@@ -22,7 +22,7 @@ Terminology specific for Sidetree (the basis of ION) can be found [here](https:/
 ```
 - [Q&A about ION](#qa-about-ion)
     + [Disclaimer](#disclaimer)
-    + [List of questions and definitions](#list-of-questions-and-definitions)
+    + [List of abbreviations and definitions](#list-of-abbreviations-and-definitions)
   * [Knowledge you should be confidently applying](#knowledge-you-should-be-confidently-applying)
   * [Actions you should be comfortable with](#actions-you-should-be-comfortable-with)
 - [Jump table to categories](#jump-table-to-categories)
@@ -71,6 +71,7 @@ We've done our best to protect the privacy of the Github by investigating the im
       - [Entropy](./Glossary.md#entropy)
       - [Entity](./Glossary.md#entity)
       - [Identity](./Glossary.md#identity)
+      - [IPFS](./Glossary.md#inter-planetary-file-system)
       - [JSON Web Key](./Glossary.md#json-web-key)
       - [Key](./Glossary.md#key)
       - [Normative](./Glossary.md#normative)
@@ -108,7 +109,7 @@ We've done our best to protect the privacy of the Github by investigating the im
 
 # Jump table to categories
 - [General](#qa-section-general)
-- [Bitcoin and its blockchain](#qa-section-key-bitcoin-and-its-blockchain)
+- [Bitcoin and its blockchain](#qa-section-bitcoin-and-its-blockchain)
 - [ION operational](#qa-section-ion-operational)
 - [Userinterface](#qa-section-userinterface)
 - [Identifiers and DIDs](#qa-section-identifiers-and-dids)
@@ -321,7 +322,8 @@ Sidetree is a protocol for creating scalable decentralized public key infrastruc
 ## What is the setting of sidetree?
 The protocol allows users to create _globally unique, user-controlled identifiers_ and manage their associated metadata, all _without the need for centralized authorities_ or trusted third parties. The syntax of the identifier and accompanying data model used by the protocol is conformant to that defined by W3C Decentralized Identifiers. Implementations of the protocol can be codified as their own distinct DID Methods and registered in the W3C DID Method Registry.
 ## How is the inner working of Sidetree?
-<img src="../www/diagrams/architecture.png" alt="Architecture of Sidetree" border="0" width="400">
+
+<img src="./images/architecture-sidetree.png" alt="Architecture of Sidetree" border="0" width="500">
 
 ## For who is Sidetree?
 Any team or organisation that wants to create an DID based on Sidetree, because of its typical Layer 2 properties, not bloating any Layer 1 solution. Laying a foundation for layer 3 development,  in the DID to be developed,  that will result in W3C DID compliant VCs.
