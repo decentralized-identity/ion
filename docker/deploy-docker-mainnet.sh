@@ -86,6 +86,7 @@ echo "
   \"port\": 3002,
   \"sidetreeTransactionFeeMarkupPercentage\": 1,
   \"sidetreeTransactionPrefix\": \"ion:\",
+  \"transactionPollPeriodInSeconds\": 60,
   \"valueTimeLockAmountInBitcoins\": 0
 }" > ../json/mainnet-bitcoin-docker-config.json
 
