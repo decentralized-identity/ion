@@ -325,6 +325,7 @@ Sidetree is a protocol for creating scalable decentralized public key infrastruc
 
 ## *Q: What is the setting of sidetree?
 The protocol allows users to create _globally unique, user-controlled identifiers_ and manage their associated metadata, all _without the need for centralized authorities_ or trusted third parties. The syntax of the identifier and accompanying data model used by the protocol is conformant to that defined by W3C Decentralized Identifiers. Implementations of the protocol can be codified as their own distinct DID Methods and registered in the W3C DID Method Registry.
+
 ## **Q: How is the inner working of Sidetree?
 
 <img src="./images/architecture-sidetree.png" alt="Architecture of Sidetree" border="0" width="500">
