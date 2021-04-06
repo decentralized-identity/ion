@@ -127,12 +127,16 @@ We've done our best to protect the privacy of the Github by investigating the im
 <img src="./images/what-is-ION.png" alt="What is ION?" border="0" width="500">
 
 ION is based on Sidetree - standard.
-#### 
+
+#### *Q: Why ION?
 
 Imagine you have identifiers on the web that are yours. You control them and you can attach personal data to these IDs: 
 - privately: it's your choice to open up
 - non-censorable: Twitter or anyone can't shut your dig. ID down
 - temporary: you can revoke them
+
+## *Q: How do I buy ION coin?
+The ION you're currently reading about **is not a coin, you can't buy it**. And we do not recommend to buy any crypto currencies with - or associated to - the name ION. 
 
 ## *Q: Who owns ION?
 Just like Sidetree ION is [open source](https://github.com/decentralized-identity/ion/blob/master/LICENSE). Microsoft has been an important sustaining sponsor, but no more than that.
