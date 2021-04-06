@@ -132,7 +132,7 @@ ION is based on Sidetree - standard.
 
 Imagine you have identifiers on the web that are yours. You control them and you can attach personal data to these IDs: 
 - privately: it's your choice to open up
-- non-censorable: Twitter or anyone can't shut your dig. ID down
+- non-censorable: Twitter or anyone can't shut your digital identity down
 - temporary: you can revoke them
 
 ## *Q: How do I buy ION coin?
