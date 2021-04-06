@@ -319,17 +319,17 @@ Sidetree has its own repository under [DIF](https://github.com/decentralized-ide
 
 Most Question and Answers about Sidetree are located in its own [github repo](https://github.com/decentralized-identity/sidetree/blob/master/docs/Q-and-A.md). Below a basic selection to start off with.
 
-## What is Sidetree?
+## *Q: What is Sidetree?
 Sidetree is a protocol for creating scalable decentralized public key infrastructure (DPKI) networks that can run atop of any existing decentralized ledger system (e.g. Bitcoin) and be as open, public, and permissionless as the underlying ledger they utilize.
 
 
-## What is the setting of sidetree?
+## *Q: What is the setting of sidetree?
 The protocol allows users to create _globally unique, user-controlled identifiers_ and manage their associated metadata, all _without the need for centralized authorities_ or trusted third parties. The syntax of the identifier and accompanying data model used by the protocol is conformant to that defined by W3C Decentralized Identifiers. Implementations of the protocol can be codified as their own distinct DID Methods and registered in the W3C DID Method Registry.
-## How is the inner working of Sidetree?
+## **Q: How is the inner working of Sidetree?
 
 <img src="./images/architecture-sidetree.png" alt="Architecture of Sidetree" border="0" width="500">
 
-## For who is Sidetree?
+## *Q: For who is Sidetree?
 Any team or organisation that wants to create an DID based on Sidetree, because of its typical Layer 2 properties, not bloating any Layer 1 solution. Laying a foundation for layer 3 development,  in the DID to be developed,  that will result in W3C DID compliant VCs.
 _(@henkvancann)_
 
