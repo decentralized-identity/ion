@@ -230,6 +230,10 @@ With ION can fit 10,000 ID operations in a single bitcoin transaction.
 
 The operations on IDs in ION are near instant. The only thing that needs the snales pace of bitcoin is the anchoring of the whole set of ID operations on the most immutable and non-censorable and inclusive global ledger we have at the moment: bitcoin.
 
+## *Q When I implemented ION myself I get lots of bitcoin blockchain data. Can this be pruned?
+Yes, it can prune most of Bitcoin's data: all data before block 677000, and all non-ION transactions thereafter.\
+(_@csuwildcat_)
+
 # Q&A section ION operational
 
 ## *Q: Is ION a coin or an ICO?
@@ -257,6 +261,36 @@ No, including. And it doesn't really require that much, because there aren't rea
 ## **Q: How to install my ION node on a Raspberry Pi 4?
 https://matthijs.hoekstraonline.net/2021/03/25/running-an-ion-node-on-your-raspberry-4/
 
+
+## *Q: What are the availability guarantees of ION?
+ION does not depend on our infra in a way that somehow fails if our node is down. All ION nodes aggressively replicate all operations.\
+(_@csuwildcat_)
+
+#### **Q: So ION has the same availability guarantees as an IPFS cluster?
+_Which would basically mean the collective availability of all node runners_
+Yes. 
+
+#### **Q: Does that mean that all nodes pin all transactions?
+Yes, all ION nodes currently pin all ION-related IPFS files. It's not ad hoc, every node is setup to be a full replica.
+
+Because the data load is so small, probably for years, all nodes can store this data in full, but there's a light node structure for when we all think it is getting large, to allow low-resource devices to store less.\
+Once light nodes are ready, they can operate on about 5% of the total dataset.\
+(_@csuwildcat_)
+
+## *Q: Does ION need incentives to keep the nodes running that are based on external contractual/social/etc. obligations?
+We have advised all our customers to run a node. There are at least fifteen companies I know of who are running them. It might be a good dependency / incentive if you're using it yourself.\
+(_@csuwildcat_)
+
+
+## *Q: How many users does ION as a service have?
+We have got an idea of the number of nodes running. We have many users too, but we don't really know an exact count of that. Because it's not like they call home or anything; because there's no home.
+
+We are planning to scan for IPFS nodes that have the data, and make a rough estimate of user nodes based on the IPFS ID URIs that we see uniquely returning data
+I will be adding more graphical readouts of these things in the Explorer over the coming months
+
+
+# **Q: Does an ION user node need bitcoin? or just IPFS?
+It needs bitcoin, but it can prune most of Bitcoin's data: all data before block 677000, and all non-ION transactions thereafter.
 
 # Q&A section Userinterface
 
