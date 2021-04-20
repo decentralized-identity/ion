@@ -286,7 +286,7 @@ We have advised all our customers to run a node. There are at least fifteen comp
 We have got an idea of the number of nodes running. We have many users too, but we don't really know an exact count of that. Because it's not like they call home or anything; because there's no home.
 
 We are planning to scan for IPFS nodes that have the data, and make a rough estimate of user nodes based on the IPFS ID URIs that we see uniquely returning data
-I will be adding more graphical readouts of these things in the Explorer over the coming months
+We will be adding more graphical readouts of these things in the Explorer over the coming months
 
 
 # **Q: Does an ION user node need bitcoin? or just IPFS?
