@@ -290,7 +290,7 @@ I will be adding more graphical readouts of these things in the Explorer over th
 
 
 # **Q: Does an ION user node need bitcoin? or just IPFS?
-It needs bitcoin, but it can prune most of Bitcoin's data: all data before block 677000, and all non-ION transactions thereafter.
+It needs bitcoin, but it can prune most of Bitcoin's data: all data before block 667000, and all non-ION transactions thereafter.
 
 # Q&A section Userinterface
 
