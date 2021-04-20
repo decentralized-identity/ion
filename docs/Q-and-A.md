@@ -231,7 +231,7 @@ With ION can fit 10,000 ID operations in a single bitcoin transaction.
 The operations on IDs in ION are near instant. The only thing that needs the snales pace of bitcoin is the anchoring of the whole set of ID operations on the most immutable and non-censorable and inclusive global ledger we have at the moment: bitcoin.
 
 ## *Q When I start an ION myself I get lots of bitcoin blockchain data. Can this be pruned?
-Yes, it can prune most of Bitcoin's data: all data before block 677000, and all non-ION transactions thereafter.\
+Yes, it can prune most of Bitcoin's data: all data before block 667000, and all non-ION transactions thereafter.\
 (_@csuwildcat_)
 
 # Q&A section ION operational
