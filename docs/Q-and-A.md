@@ -263,8 +263,8 @@ https://matthijs.hoekstraonline.net/2021/03/25/running-an-ion-node-on-your-raspb
 
 
 ## *Q: What are the availability guarantees of ION?
-ION does not depend on our infra in a way that somehow fails if our node is down. All ION nodes aggressively replicate all operations.\
-(_@csuwildcat_)
+ION depends on the aggregated availability of all the nodes. The more ION nodes there are, the more available and redundant ION data is. ION does not depend on single infra in a way that it somehow fails if a few nodes are down. All ION nodes aggressively replicate all operations.\
+(_@csuwildcat_ and _@thehenrytsai_)
 
 #### **Q: So ION has the same availability guarantees as an IPFS cluster?
 _Which would basically mean the collective availability of all node runners_
