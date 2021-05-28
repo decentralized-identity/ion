@@ -127,12 +127,16 @@ We've done our best to protect the privacy of the Github by investigating the im
 <img src="./images/what-is-ION.png" alt="What is ION?" border="0" width="500">
 
 ION is based on Sidetree - standard.
-#### 
+
+#### *Q: Why ION?
 
 Imagine you have identifiers on the web that are yours. You control them and you can attach personal data to these IDs: 
 - privately: it's your choice to open up
-- non-censorable: Twitter or anyone can't shut your dig. ID down
+- non-censorable: Twitter or anyone can't shut your digital identity down
 - temporary: you can revoke them
+
+## *Q: How do I buy ION coin?
+The ION you're currently reading about **is not a coin, you can't buy it**. And we do not recommend to buy any crypto currencies with - or associated to - the name ION. 
 
 ## *Q: Who owns ION?
 Just like Sidetree ION is [open source](https://github.com/decentralized-identity/ion/blob/master/LICENSE). Microsoft has been an important sustaining sponsor, but no more than that.
@@ -186,11 +190,11 @@ Sure, they can get DIDs and use them to sign/exchange proofs for all sorts of bu
 ## Why is bitcoin chosen as the blockchain?
 While ledger-based consensus systems, on the surface, would seem to provide the same general features as one another, there are a few key differences that make some more suitable for critical applications, like the decentralized identifiers of human beings. Some of these considerations and features are:
 1. The system must be open and permissionless, not a cabal of authorities who can exclude and remove participants.
-1. The system must be well-tested, and proven secure against attack over a long enough duration to be confident in.
-1. The system must produce a singular, independently verifiable record that is as immutable as possible, so that reversing the record the system produces is infeasible.
-1. The system must be widely deployed, with nodes that span the globe, to ensure the record is persisted.
-1. The system must be self-incentivized, so that nodes continue to operate, process, and secure the record over time. The value from operation must come from the system directly, because outside incentive reliance is itself a vector for attack.
-1. The cost to attack the system through any game theoretically available means must be high enough that it is infeasible to attempt, and even if an ultra-capitalized attacker did, it would require a weaponized mobilization of force and resources that would be obvious, with options for mitigation.
+2. The system must be well-tested, and proven secure against attack over a long enough duration to be confident in.
+3. The system must produce a singular, independently verifiable record that is as immutable as possible, so that reversing the record the system produces is infeasible.
+4. The system must be widely deployed, with nodes that span the globe, to ensure the record is persisted.
+5. The system must be self-incentivized, so that nodes continue to operate, process, and secure the record over time. The value from operation must come from the system directly, because outside incentive reliance is itself a vector for attack.
+6. The cost to attack the system through any game theoretically available means must be high enough that it is infeasible to attempt, and even if an ultra-capitalized attacker did, it would require a weaponized mobilization of force and resources that would be obvious, with options for mitigation.
 
 The outcome:
 - #1 eliminates private and permissioned ledgers
@@ -226,6 +230,10 @@ With ION can fit 10,000 ID operations in a single bitcoin transaction.
 
 The operations on IDs in ION are near instant. The only thing that needs the snales pace of bitcoin is the anchoring of the whole set of ID operations on the most immutable and non-censorable and inclusive global ledger we have at the moment: bitcoin.
 
+## *Q When I start an ION myself I get lots of bitcoin blockchain data. Can this be pruned?
+Yes, it can prune most of Bitcoin's data: all data before block 667000, and all non-ION transactions thereafter.\
+(_@csuwildcat_)
+
 # Q&A section ION operational
 
 ## *Q: Is ION a coin or an ICO?
@@ -253,6 +261,36 @@ No, including. And it doesn't really require that much, because there aren't rea
 ## **Q: How to install my ION node on a Raspberry Pi 4?
 https://matthijs.hoekstraonline.net/2021/03/25/running-an-ion-node-on-your-raspberry-4/
 
+
+## *Q: What are the availability guarantees of ION?
+ION depends on the aggregated availability of all the nodes. The more ION nodes there are, the more available and redundant ION data is. ION does not depend on single infra in a way that it somehow fails if a few nodes are down. All ION nodes aggressively replicate all operations.\
+(_@csuwildcat_ and _@thehenrytsai_)
+
+#### **Q: So ION has the same availability guarantees as an IPFS cluster?
+_Which would basically mean the collective availability of all node runners_
+Yes. 
+
+#### **Q: Does that mean that all nodes pin all transactions?
+Yes, all ION nodes currently pin all ION-related IPFS files. It's not ad hoc, every node is setup to be a full replica.
+
+Because the data load is so small, probably for years, all nodes can store this data in full, but there's a light node structure for when we all think it is getting large, to allow low-resource devices to store less.\
+Once light nodes are ready, they can operate on about 5% of the total dataset.\
+(_@csuwildcat_)
+
+## *Q: Does ION need incentives to keep the nodes running that are based on external contractual/social/etc. obligations?
+We have advised all our customers to run a node. There are at least fifteen companies I know of who are running them. It might be a good dependency / incentive if you're using it yourself.\
+(_@csuwildcat_)
+
+
+## *Q: How many users does ION as a service have?
+We have got an idea of the number of nodes running. We have many users too, but we don't really know an exact count of that. Because it's not like they call home or anything; because there's no home.
+
+We are planning to scan for IPFS nodes that have the data, and make a rough estimate of user nodes based on the IPFS ID URIs that we see uniquely returning data
+We will be adding more graphical readouts of these things in the Explorer over the coming months
+
+
+# **Q: Does an ION user node need bitcoin? or just IPFS?
+It needs bitcoin, but it can prune most of Bitcoin's data: all data before block 667000, and all non-ION transactions thereafter.
 
 # Q&A section Userinterface
 
@@ -306,7 +344,7 @@ Have a look at the port mappings in the [yml-file](https://github.com/decentrali
 ## *Q: Does it pay rewards / Mine tokens for hosting a node?
 No, the value of running a node is accessing what may become the largest Web of identity for connecting to people, companies, apps, and services, which is the foundation of decentralized apps. One near term example: companies will run them so they can verify the DIDs /VC of customers.
 
-## Have you got any instructions for regtest setup?
+## **Q: Have you got any instructions for regtest setup?
 You might find what yu need here: https://github.com/decentralized-identity/ion/tree/master/json
 
 # Q&A section Sidetree
@@ -315,17 +353,18 @@ Sidetree has its own repository under [DIF](https://github.com/decentralized-ide
 
 Most Question and Answers about Sidetree are located in its own [github repo](https://github.com/decentralized-identity/sidetree/blob/master/docs/Q-and-A.md). Below a basic selection to start off with.
 
-## What is Sidetree?
+## *Q: What is Sidetree?
 Sidetree is a protocol for creating scalable decentralized public key infrastructure (DPKI) networks that can run atop of any existing decentralized ledger system (e.g. Bitcoin) and be as open, public, and permissionless as the underlying ledger they utilize.
 
 
-## What is the setting of sidetree?
+## *Q: What is the setting of sidetree?
 The protocol allows users to create _globally unique, user-controlled identifiers_ and manage their associated metadata, all _without the need for centralized authorities_ or trusted third parties. The syntax of the identifier and accompanying data model used by the protocol is conformant to that defined by W3C Decentralized Identifiers. Implementations of the protocol can be codified as their own distinct DID Methods and registered in the W3C DID Method Registry.
-## How is the inner working of Sidetree?
+
+## **Q: How is the inner working of Sidetree?
 
 <img src="./images/architecture-sidetree.png" alt="Architecture of Sidetree" border="0" width="500">
 
-## For who is Sidetree?
+## *Q: For who is Sidetree?
 Any team or organisation that wants to create an DID based on Sidetree, because of its typical Layer 2 properties, not bloating any Layer 1 solution. Laying a foundation for layer 3 development,  in the DID to be developed,  that will result in W3C DID compliant VCs.
 _(@henkvancann)_
 
