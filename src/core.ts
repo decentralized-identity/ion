@@ -6,7 +6,6 @@ import LogColor from '../bin/LogColor';
 import {
   SidetreeConfig,
   SidetreeCore,
-  SidetreeMonitor,
   SidetreeResponse,
   SidetreeResponseModel,
   SidetreeVersionModel
@@ -45,7 +44,6 @@ const coreVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
 const ipfsFetchTimeoutInSeconds = 10;
 const cas = new Ipfs(config.ipfsHttpApiEndpointUri, ipfsFetchTimeoutInSeconds);
 const sidetreeCore = new SidetreeCore(config, coreVersions, cas);
-const sidetreeMonitor = new SidetreeMonitor();
 
 const app = new Koa();
 
@@ -74,12 +72,15 @@ router.get(`${resolvePath}:did`, async (ctx, _next) => {
   setKoaResponse(response, ctx.response);
 });
 
-router.get('/monitors/operation-queue-size', async (ctx, _next) => {
-  const operationQueueSize = await sidetreeMonitor.getOperationQueueSize();
-  const response = {
-    status: ResponseStatus.Succeeded,
-    body: { operationQueueSize },
-  };
+router.get('/monitor/operation-queue-size', async (ctx, _next) => {
+  const body = await sidetreeCore.monitor.getOperationQueueSize();
+  const response = { status: ResponseStatus.Succeeded, body };
+  setKoaResponse(response, ctx.response);
+});
+
+router.get('/monitor/writer-max-batch-size', async (ctx, _next) => {
+  const body = await sidetreeCore.monitor.getWriterMaxBatchSize();
+  const response = { status: ResponseStatus.Succeeded, body };
   setKoaResponse(response, ctx.response);
 });
 
@@ -94,8 +95,7 @@ app.use((ctx, _next) => {
 (async () => {
   try {
     await sidetreeCore.initialize();
-    await sidetreeMonitor.initialize(config);
-  
+
     const port = config.port;
     app.listen(port, () => {
       console.log(`Sidetree node running on port: ${port}`);

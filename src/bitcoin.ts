@@ -143,6 +143,11 @@ router.get('/writerlock', async (ctx, _next) => {
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
+router.get('/monitors/balance', async (ctx, _next) => {
+  const requestHandler = () => blockchainService.monitor.getWalletBalance();
+  await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
+});
+
 app.use(router.routes())
   .use(router.allowedMethods());
 
