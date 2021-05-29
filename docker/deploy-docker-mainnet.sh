@@ -70,7 +70,7 @@ rpcbind=0.0.0.0
 " > $bitcoinDataDirectory/bitcoin.conf
 
 
-# patch the configuration for ION
+# create the configuration for ION Bitcoin service
 echo "
 {
   \"bitcoinDataDirectory\": \"/bitcoindata\",
@@ -82,12 +82,16 @@ echo "
   \"bitcoinWalletOrImportString\": \"5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF\",
   \"databaseName\": \"ion-mainnet-bitcoin\",
   \"genesisBlockNumber\": 667000,
+  \"logRequestError\": true,
   \"mongoDbConnectionString\": \"mongodb://mongo:27017/\",
   \"port\": 3002,
   \"sidetreeTransactionFeeMarkupPercentage\": 1,
   \"sidetreeTransactionPrefix\": \"ion:\",
   \"transactionPollPeriodInSeconds\": 60,
-  \"valueTimeLockAmountInBitcoins\": 0
+  \"valueTimeLockUpdateEnabled\": false,
+  \"valueTimeLockAmountInBitcoins\": 0,
+  \"valueTimeLockPollPeriodInSeconds\": 600,
+  \"valueTimeLockTransactionFeesAmountInBitcoins\": 0.0001
 }" > ../json/mainnet-bitcoin-docker-config.json
 
 echo "Starting up bitcoin-node service"
