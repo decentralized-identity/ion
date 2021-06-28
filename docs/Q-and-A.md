@@ -292,6 +292,12 @@ We will be adding more graphical readouts of these things in the Explorer over t
 # **Q: Does an ION user node need bitcoin? or just IPFS?
 It needs bitcoin, but it can prune most of Bitcoin's data: all data before block 667000, and all non-ION transactions thereafter.
 
+# **Q: Is it possible to add other public key algorithms to the DID Document? 
+_...like ED25519, X25519 key agreement or custom key provided by external services?_
+
+You can add any public key JWK representation you want to the DID Document. See here for some options: https://w3c-ccg.github.io/ld-cryptosuite-registry/ - just remember that it needs to be one of the JWK variants.\
+(_@csuwildcat_)
+
 # Q&A section Userinterface
 
 ## **Q: How can I be a part of this or have my own DID?
