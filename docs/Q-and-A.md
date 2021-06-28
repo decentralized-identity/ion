@@ -225,7 +225,7 @@ Two key differences:
 2. It's a massively, provably scalable architecture, unlike those alt-chains\
 (_@csuwildcat_)
 
-## *Q: How do you even verify ID on BTC with the snales pace?
+## *Q: How do you even verify ID on BTC with the snail's pace?
 With ION can fit 10,000 ID operations in a single bitcoin transaction.
 
 The operations on IDs in ION are near instant. The only thing that needs the snales pace of bitcoin is the anchoring of the whole set of ID operations on the most immutable and non-censorable and inclusive global ledger we have at the moment: bitcoin.

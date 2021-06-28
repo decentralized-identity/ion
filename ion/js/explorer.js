@@ -339,8 +339,9 @@ async function searchForDID(){
   try {
     result = await fetch('https://beta.discover.did.microsoft.com/1.0/identifiers/' + didURI).then(async response => {
       search.setAttribute('status', response.status);
-      if (response.status >= 400) throw '';
       currentDidSearch = didURI;
+
+      if (response.status >= 400) throw '';
       return response.json();
     });
   }
