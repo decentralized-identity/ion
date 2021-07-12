@@ -234,9 +234,16 @@ Copy the configuration files `<testnet or mainnet>-core-config.json` and `<testn
 
 Start a new console and run the following command to start the core service. 
 
+On Windows
 ```
-ION_CORE_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-config.json
-ION_CORE_VERSIONING_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-versioning.json
+$Env:ION_CORE_CONFIG_FILE_PATH="\usr\local\src\ion\json\testnet-core-config.json"
+$Env:ION_CORE_VERSIONING_CONFIG_FILE_PATH="\usr\local\src\ion\json\testnet-core-versioning.json"
+```
+
+On Linux
+```
+export ION_CORE_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-config.json
+export ION_CORE_VERSIONING_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-versioning.json
 npm run core
 ```
 
