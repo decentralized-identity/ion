@@ -1,0 +1,96 @@
+
+{% set css = ['imports/hero', 'home'] %}
+{% set js = [{ path: 'imports/hero' }, { path: 'home', module: true }] %}
+
+{% extends "default.html" %}
+
+{% block svg %}
+<symbol id="docker-icon" viewBox="0 0 640 512">
+  <path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/>
+</symbol>
+{% endblock %}
+
+{% block content %}
+
+<section id="hero" full-width>
+  <div id="hero_content">
+    <object data="/ion/images/logo-white.svg"></object>
+    <!-- {% if code.latest_version %}
+      <div class="release_version">{{ code.latest_version }}</div>
+    {% endif %} -->
+    <!-- <h1>Open - Public - Permissionless</h1> -->
+    <p>ION is an open, public, permissionless Layer 2 Decentralized Identifier 
+      network that runs atop the Bitcoin blockchain</p>
+    <nav>
+      <a href="/ion/install-guide" class="button">
+        <svg><use href="#guide-icon"></use></svg>
+        Install Guide
+      </a>
+      <a href="https://github.com/decentralized-identity/ion/tree/master/docker" class="button">
+        <svg><use href="#docker-icon"></use></svg>
+        Docker
+      </a>
+      <a href="https://github.com/decentralized-identity/ion-tools" class="button">
+        <svg><use href="#sdk-icon"></use></svg>
+        ION.js Library
+      </a>
+    </nav>
+  </div>
+</section>
+
+<section id="highlights">
+
+  <ul max-width>
+    <li>
+      <div>
+        <svg shape="hexagon"><use href="#network-2-icon"></use></svg>
+      </div>
+      <div>
+        <h2>Decentralized</h2>
+        <p>
+          ION is a Layer 2 open, permissionless network based on the purely deterministic 
+          Sidetree protocol, which requires no special tokens, trusted validators, or 
+          additional consensus mechanisms; the linear progression of Bitcoin's 
+          timechain is all that's required for its operation.
+        </p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h2>Scalable</h2>
+        <p>
+          ION is designed for scale, supporting thousands of DID operations 
+          per second across the network. ION is based on a strongly eventually 
+          consistent architecture that enables embarrassingly parallel ingest, 
+          processing, and resolution of DID operations. 
+        </p>
+      </div>
+      <div>
+        <svg shape="hexagon"><use href="#gauge-icon"></use></svg>
+      </div>
+    </li>
+    <li>
+      <div>
+        <svg shape="hexagon"><use href="#shield-lock-icon"></use></svg>
+      </div>
+      <div>
+        <h2>Censorship & Tamper Evasive</h2>
+        <ul list>
+          <li>ION DIDs can only be deactivated by their owners, protecting people from violations of digital rights.</li>
+          <li>ION includes registry capabilities to support decentralized package managers, app stores, etc.</li>
+          <li>ION enables DID owners to securely connect to each other through decentralized routing endpoints.</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+
+</section>
+
+<section id="features">
+
+</section>
+
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+{% endblock %}
