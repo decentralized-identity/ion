@@ -292,6 +292,27 @@ We will be adding more graphical readouts of these things in the Explorer over t
 # **Q: Does an ION user node need bitcoin? or just IPFS?
 It needs bitcoin, but it can prune most of Bitcoin's data: all data before block 667000, and all non-ION transactions thereafter.
 
+# **Q: How to create a batch of DIDs?
+_Can you explain more detail on this? Assume that the company requires to create 1000 DIDs for IOT devices. How can I do create them in a batch?_
+
+You'd use the API to send your running node N number of ops, then it will batch them up for you and anchor them (assuming you attach a funded wallet that can do txns).\
+Assuming you are running your own node, you simply need to submit 1000 create operations to your node (ie. http://localhost:3000/operations) before your batch writer kicks in every 10 minutes by default, the batch writer will batch all 1000 operations into 1 bitcoin transaction thus you'll pay fee for just one transaction to the minor.\
+The technical spec for constructing a create request can be found in [Sidetree API spec](https://identity.foundation/sidetree/api/#create), but if you know TypeScript, you are better off using the [ion-sdk](https://github.com/decentralized-identity/ion-sdk) directly, it will save you a lot of time.\
+(_@TheHenryTsai_) - related github [issue](https://github.com/decentralized-identity/ion/issues/210)
+
+#### *Q: Does it cost only a single bitcoin transaction or 1000 BTC transactions?
+To create 1000 DIDs for IOT devices, you wouldn't need 1000 BTC transactions, but only a fraction. Furthermore costs can be shared among many users. e.g. ION is able to bundle thousands of pluriform identifier events and only a root hash will be anchored on the bitcoin blockchain. It depends whether you're able to batch the inception events of the IoT identifiers or not. A batch of 1000 identifiers requires 1 BTC transaction and there's even more room in that ION batch.\
+1000 consecutive inception events over of period of time, could require 1000 BTC transactions, but of course a single identifier event in one anchoring ION BTC transaction should not have to pay for the total fee. The fee can be shared and divided by the number of participating controllers in that specific ION anchoring BTC transaction.\
+(_@henkvancann_)\
+ There's one big caveat: anchoring thousand of ION ops is going to require you to have enough in the wallet to lock an escrow-like proof of fee, which uses a relative timelock that will freeze a large amount of Bitcoin for roughly 30 days. It's a form of spam protection for the network. You can so 100 ops in a Bitcoin txn without any proof of fee value lock. This doc explains the value locking proof of fee requirement the nodes all enforce: https://github.com/decentralized-identity/ion/blob/master/docs/design.md#value-locking-algorithm\
+ (_@csuwildcat_)
+
+# **Q: Is it possible to add other public key algorithms to the DID Document? 
+_...like ED25519, X25519 key agreement or custom key provided by external services?_
+
+You can add any public key JWK representation you want to the DID Document. See here for some options: https://w3c-ccg.github.io/ld-cryptosuite-registry/ - just remember that it needs to be one of the JWK variants.\
+(_@csuwildcat_)
+
 # Q&A section Userinterface
 
 ## **Q: How can I be a part of this or have my own DID?
