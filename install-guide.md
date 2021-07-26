@@ -214,7 +214,7 @@ npm run build
 
 ## 6. Run ION Bitcoin microservice
 
-*Update the paths below* to where you editted and saved the config files from the previous step.
+*Update the paths below* to where you edited and saved the config files from the previous step.
 
 ```
 ION_BITCOIN_CONFIG_FILE_PATH=/etc/ion/testnet-bitcoin-config.json
