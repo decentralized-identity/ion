@@ -1,6 +1,6 @@
 {
   "name": "ion",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Identity Overlay Network (ION) using Sidetree protocol.",
   "repository": "https://github.com/decentralized-identity/ion",
   "license": "Apache-2.0",
