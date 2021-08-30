@@ -28,7 +28,7 @@ export default class OperationCommand {
     console.info(LogColor.lightBlue(`DID: `) + LogColor.yellow(`${shortFormDid}`));
     console.info('');
 
-    // Save the all private keys.
+    // Save all private keys.
     const recoveryKeyFileName = `${didSuffix}-RecoveryPrivateKey.json`;
     const updateKeyFileName = `${didSuffix}-UpdatePrivateKey.json`;
     const signingKeyFileName = `${didSuffix}-SigningPrivateKey.json`;
