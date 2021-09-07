@@ -2,7 +2,7 @@
 
 ION is a decentralized Layer 2 network for Decentralized Identifiers that runs atop the Bitcoin blockchain. Running an ION node minimizes trust in external parties for resolving ION DIDs, helps make the network more resilient and reliable, and provides the operator with better DID resolution performance.
 
-The ION node reference implementation is currently in beta phase, operators should expect potential breaking changes and resets of the network's state. Presently, we are only recommending that experienced developers invest the time in running, testing, and contributing to the code base. This recommendation will change as the implementation progresses into more stable stages of development, which contributors will communicate to the community via blog posts and communications from DIF and collaborating organizations.
+The ION node reference implementation a production-stable implementation of the v1 DIF Sidetree specification. Presently, node installation and operation is attuned for experienced developers who are able to invest the time in running, testing, and contributing to the codebase. This recommendation will change over time, which contributors will communicate to the community via blog posts and communications from DIF and collaborating organizations.
 
 The ION node implementation is composed of a collection of microservices. Of these components, the major dependencies are Bitcoin Core, IPFS, and MongoDB (for local persistence of data).
 
@@ -90,11 +90,17 @@ Create a configuration file (`bitcoin.conf`) designating
 3. a password (must match `ion-bitcoin`'s configuration later)
 
 <table>
+
 <tr>
+
 <th>Testnet</th>
+
 <th>Mainnet</th>
+
 </tr>
+
 <tr>
+
 <td>
 
 ```yaml
@@ -107,6 +113,7 @@ txindex=1
 ```
 
 </td>
+
 <td>
 
 ```yaml
@@ -118,7 +125,9 @@ rpcpassword=<your-rpc-password>
 ```
 
 </td>
+
 </tr>
+
 </table>
 
 Start Bitcoin Core and let it sync:
