@@ -226,7 +226,7 @@
 <section id="hero" full-width>
   <div id="hero_content">
     <object data="/ion/images/logo-white.svg"></object>
-    <h2>Install Guide for v1.0.1</h2>
+    <h2>Install Guide for v1.0.3</h2>
   </div>
 </section>
 
@@ -364,7 +364,8 @@ rpcpassword=&lt;your-rpc-password&gt;
 </li>
 <li><code>bitcoinDataDirectory</code>
 <ul>
-<li>It needs to point to the block files folder:</li>
+<li>This is an <em><strong>optional</strong></em> config value. By configuring this value, instead of using rpc call to initialize Bitcoin microservice, the node will read from the block binary files. This is useful in speeding up init time if you have fast access to the files (local SSD is optimal). If the files are stored and retireved across network, such as on the cloud in AWS S3 Bucket or Azure Blob Storage, then this will be slower than using RPC as it has to download GB worth of files.</li>
+<li>Leave it blank if you do not wish to init from file. If you want to init from files, it needs to point to the block files folder:</li>
 <li>testnet: <code>[datadir]/testnet3</code>.</li>
 <li>mainnet: exactly the same as the <code>[datadir]</code> value configured for Bitcoin Core in Step 2.</li>
 </ul>
@@ -396,10 +397,13 @@ rpcpassword=&lt;your-rpc-password&gt;
 npm run build
 </code></pre>
 <blockquote>
+<p>NOTE: You may nee to run <code>npm install tsc</code> before running <code>npm run build</code> to install TypeScript in Linux/Mac environments.</p>
+</blockquote>
+<blockquote>
 <p>NOTE: You <strong>must rerun <code>npm run build</code></strong> every time a configuration JSON file is modified.</p>
 </blockquote>
 <h2>6. Run ION Bitcoin microservice</h2>
-<p><em>Update the paths below</em> to where you editted and saved the config files from the previous step.</p>
+<p><em>Update the paths below</em> to where you edited and saved the config files from the previous step.</p>
 <pre><code>ION_BITCOIN_CONFIG_FILE_PATH=/etc/ion/testnet-bitcoin-config.json
 ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/etc/ion/testnet-bitcoin-versioning.json
 npm run bitcoin
