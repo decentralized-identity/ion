@@ -70,7 +70,7 @@ rpcbind=0.0.0.0
 " > $bitcoinDataDirectory/bitcoin.conf
 
 
-# patch the configuration for ION
+# create the configuration for ION Bitcoin service
 echo "
 {
   \"bitcoinDataDirectory\": \"/bitcoindata\",
@@ -82,11 +82,16 @@ echo "
   \"bitcoinWalletOrImportString\": \"5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF\",
   \"databaseName\": \"ion-mainnet-bitcoin\",
   \"genesisBlockNumber\": 667000,
+  \"logRequestError\": true,
   \"mongoDbConnectionString\": \"mongodb://mongo:27017/\",
   \"port\": 3002,
   \"sidetreeTransactionFeeMarkupPercentage\": 1,
   \"sidetreeTransactionPrefix\": \"ion:\",
-  \"valueTimeLockAmountInBitcoins\": 0
+  \"transactionPollPeriodInSeconds\": 60,
+  \"valueTimeLockUpdateEnabled\": false,
+  \"valueTimeLockAmountInBitcoins\": 0,
+  \"valueTimeLockPollPeriodInSeconds\": 600,
+  \"valueTimeLockTransactionFeesAmountInBitcoins\": 0.0001
 }" > ../json/mainnet-bitcoin-docker-config.json
 
 echo "Starting up bitcoin-node service"
@@ -116,8 +121,8 @@ do
 done
 
 echo -ne "Starting ion-bitcoin, please wait the service finish scanning the bitcoin blockfiles before proceeding \n
-Run \" docker logs -f ion-bitcoin\" to tail the current logs from the node \n
-When the log shows an entry like \" bla bla \" the sync is complete \n"
+Run \"docker logs -f ion-bitcoin\" to tail the current logs from the node \n
+When the log shows an entry like \"Sidetree-Bitcoin node running on port:\" the sync is complete \n"
 docker start ion-bitcoin-mainnet
 #TODO, write piece of bash which monitors the log files and continues automatically when it's done scanning the blk files
 read

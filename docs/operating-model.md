@@ -4,7 +4,7 @@
 
 "We reject kings, presidents, and voting. We believe in rough consensus and running code."
 
-In the spirit of David Clark's famous quote from the early days of IETF, we believe ION is a shared utility that no person, entity, or group should own or control. We, as a community of engineers, organizations, and anonymous individuals, endeavor to foster an open environment for development and coordination among all to seek to contribute. We, as a community, will always strive to evaluate every contribution on its merit. We, as a community, believe in the rights and liberties of individuals, and we are committed to ensuring our work here reflects that.
+In the spirit of David Clark's famous quote from the early days of IETF, we believe ION is a shared utility that no person, entity, or group should own or control. We, as a community of engineers, organizations, and anonymous individuals, endeavor to foster an open environment for development and coordination among all who seek to contribute. We, as a community, will always strive to evaluate every contribution on its merit. We, as a community, believe in the rights and liberties of individuals, and we are committed to ensuring our work here reflects that.
 
 ## ION's Relationship with Sidetree
 

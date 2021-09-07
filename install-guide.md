@@ -194,7 +194,8 @@ Update the ION Bitcoin microservice (e.g. `/etc/ion/testnet-bitcoin-config.json`
      - testnet: `http://localhost:18332`
      - mainnet: `http://localhost:8332` (assuming default Bitcoin Core configuration from Step 2)
   - `bitcoinDataDirectory`
-    - It needs to point to the block files folder:
+    - This is an ***optional*** config value. By configuring this value, instead of using rpc call to initialize Bitcoin microservice, the node will read from the block binary files. This is useful in speeding up init time if you have fast access to the files (local SSD is optimal). If the files are stored and retireved across network, such as on the cloud in AWS S3 Bucket or Azure Blob Storage, then this will be slower than using RPC as it has to download GB worth of files.
+    - Leave it blank if you do not wish to init from file. If you want to init from files, it needs to point to the block files folder:
      - testnet: `[datadir]/testnet3`.
      - mainnet: exactly the same as the `[datadir]` value configured for Bitcoin Core in Step 2.
   - `bitcoinWalletImportString`
@@ -215,12 +216,14 @@ npm i
 npm run build
 ```
 
+> NOTE: You may nee to run `npm install tsc` before running `npm run build` to install TypeScript in Linux/Mac environments.
+
 > NOTE: You **must rerun `npm run build`** every time a configuration JSON file is modified.
 
 
 ## 6. Run ION Bitcoin microservice
 
-*Update the paths below* to where you editted and saved the config files from the previous step.
+*Update the paths below* to where you edited and saved the config files from the previous step.
 
 ```
 ION_BITCOIN_CONFIG_FILE_PATH=/etc/ion/testnet-bitcoin-config.json

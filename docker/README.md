@@ -37,25 +37,27 @@ This implementation is designed to be run with very little dependencies, on a Li
   sudo chmod +x /usr/local/bin/docker-compose
   ```
 
-- NodeJS - version 10.x   `NOTE: This has a requirement for version 10 of nodejs only`
+- NodeJS - version 14.x   `NOTE: This has a requirement for version 14 of nodejs only`
   ```
-  curl -sl https://deb.nodesource.com/setup_10.x | sudo bash -
+  curl -sl https://deb.nodesource.com/setup_14.x | sudo bash -
   ```
 
 - make - Build tool used for library this depends on.  `NOTE: You can get this as part of the build-essential package for debian based os`
   ```
-  apt-get install build-essential -y
+  sudo apt-get install build-essential -y
   ```
 
 ## Run
 Before you start the setup you need to install the packages from the directory with the ION repo.
 ```
+git clone https://github.com/decentralized-identity/ion.git
 npm install
 npm run build
 ```
 After those ran succesfully, navigate to the docker directory and run the configuration script [configuration script](deploy-docker-mainnet.sh). The script will prompt for data directories to use. As noted above, you will need about 350GB of free space to run this.
 
 ```
+chmod +x deploy-docker-mainnet.sh
 ./deploy-docker-mainnet.sh
 ```
 
