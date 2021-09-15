@@ -408,5 +408,5 @@ Due to its licensing structure, Sidetree isn't owned by anyone and everyone at t
 On github Sidetree is - and will become even more - a thickening bunch of repositories:
  -  https://github.com/decentralized-identity/Sidetree 
 
- Lastly, Microsoft is an important promotor of Sidetree and employer of some contributors.
+ Lastly, Microsoft is an important promoter of Sidetree and employer of some contributors.
  _(@henkvancann)_
