@@ -2,7 +2,7 @@ version: "3"
 services:
   bitcoin-core-mainnet:
     container_name: bitcoin-core-mainnet
-    image: ruimarinho/bitcoin-core:0.20.1
+    image: ruimarinho/bitcoin-core:0.21.1
     command:
       -printtoconsole
       -txindex=1
@@ -16,7 +16,7 @@ services:
 #      - "8333:8333"
   mongo:
     container_name: mongo
-    image: mongo:3.6.18-xenial
+    image: mongo:4.0.27-xenial
 #    ports: 
 #      - "27017:27017"
     volumes:
@@ -36,7 +36,7 @@ services:
   
   ion-bitcoin-mainnet:
     container_name: ion-bitcoin-mainnet
-    image: node:14.15.4-alpine3.11
+    image: node:lts-alpine3.14
     command: "npm run bitcoin"
     working_dir: /ion
     environment: 
@@ -54,7 +54,7 @@ services:
 
   ion-core-mainnet:
     container_name: ion-core-mainnet
-    image: node:14.15.4-alpine3.11
+    image: node:lts-alpine3.14
     command: "npm run core"
     working_dir: /ion
     environment: 
