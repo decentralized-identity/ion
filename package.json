@@ -41,7 +41,7 @@
     "markdown-it": "12.0.4",
     "merge-stream": "2.0.0",
     "nyc": "15.0.1",
-    "prismjs": "^1.24.1",
+    "prismjs": "^1.25.0",
     "supertest": "4.0.2",
     "ts-node": "8.3.0",
     "tslint": "6.1.2",
