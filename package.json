@@ -38,7 +38,7 @@
     "jasmine": "3.5.0",
     "jasmine-reporters": "^2.4.0",
     "jasmine-spec-reporter": "4.2.1",
-    "markdown-it": "12.0.4",
+    "markdown-it": "12.3.2",
     "merge-stream": "2.0.0",
     "nyc": "15.0.1",
     "prismjs": "^1.25.0",
