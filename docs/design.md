@@ -8,7 +8,7 @@
 
 If you want to write transactions containing more than 100 operations, you are required to lock some BTC for exactly 4500 blocks using a time locked transaction.
 
-The formulae to calculate the required lock amount can be calculated using:
+The formula to calculate the required lock amount can be calculated using:
 
 ```
 requiredLockedBtc = numberOfOpsPerTransactionDesired x estimatedNormalizedFee x normalizedFeeToPerOperationFeeMultiplier x valueTimeLockAmountMultiplier
