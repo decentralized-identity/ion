@@ -2,7 +2,7 @@
 | | |
 |-|-|
 |Authors| Henry Tsai |
-|Revision| 2022-03-31 |
+|Revision| 2022-04-04 |
 
 The main value-proposition of ION is its ability to batch tens of thousands of DID/DPKI operations in a single Bitcoin transaction, thereby drastically increase throughput capacity of the network.
 
@@ -87,11 +87,17 @@ In addition to [proof-of-fee](#proof-of-fee), value locking is introduced to fur
 
 - Some bitcoins need to be _locked_ for `4500` blocks using a [Bitcoin time locked transaction](https://github.com/bitcoin/bips/blob/master/bip-0068.mediawiki) prior to writing ION transaction containing more than `100` operations.
 
-- Relative time lock is used.
+- Bitcoin's relative time lock is used for value locking.
 
 - The larger the batch, the more bitcoins need to be locked.
 
 - The writer can write transactions with batch size that the value lock allows during the time lock window.
+
+- The writer ID is the public key hash of the Bitcoin address that holds the bitcoins being spent.
+
+- The writer ID must match the lock owner, where the owner is the public key hash of the bitcoin address receiver of the locked amount upon expiry. (See `resolveLockIdentifierAndThrowOnError()` in code). Note that owner of the lock is the receiver of the bitcoins, not the sender, since logically, it is the receiver's bitcoins that are locked once the time lock transaction is written.
+
+- Both transaction hash and the value lock redeem script is written as the "value lock ID" in the IPFS Core Index file for value lock verification. However technically only transaction hash is needed. The value lock redeem script is there only due to the original implementation using absolute time lock, this part of the code was not removed when we switched to relative time lock.
 
 - The allowed batch size is calculated based on the block the time lock is written in, it remains constant throughout the lock window.
 
@@ -194,7 +200,10 @@ graph TD
 - Deferred processing operations until resolution time.
 
 ### Batch Writer
-- Writes ION transactions to Bitcoin netwrok.
+- Writes ION transactions to Bitcoin network.
+
+- Gets fee and lock information from ION Bitcoin service to decide how many operations can be written in a transaction.
+
 - The Bitcoin minors at any given time may demand more or less transaction fee the the total per-operation fee required by ION. The batch writer will spend the lager amount of the two to ensure reliable anchoring of the ION transaction.
 
 - Waits for confirmation.
@@ -227,11 +236,11 @@ graph TD
 - Monitors spending, prevents write when specified limit is met.
 
 ### Lock monitor
-
+- Responsible for monitoring the value lock such that the ION Core Batch Writer is able to write ION transactions with the desired batch size.
 
 ### IBitcoinWallet
-- An interface that allows 
-- Default implmen
+- An interface that allows plugin of different Bitcoin wallet implementation.
+- Default implementation uses Bitcoin Core.
 
 ## IPFS
-- Library that interfaces with go-IPFS RPC API.
+- ION Core interfaces with IPFS through go-IPFS RPC API.
