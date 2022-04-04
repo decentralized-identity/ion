@@ -149,7 +149,7 @@ Observe the fork of the operation chain and the switch from the operation with t
   - Assuming recovery key is kept private as intended, it is safe to hand the update key to a custodian.
 
 ## Implementation Architecture
-::: mermaid
+```mermaid
 graph TD
 
   subgraph ION Bitcoin Service
@@ -186,8 +186,7 @@ graph TD
   Bitcoin-Processor --> ION-Bitcoin-MongoDB
   Bitcoin-Processor --> Bitcoin-Core
   Lock-Monitor --> Bitcoin-Core
-
-:::
+```
 
 ## ION Core Service
 ### Observer
