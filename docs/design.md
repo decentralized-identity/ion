@@ -137,6 +137,8 @@ This means you will need to lock 0.66 BTC in order for transactions of 1000 oper
 
 - The delay in anchoring could be intentional or technical.
 
+- When generating Long-Form DIDs, it is recommended to keep the `<initial-state>` size to less than 1000 bytes to avoid max URL length issues.
+
 - Explained in detail in [Sidetree spec](https://identity.foundation/sidetree/spec/#long-form-did-uris).
 
 ### Late Publishing
