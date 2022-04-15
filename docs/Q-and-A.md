@@ -332,7 +332,7 @@ _This is a giant leap forward for individuals and their privacy._ - (_@mkaplanPM
 ## *Q: Who owns the DIDs generated with ION?
 Ownership of your DIDs is based on keys you generate locally, and all ION operations are signed with those keys, so even if you use our node for anchoring DID operations (or any other node), you are always in sole control.\
 (_@csuwildcat_)
-## *Q: They probably already have my ID, why would i tokenize it?
+## *Q: They probably already have my ID, why would I tokenize it?
 It's not tokenizing your identity, it provides Identifiers you own and control - for example: if you had a DID linked to a personal datastore, people could follow your DID and fetch tweets from you, meaning Twitter can't erase your ID or censor your posts.
 ## **Q: Where can I see what data points someone can set up around their own DID? 
 _For example, name, address, driving licence. There must be a huge array of fields someone can include within their DID for it to be comprehensive?_\
