@@ -150,7 +150,7 @@ Observe the fork of the operation chain and the switch from the operation with t
 - Transactions with missing layer-2 data are called _unresolvable transactions_.
 - Unresolvable transactions are retried for reprocessing with an exponential back-off on each ION node.
 - Late publishing is an uninteresting attack if done by DID owner.
-- In a custodial setting, the malicious custodian can prepare and perform a late publish to cease control of a DID.
+- In a custodial setting, the malicious custodian can prepare and perform a late publish to seize control of a DID.
   - As a rule-of-thumb, NEVER hand the recovery key to anyone, because anyone with your recovery key can prepare and perform a late-publish.
   - Assuming recovery key is kept private as intended, it is safe to hand the update key to a custodian.
 
