@@ -23,8 +23,7 @@ services:
       - ${DB_VOL}:/data/db
   ipfs:
     container_name: ipfs
-#this image doesn't work on ARM64 yet, use mhoekstra/go-ipfs:v0.7.0 if you want to deploy on ARM    
-    image: ipfs/go-ipfs
+    image: ipfs/go-ipfs:master-latest
     environment: 
       - IPFS_PATH=/data/ipfs
     volumes:
