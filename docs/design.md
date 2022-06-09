@@ -102,7 +102,7 @@ In addition to [proof-of-fee](#proof-of-fee), value locking is introduced to fur
 - The allowed batch size is calculated based on the block the time lock is written in, it remains constant throughout the lock window.
 
 
-The formulae to calculate the required lock amount can be calculated using:
+The formula to calculate the required lock amount can be calculated using:
 
 ```
 requiredLockedBtc = numberOfOpsPerTransactionDesired x estimatedNormalizedFee x normalizedFeeToPerOperationFeeMultiplier x valueTimeLockAmountMultiplier
