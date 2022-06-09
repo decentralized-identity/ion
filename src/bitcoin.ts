@@ -1,13 +1,13 @@
-import * as getRawBody from 'raw-body';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
+import * as getRawBody from 'raw-body';
 import * as querystring from 'querystring';
-import LogColor from '../bin/LogColor';
 import {
   ISidetreeBitcoinConfig,
   SidetreeBitcoinProcessor,
   SidetreeBitcoinVersionModel
 } from '@decentralized-identity/sidetree';
+import LogColor from '../bin/LogColor';
 
 /** Bitcoin service configuration parameters */
 interface IBitcoinServiceConfig extends ISidetreeBitcoinConfig {
@@ -68,7 +68,9 @@ if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
 // Selecting versioning file, environment variable overrides default config file.
 let versioningConfigFilePath = '../json/testnet-bitcoin-versioning.json';
 if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
-  console.log(LogColor.yellow(`Environment variable ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH undefined, using default ION bitcoin versioning config path ${versioningConfigFilePath} instead.`));
+  console.log(LogColor.yellow(
+    `Environment variable ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH undefined, using default ION bitcoin versioning config path ${versioningConfigFilePath}.`
+  ));
 } else {
   versioningConfigFilePath = process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH;
   console.log(LogColor.lightBlue(`Loading ION bitcoin versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
@@ -169,15 +171,15 @@ try {
     server = app.listen(port);
   } else {
     blockchainService.initialize(ionBitcoinVersions)
-    .then(() => {
-      server = app.listen(port, () => {
-        console.log(`Sidetree-Bitcoin node running on port: ${port}`);
+      .then(() => {
+        server = app.listen(port, () => {
+          console.log(`Sidetree-Bitcoin node running on port: ${port}`);
+        });
+      })
+      .catch((error) => {
+        console.error(`Sidetree-Bitcoin node initialization failed with error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
+        process.exit(1);
       });
-    })
-    .catch((error) => {
-      console.error(`Sidetree-Bitcoin node initialization failed with error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
-      process.exit(1);
-    });
   }
 } catch (error) {
   console.log(error.toString());

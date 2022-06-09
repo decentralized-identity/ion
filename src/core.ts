@@ -1,8 +1,6 @@
-import * as getRawBody from 'raw-body';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
-import Ipfs from '@decentralized-identity/sidetree/dist/lib/ipfs/Ipfs';
-import LogColor from '../bin/LogColor';
+import * as getRawBody from 'raw-body';
 import {
   SidetreeConfig,
   SidetreeCore,
@@ -10,6 +8,8 @@ import {
   SidetreeResponseModel,
   SidetreeVersionModel
 } from '@decentralized-identity/sidetree';
+import Ipfs from '@decentralized-identity/sidetree/dist/lib/ipfs/Ipfs';
+import LogColor from '../bin/LogColor';
 import ResponseStatus from '@decentralized-identity/sidetree/dist/lib/common/enums/ResponseStatus';
 
 /** Configuration used by this server. */
@@ -34,7 +34,9 @@ const config: ServerConfig = require(configFilePath);
 // Selecting versioning file, environment variable overrides default config file.
 let versioningConfigFilePath = '../json/testnet-core-versioning.json';
 if (process.env.ION_CORE_VERSIONING_CONFIG_FILE_PATH === undefined) {
-  console.log(LogColor.yellow(`Environment variable ION_CORE_VERSIONING_CONFIG_FILE_PATH undefined, using default core versioning config path ${versioningConfigFilePath} instead.`));
+  console.log(LogColor.yellow(
+    `Environment variable ION_CORE_VERSIONING_CONFIG_FILE_PATH undefined, using default core versioning config path ${versioningConfigFilePath} instead.`
+  ));
 } else {
   versioningConfigFilePath = process.env.ION_CORE_VERSIONING_CONFIG_FILE_PATH;
   console.log(LogColor.lightBlue(`Loading core versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
@@ -85,7 +87,7 @@ router.get('/monitor/writer-max-batch-size', async (ctx, _next) => {
 });
 
 app.use(router.routes())
-   .use(router.allowedMethods());
+  .use(router.allowedMethods());
 
 // Handler to return bad request for all unhandled paths.
 app.use((ctx, _next) => {
@@ -98,10 +100,11 @@ app.use((ctx, _next) => {
 
     const port = config.port;
     app.listen(port, () => {
-      console.log(`Sidetree node running on port: ${port}`);
+      console.log(`ION node running on port: ${port}`);
     });
   } catch (error) {
-    console.log(`Sidetree node initialization failed with error ${error}`);
+    const serializedError = JSON.stringify(error, Object.getOwnPropertyNames(error));
+    console.log(`ION node initialization failed with error ${serializedError}`);
     process.exit(1);
   }
 })();
