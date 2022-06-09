@@ -1,0 +1,45 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jasmine": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "dot-notation": ["off"],
+    "max-len": ["error", { "code": 160, "ignoreStrings": true }],
+    "no-multi-spaces":  ["error", { "ignoreEOLComments": true }],
+    "no-unneeded-ternary": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": true,
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": ["error"],
+    "padded-blocks": ["off"],
+    "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true} ],
+    "semi": ["off"],
+    "@typescript-eslint/semi": ["error", "always"],
+    "sort-imports": "error"
+  }
+}
