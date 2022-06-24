@@ -73,7 +73,27 @@ The initial synchronization will take at least 24 hours to complete for `mainnet
 
 > NOTE: the dockers containers expose their service ports so that requests can be sent from the host machine for debugging purposes.
 
+## Customize ION Data Directory
+You can customize the location where all data generated and required by an ION node is stored by specifying it in the `ION_DATA_VOLUME` variable.
 
+This is especially useful if you already have a copy of the fully synchronized bitcoin data. Just pass the custom path like so:
+
+
+```sh
+ION_DATA_VOLUME=<custom_data_path> docker-compose up -d
+```
+
+The `docker-compose` files assumes the following directory structure:
+
+```
+<custom_data_path>
+  |
+  |-- bitcoin
+  |
+  |-- ipfs
+  |
+  |-- mongo
+```
 
 # Building an ION image
 For developers only. Ignore this section if you looking to just run an ION node using docker.
