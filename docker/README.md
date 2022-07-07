@@ -18,41 +18,43 @@ Running a ION node using docker is as simple as executing a docker command once 
 
 This implementation is designed to be run with very little dependencies beyond beyond a docker engine.
 
-### Linux host
+### Linux Host
 
-- Linux Ubuntu 18.04LTS 
+- Linux Ubuntu 18.04LTS
 
 - Docker engine (latest) (from https://docs.docker.com/engine/install/ubuntu/)
   ```
+  sudo apt-get update
+
   sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 
   curl -fsSL --max-time 10 --retry 3 --retry-delay 3 --retry-max-time 60 https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-  sudo apt-get update
   sudo apt-get install -y docker-ce
   sudo systemctl enable docker
   ```
 
 - Docker compose (latest)
   ```
-  sudo curl -L --max-time 10 --retry 3 --retry-delay 3 --retry-max-time 60 "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo curl -L --max-time 60 --retry 3 --retry-delay 3 --retry-max-time 100 "https://github.com/docker/compose/releases/download/v2.6.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
   sudo chmod +x /usr/local/bin/docker-compose
   ```
 
-### MacOS
+### MacOS Host
 - Install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 ## Run
 
-You will first need to download the `docker-compose.*` files in this directory before you can run the docker command to start an ION node. You could clone the entire repo as opposed to copy the files locally manually:
+You will first need to download the `docker-compose.*` files in this directory before you can run the docker command to start an ION node. You can either clone the entire repo or just copy the files locally manually. To clone the entire repo:
+
 ```
 git clone https://github.com/decentralized-identity/ion.git
 ```
 
-Once you've downloaded the docker files locally, `cd` into the directory containing the `docker-compose` files:
+Once you've downloaded the docker files locally, `cd` into the directory containing the `docker-compose` files, then:
 
 - To run a `mainnet` ION node:
 ```sh
@@ -74,9 +76,9 @@ The initial synchronization will take at least 24 hours to complete for `mainnet
 > NOTE: the dockers containers expose their service ports so that requests can be sent from the host machine for debugging purposes.
 
 ## Customize ION Data Directory
-You can customize the location where all data generated and required by an ION node is stored by specifying it in the `ION_DATA_VOLUME` variable.
+You can customize the location where all ION data generated is stored by specifying it in the `ION_DATA_VOLUME` variable.
 
-This is especially useful if you already have a copy of the fully synchronized bitcoin data. Just pass the custom path like so:
+This is especially useful if you already have a copy of the fully synchronized bitcoin data, allowing you to avoid downloading the entire bitcoin blockchain again. Just pass the custom path to `docker-compose` like so:
 
 
 ```sh
