@@ -97,11 +97,29 @@ The `docker-compose` files assumes the following directory structure:
   |-- mongo
 ```
 
-# Building an ION image
+# Building a Multi-Platform ION Image
 For developers only. Ignore this section if you looking to just run an ION node using docker.
 
-`cd` into the `docker` directory, run:
+## Prerequisites
 
-`docker build -t <repository>:<tag> -f dockerfile ../`
+- You must use `docker buildx` instead of `docker build`, this should come installed with Docker Desktop.
 
-e.g. `docker build -t thehenrytsai/ion:1.0.4 -f dockerfile ../`
+- Default build driver does not support building multi-platform images. You will have create a separate `BuildKit` build driver instance by running:
+  
+  `docker buildx create --name <custom_name> --use`
+  - `--name` - if not specified a name will be generated for you
+  - `--use` - sets this instance as the default build instance
+  - By default `buildx create` creates a new build instance using `BuildKit` container driver, which is what we want. This is equivalent to specifying the parameter explicitly: `--driver docker-container`
+
+- You can use `docker buildx ls` to list the build driver instances to verify you have created the `BuildKit` instance.
+
+## Building the Docker Image
+- `cd` into the `docker` directory, run:
+
+- Run the `buildx` command to build the multi-platform image:
+`docker buildx build --platform=linux/arm64,linux/amd64 --push -t <repository>:<tag> -f dockerfile ../`
+
+  e.g. `docker buildx build --platform=linux/arm64,linux/amd64 --push -t thehenrytsai/ion:1.0.4 -f dockerfile ../`
+
+  - `--platform` - specifies the platforms this images will be built for
+  - `--push` - pushes the image to the specified repository
