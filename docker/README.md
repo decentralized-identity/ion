@@ -98,7 +98,11 @@ The `docker-compose` files assumes the following directory structure:
 ```
 
 # Building a Multi-Platform ION Image
-For developers only. Ignore this section if you looking to just run an ION node using docker.
+For developers only. Ignore this section if you looking to just run an ION node using docker. If you don't care about multi-platform support, ignore rest of this section, just run:
+
+  `docker build -t <repository>:<tag> -f dockerfile ../`
+
+  e.g. `docker build -t thehenrytsai/ion:1.0.4 -f dockerfile ../`
 
 ## Prerequisites
 
@@ -114,6 +118,7 @@ For developers only. Ignore this section if you looking to just run an ION node 
 - You can use `docker buildx ls` to list the build driver instances to verify you have created the `BuildKit` instance.
 
 ## Building the Docker Image
+- `npm i` followed by `npm run build` in root directory.
 - `cd` into the `docker` directory, run:
 
 - Run the `buildx` command to build the multi-platform image:
