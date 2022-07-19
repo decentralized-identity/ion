@@ -48,7 +48,7 @@ This implementation is designed to be run with very little dependencies beyond b
 
 ## Run
 
-You will first need to download the `docker-compose.*` files in this directory before you can run the docker command to start an ION node. You can either clone the entire repo or just copy the files locally manually. To clone the entire repo:
+You will first need to download the `docker-compose.*` files in this directory before you can run the docker command to start an ION node. You can either clone the entire repo or just copy the few files locally manually. To clone the entire repo:
 
 ```
 git clone https://github.com/decentralized-identity/ion.git
@@ -108,7 +108,7 @@ For developers only. Ignore this section if you looking to just run an ION node 
 
 - You must use `docker buildx` instead of `docker build`, this should come installed with Docker Desktop.
 
-- Default build driver does not support building multi-platform images. You will have create a separate `BuildKit` build driver instance by running:
+- Default build driver does not support building multi-platform images. You will have to create a separate `BuildKit` build driver instance by running:
   
   `docker buildx create --name <custom_name> --use`
   - `--name` - if not specified a name will be generated for you
@@ -122,6 +122,7 @@ For developers only. Ignore this section if you looking to just run an ION node 
 - `cd` into the `docker` directory, run:
 
 - Run the `buildx` command to build the multi-platform image:
+
 `docker buildx build --platform=linux/arm64,linux/amd64 --push -t <repository>:<tag> -f dockerfile ../`
 
   e.g. `docker buildx build --platform=linux/arm64,linux/amd64 --push -t thehenrytsai/ion:1.0.4 -f dockerfile ../`
