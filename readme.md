@@ -1,9 +1,9 @@
 
 <img src="images/logo.png" style="display: block; height: 12em; margin: 0 auto;"/>
 
-ION is a public, permissionless, Decentralized Identifier (DID) network that implements the blockchain-agnostic Sidetree protocol on top of Bitcoin (as a 'Layer 2' overlay) to support DIDs/DPKI (Decentralized Public Key Infrastructure) at scale.
+[ION](https://identity.foundation/ion/) is a public, permissionless, Decentralized Identifier (DID) network that implements the blockchain-agnostic Sidetree protocol on top of Bitcoin (as a 'Layer 2' overlay) to support DIDs/DPKI (Decentralized Public Key Infrastructure) at scale.
 
-**IMPORTANT NOTE:** The majority of ION's code is developed under the blockchain-agnostic Sidetree protocol's repo: https://github.com/decentralized-identity/sidetree, which this project uses internally with the code required to run the protocol on Bitcoin, as the ION network.
+**IMPORTANT NOTE:** The majority of ION's code is developed under the blockchain-agnostic Sidetree protocol's repo: https://github.com/decentralized-identity/sidetree, which this project uses internally with the code required to run the protocol on Bitcoin, like the ION network.
 
 ## Key Points:
 
@@ -30,4 +30,4 @@ Please use the following guide to setup the various services that comprise an IO
 
 ## Partner Organizations:
 
-ION (a instantiation of Sidetree on Bitcoin) has been developed as a part of the [Decentralized Identity Foundation](https://identity.foundation/)
+ION (an instantiation of Sidetree on Bitcoin) has been developed as a part of the [Decentralized Identity Foundation](https://identity.foundation/)
