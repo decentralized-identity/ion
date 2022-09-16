@@ -1,0 +1,18 @@
+services:
+  bitcoin-core:
+    container_name: testnet-bitcoin-core
+    command: -printtoconsole -txindex -server -rpcuser=user -rpcpassword=password -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0 -testnet
+    ports:
+      - "18332:18332"
+
+  ion-bitcoin:
+    container_name: testnet-ion-bitcoin
+    environment:
+      - ION_BITCOIN_CONFIG_FILE_PATH=/json/docker-testnet-bitcoin-config.json
+      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/json/testnet-bitcoin-versioning.json
+
+  ion-core:
+    container_name: testnet-ion-core
+    environment:
+      - ION_CORE_CONFIG_FILE_PATH=/json/docker-testnet-core-config.json
+      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/json/testnet-core-versioning.json

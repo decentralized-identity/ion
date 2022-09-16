@@ -64,6 +64,7 @@ if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
   configFilePath = process.env.ION_BITCOIN_CONFIG_FILE_PATH;
   console.log(LogColor.lightBlue(`Loading configuration from ${LogColor.green(configFilePath)}...`));
 }
+const config: IBitcoinServiceConfig = require(configFilePath);
 
 // Selecting versioning file, environment variable overrides default config file.
 let versioningConfigFilePath = '../json/testnet-bitcoin-versioning.json';
@@ -77,7 +78,6 @@ if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
 }
 const ionBitcoinVersions: SidetreeBitcoinVersionModel[] = require(versioningConfigFilePath);
 
-const config: IBitcoinServiceConfig = require(configFilePath);
 const app = new Koa();
 
 // Raw body parser.

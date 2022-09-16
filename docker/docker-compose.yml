@@ -1,69 +1,59 @@
-version: "3"
+version: "3.9"
 services:
-  bitcoin-core-mainnet:
-    container_name: bitcoin-core-mainnet
+  bitcoin-core:
+    container_name: mainnet-bitcoin-core
     image: ruimarinho/bitcoin-core:0.21.1
-    command:
-      -printtoconsole
-      -txindex=1
-      -server=1
+    command: -printtoconsole -txindex -server -rpcuser=user -rpcpassword=password -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0
     environment:
-      - BITCOIN_DATA=/data
+      - BITCOIN_DATA=/data/bitcoin
     volumes:
-      - ${DATA_VOL}:/data
-#    ports: 
-#      - "8332:8332"
-#      - "8333:8333"
+      # the ":-" means if ION_DATA_VOLUME is not set or empty, substitute with "~/ion-data"
+      # see https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution for detail on variable substitution
+      - ${ION_DATA_VOLUME:-~/ion-data}/bitcoin:/data/bitcoin
+    ports:
+      - "8332:8332"
+
   mongo:
     container_name: mongo
     image: mongo:4.0.27-xenial
-#    ports: 
-#      - "27017:27017"
     volumes:
-      - ${DB_VOL}:/data/db
+      # mongo image by default writes to `/data/db` inside the container
+      - ${ION_DATA_VOLUME:-~/ion-data}/mongo:/data/db
+    ports:
+      - "27017:27017"
+
   ipfs:
     container_name: ipfs
-    image: ipfs/go-ipfs:master-latest
-    environment: 
+    image: ipfs/go-ipfs:v0.13.0
+    environment:
       - IPFS_PATH=/data/ipfs
     volumes:
-      - ${IPFS_VOL}:/data/ipfs
+      - ${ION_DATA_VOLUME:-~/ion-data}/ipfs:/data/ipfs
     ports:
-#      - "5001:5001"
-      - "4001:4001"
-#      - "8080:8080"
-  
-  ion-bitcoin-mainnet:
-    container_name: ion-bitcoin-mainnet
-    image: node:lts-alpine3.14
-    command: "npm run bitcoin"
-    working_dir: /ion
-    environment: 
-      - ION_BITCOIN_CONFIG_FILE_PATH=/ion/json/mainnet-bitcoin-docker-config.json
-      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/ion/json/mainnet-bitcoin-versioning.json
-    links:
-      - "bitcoin-core-mainnet"
-      - "mongo"
-    volumes:
-      - ..:/ion
-      - ${DATA_VOL}:/bitcoindata
-    ports:
-      - "3002:3002"          
-      
+      - "4001:4001" # inbound TCP traffic
+      - "5001:5001" # API port
 
-  ion-core-mainnet:
-    container_name: ion-core-mainnet
-    image: node:lts-alpine3.14
-    command: "npm run core"
+  ion-bitcoin:
+    container_name: mainnet-ion-bitcoin
+    image: thehenrytsai/ion:1.0.4
+    command: [ node, "src/bitcoin.js" ]
     working_dir: /ion
-    environment: 
-      - ION_CORE_CONFIG_FILE_PATH=/ion/json/mainnet-core-docker-config.json
-      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/ion/json/mainnet-core-versioning.json    
-    links:
-      - "ion-bitcoin-mainnet"
-      - "ipfs"
-      - "mongo"
+    environment:
+      - ION_BITCOIN_CONFIG_FILE_PATH=/json/docker-mainnet-bitcoin-config.json
+      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/json/mainnet-bitcoin-versioning.json
     volumes:
-      - ..:/ion
+      # for optional fast initialization feature
+      - ${ION_DATA_VOLUME:-~/ion-data}/bitcoin:/data/bitcoin
+    ports:
+      - "3002:3002"
+
+  ion-core:
+    container_name: mainnet-ion-core
+    image: thehenrytsai/ion:1.0.4
+    command: [ node, "src/core.js" ]
+    working_dir: /ion
+    environment:
+      - ION_CORE_CONFIG_FILE_PATH=/json/docker-mainnet-core-config.json
+      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/json/mainnet-core-versioning.json
     ports:
       - "3000:3000"
