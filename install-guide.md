@@ -4,7 +4,7 @@ ION is a decentralized Layer 2 network for Decentralized Identifiers that runs a
 
 The ION node reference implementation a production-stable implementation of the v1 DIF Sidetree specification. Presently, node installation and operation is attuned for experienced developers who are able to invest the time in running, testing, and contributing to the codebase. This recommendation will change over time, which contributors will communicate to the community via blog posts and communications from DIF and collaborating organizations.
 
-The ION node implementation is composed of a collection of microservices. Of these components, the major dependencies are Bitcoin Core, IPFS, and MongoDB (for local persistence of data).
+The ION node implementation is composed of a collection of microservices. Of these components, the major dependencies are Bitcoin Core, Kubo (IPFS), and MongoDB (for local persistence of data).
 
 ## 1. Preparing your development environment
 
@@ -147,9 +147,9 @@ bitcoin-qt.exe -testnet -datadir=<path-to-store-data> -server -rpcuser=<your-rpc
 ```
 
 
-## 3. Installing Go-IPFS
+## 3. Installing Kubo (IPFS)
 
-Follow the instruction found at [IPFS website](https://docs.ipfs.io/install/) to install Go-IPFS, you can install the IPFS Desktop which internally installs Go-IPFS, it provides you with a user friendly UI.
+Follow the instruction found at [IPFS website](https://docs.ipfs.tech/install/) to install [Kubo CLI](https://docs.ipfs.tech/install/command-line/) (IPFS implementation),  you can also use [Docker image](https://docs.ipfs.tech/how-to/run-ipfs-inside-docker/), or [install the IPFS Desktop](https://docs.ipfs.tech/install/ipfs-desktop/) which internally installs Kubo daemon, it provides you with a user friendly UI.
 
 ## 4. Setting up MongoDB
 
