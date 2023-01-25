@@ -210,6 +210,18 @@ Update the configuration for the ION core service under `json/testnet-core-confi
     - testnet: `ion:test`
     - mainnet: `ion`
 
+**NOTE**: You can set a few config variables via environment variables for simplicity. The following env variables, if
+set, will override the values listed in the config files.
+
+| Environment Variable   | Config Mapping                |
+|------------------------|-------------------------------|
+| `BITCOIN_DATA_DIR`     | **bitcoinDataDirectory**      |
+| `BITCOIN_RPC_PASSWORD` | **bitcoinRpcPassword**        |
+| `BITCOIN_WALLET`       | **bitcoinWalletImportString** |
+| `BITCOIN_ENDPOINT`     | **bitcoinPeerUri**            |
+| `MONGO_ENDPOINT`       | **mongoDbConnectionString**   |
+
+
 Run the following commands to build ION:
 ```
 npm i
@@ -243,6 +255,15 @@ npm run bitcoin
 Copy the configuration files `<testnet or mainnet>-core-config.json` and `<testnet or mainnet>-core-versioning.json` to another directory, (e.g. `/etc/ion/` or `~`)
 
 Start a new console and run the following command to start the core service. 
+
+**NOTE**: You can set a few config variables via environment variables for simplicity. The following env variables, if
+set, will override the values listed in the config files.
+
+| Environment Variable          | Config Mapping              |
+|-------------------------------|-----------------------------|
+| `IPFS_ENDPOINT`               | **ipfsHttpApiEndpointUri**  |
+| `BLOCKCHAIN_SERVICE_ENDPOINT` | **blockchainServiceUri**    |
+| `MONGO_ENDPOINT`              | **mongoDbConnectionString** |
 
 ```
 ION_CORE_CONFIG_FILE_PATH=/usr/local/src/ion/json/testnet-core-config.json

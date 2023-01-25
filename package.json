@@ -64,7 +64,7 @@
     "ion": "./dist/bin/index.js"
   },
   "scripts": {
-    "build": "tsc && copyfiles \"json/**/*.json\" dist && copyfiles \"tests/**/*.json\" dist && copyfiles \"tests/**/*.js*\" dist",
+    "build": "tsc && copyfiles \\\"config/**/*.json\\\" dist && copyfiles \\\"tests/**/*.json\\\" dist && copyfiles \\\"tests/**/*.js*\\\" dist",
     "test": "jasmine --config=./tests/jasmine.json",
     "cc": "npm run build && nyc jasmine --config=./tests/jasmine.json",
     "lint": "eslint --ext ts src/ tests/ --fix",

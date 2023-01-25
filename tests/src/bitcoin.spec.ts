@@ -6,7 +6,7 @@ import RequestError from '@decentralized-identity/sidetree/dist/lib/bitcoin/Requ
 import ResponseStatus from '@decentralized-identity/sidetree/dist/lib/common/enums/ResponseStatus';
 
 process.env.SIDETREE_TEST_MODE = 'true';
-process.env.SIDETREE_BITCOIN_CONFIG_FILE_PATH = '../tests/json/bitcoin-config-test.json';
+process.env.SIDETREE_BITCOIN_CONFIG_FILE_PATH = '../tests/config/bitcoin-config-test.config';
 
 describe('Bitcoin service', async () => {
   it('should return 400 with error code when transaction fetch throws invalid hash error.', async () => {
