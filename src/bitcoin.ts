@@ -27,7 +27,7 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
   try {
     const responseBody = await requestHandler();
     koaResponse.status = 200;
-    koaResponse.set('Content-Type', 'application/config');
+    koaResponse.set('Content-Type', 'application/json');
 
     if (responseBody) {
       koaResponse.body = JSON.stringify(responseBody);

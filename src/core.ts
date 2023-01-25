@@ -132,7 +132,7 @@ const setKoaResponse = (response: SidetreeResponseModel, koaResponse: Koa.Respon
   koaResponse.status = SidetreeResponse.toHttpStatus(response.status);
 
   if (response.body) {
-    koaResponse.set('Content-Type', 'application/config');
+    koaResponse.set('Content-Type', 'application/json');
     koaResponse.body = response.body;
   } else {
     // Need to set the body explicitly to empty string, else koa will echo the request as the response.
