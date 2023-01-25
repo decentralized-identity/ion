@@ -69,7 +69,7 @@ var anchors = [
   [10500, 1]
 ];
 
-function intBetween(min, max) { // min and max included 
+function intBetween(min, max) { // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -109,7 +109,7 @@ async function getLatestAnchors(){
   lastBlock = anchors.slice(-1)[0][0];
   let lastBlockIndex = anchors.length - 1;
   let blockCount = intBetween(1, 6);
-  while (blockCount--) { 
+  while (blockCount--) {
     lastBlock = intBetween(lastBlock + 1, lastBlock + intBetween(1, 6));
     let anchor = [lastBlock, intBetween(1, 10)];
     chart.series[0].addPoint(anchor, false);
@@ -371,7 +371,7 @@ function renderSearch(result){
     }
     return keys;
   }, []);
-  
+
   did_overview.innerHTML = `
     <li>
       <div class="highlighted-box"><svg><use href="#tag-icon"></use></svg></div>
@@ -394,7 +394,7 @@ function renderSearch(result){
       <span>Linked Domains<strong data-domains="${domains.length}"></strong></span>
     </li>
   `;
-  
+
   did_code_viewer.setAttribute('linked-domains', domains.length);
   linked_domains_nav.innerHTML = domains.map(domain => `<li data-origin="${domain}">${domain}</li>`);
   linked_domains_tabs.append(...domains.map(() => document.createElement('section')));

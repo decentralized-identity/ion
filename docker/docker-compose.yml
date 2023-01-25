@@ -39,8 +39,8 @@ services:
     command: [ node, "src/bitcoin.js" ]
     working_dir: /ion
     environment:
-      - ION_BITCOIN_CONFIG_FILE_PATH=/json/docker-mainnet-bitcoin-config.json
-      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/json/mainnet-bitcoin-versioning.json
+      - ION_BITCOIN_CONFIG_FILE_PATH=/config/docker-mainnet-bitcoin-config.json
+      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/config/mainnet-bitcoin-versioning.json
     volumes:
       # for optional fast initialization feature
       - ${ION_DATA_VOLUME:-~/ion-data}/bitcoin:/data/bitcoin
@@ -53,7 +53,7 @@ services:
     command: [ node, "src/core.js" ]
     working_dir: /ion
     environment:
-      - ION_CORE_CONFIG_FILE_PATH=/json/docker-mainnet-core-config.json
-      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/json/mainnet-core-versioning.json
+      - ION_CORE_CONFIG_FILE_PATH=/config/docker-mainnet-core-config.json
+      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/config/mainnet-core-versioning.json
     ports:
       - "3000:3000"

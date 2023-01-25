@@ -8,11 +8,11 @@ services:
   ion-bitcoin:
     container_name: testnet-ion-bitcoin
     environment:
-      - ION_BITCOIN_CONFIG_FILE_PATH=/json/docker-testnet-bitcoin-config.json
-      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/json/testnet-bitcoin-versioning.json
+      - ION_BITCOIN_CONFIG_FILE_PATH=/config/docker-testnet-bitcoin-config.json
+      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/config/testnet-bitcoin-versioning.json
 
   ion-core:
     container_name: testnet-ion-core
     environment:
-      - ION_CORE_CONFIG_FILE_PATH=/json/docker-testnet-core-config.json
-      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/json/testnet-core-versioning.json
+      - ION_CORE_CONFIG_FILE_PATH=/config/docker-testnet-core-config.json
+      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/config/testnet-core-versioning.json

@@ -1,5 +1,5 @@
 FROM node:lts-alpine3.14
 
 COPY dist /ion
-COPY json /json
+COPY config /config
 COPY node_modules /node_modules

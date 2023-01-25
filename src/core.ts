@@ -22,7 +22,7 @@ interface ServerConfig extends SidetreeConfig {
 }
 
 // Selecting core config file, environment variable overrides default config file.
-let configFilePath = '../json/testnet-core-config.json';
+let configFilePath = '../config/testnet-core-config.json';
 if (process.env.ION_CORE_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(`Environment variable ION_CORE_CONFIG_FILE_PATH undefined, using default core config path ${configFilePath} instead.`));
 } else {
@@ -32,7 +32,7 @@ if (process.env.ION_CORE_CONFIG_FILE_PATH === undefined) {
 const config: ServerConfig = require(configFilePath);
 
 // Selecting versioning file, environment variable overrides default config file.
-let versioningConfigFilePath = '../json/testnet-core-versioning.json';
+let versioningConfigFilePath = '../config/testnet-core-versioning.json';
 if (process.env.ION_CORE_VERSIONING_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(
     `Environment variable ION_CORE_VERSIONING_CONFIG_FILE_PATH undefined, using default core versioning config path ${versioningConfigFilePath} instead.`
@@ -42,6 +42,22 @@ if (process.env.ION_CORE_VERSIONING_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.lightBlue(`Loading core versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
 }
 const coreVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
+
+// see if there are overrides for the service endpoints with env vars
+const ipfsEndpointEnv = process.env.IPFS_ENDPOINT;
+if (ipfsEndpointEnv !== undefined) {
+  config.ipfsHttpApiEndpointUri = ipfsEndpointEnv;
+}
+
+const blockchainEndpointEnv = process.env.BLOCKCHAIN_SERVICE_ENDPOINT;
+if (blockchainEndpointEnv !== undefined) {
+  config.blockchainServiceUri = blockchainEndpointEnv;
+}
+
+const mongoEndpointEnv = process.env.MONGO_ENDPOINT;
+if (mongoEndpointEnv !== undefined) {
+  config.mongoDbConnectionString = mongoEndpointEnv;
+}
 
 const ipfsFetchTimeoutInSeconds = 10;
 const cas = new Ipfs(config.ipfsHttpApiEndpointUri, ipfsFetchTimeoutInSeconds);

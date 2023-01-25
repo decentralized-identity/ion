@@ -366,7 +366,7 @@ Have a look at the port mappings in the [yml-file](https://github.com/decentrali
 No, the value of running a node is accessing what may become the largest Web of identity for connecting to people, companies, apps, and services, which is the foundation of decentralized apps. One near term example: companies will run them so they can verify the DIDs /VC of customers.
 
 ## **Q: Have you got any instructions for regtest setup?
-You might find what yu need here: https://github.com/decentralized-identity/ion/tree/master/json
+You might find what you need here: https://github.com/decentralized-identity/ion/tree/master/config
 
 # Q&A section Sidetree
 

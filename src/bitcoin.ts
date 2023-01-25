@@ -57,7 +57,7 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
 }
 
 // Selecting configuration file, environment variable overrides default config file.
-let configFilePath = '../json/testnet-bitcoin-config.json';
+let configFilePath = '../config/testnet-bitcoin-config.json';
 if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(`Environment variable ION_BITCOIN_CONFIG_FILE_PATH undefined, using default path ${configFilePath} instead.`));
 } else {
@@ -66,8 +66,34 @@ if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
 }
 const config: IBitcoinServiceConfig = require(configFilePath);
 
+// see if there are overrides for the service endpoints with env vars
+const bitcoinDataDirectoryEnv = process.env.BITCOIN_DATA_DIR;
+if (bitcoinDataDirectoryEnv !== undefined) {
+  config.bitcoinDataDirectory = bitcoinDataDirectoryEnv;
+}
+
+const bitcoinRpcPasswordEnv = process.env.BITCOIN_RPC_PASSWORD;
+if (bitcoinRpcPasswordEnv !== undefined) {
+  config.bitcoinRpcPassword = bitcoinRpcPasswordEnv;
+}
+
+const bitcoinWalletEnv = process.env.BITCOIN_WALLET;
+if (bitcoinWalletEnv !== undefined) {
+  config.bitcoinWalletOrImportString = bitcoinWalletEnv;
+}
+
+const bitcoinEndpointEnv = process.env.BITCOIN_ENDPOINT;
+if (bitcoinEndpointEnv !== undefined) {
+  config.bitcoinPeerUri = bitcoinEndpointEnv;
+}
+
+const mongoEndpointEnv = process.env.MONGO_ENDPOINT;
+if (mongoEndpointEnv !== undefined) {
+  config.mongoDbConnectionString = mongoEndpointEnv;
+}
+
 // Selecting versioning file, environment variable overrides default config file.
-let versioningConfigFilePath = '../json/testnet-bitcoin-versioning.json';
+let versioningConfigFilePath = '../config/testnet-bitcoin-versioning.json';
 if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(
     `Environment variable ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH undefined, using default ION bitcoin versioning config path ${versioningConfigFilePath}.`
