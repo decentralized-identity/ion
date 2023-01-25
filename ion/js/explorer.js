@@ -416,7 +416,7 @@ linked_domains_tabs.addEventListener('tabselected', async e => {
   let origin = (tab.getAttribute('data-origin') || '').trim();
   panel.setAttribute('data-status', 'loading');
   try {
-    let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration.config';
+    let path = origin + (origin.match(/\/$/) ? '' : '/') + '.well-known/did-configuration.json';
     let json = await fetch(path, { mode: 'cors' }).then(raw => raw.json());
     panel.innerHTML = `
       <button clipboard>Copy to Clipboard</button>

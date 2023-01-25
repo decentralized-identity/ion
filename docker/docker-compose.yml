@@ -62,8 +62,8 @@ services:
     working_dir: /ion
     environment:
       - ION_DATA_VOLUME=db_data
-      - ION_BITCOIN_CONFIG_FILE_PATH=/config/docker-mainnet-bitcoin-config.config
-      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/config/mainnet-bitcoin-versioning.config
+      - ION_BITCOIN_CONFIG_FILE_PATH=/config/docker-mainnet-bitcoin-config.json
+      - ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH=/config/mainnet-bitcoin-versioning.json
     volumes:
       # for optional fast initialization feature
       - ${ION_DATA_VOLUME:-~/ion-data}/bitcoin:/data/bitcoin
@@ -83,8 +83,8 @@ services:
     working_dir: /ion
     environment:
       - ION_DATA_VOLUME=db_data
-      - ION_CORE_CONFIG_FILE_PATH=/config/docker-mainnet-core-config.config
-      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/config/mainnet-core-versioning.config
+      - ION_CORE_CONFIG_FILE_PATH=/config/docker-mainnet-core-config.json
+      - ION_CORE_VERSIONING_CONFIG_FILE_PATH=/config/mainnet-core-versioning.json
     ports:
       - "3000:3000"
     logging:

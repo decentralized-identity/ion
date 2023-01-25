@@ -57,7 +57,7 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
 }
 
 // Selecting configuration file, environment variable overrides default config file.
-let configFilePath = '../config/testnet-bitcoin-config.config';
+let configFilePath = '../config/testnet-bitcoin-config.json';
 if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(`Environment variable ION_BITCOIN_CONFIG_FILE_PATH undefined, using default path ${configFilePath} instead.`));
 } else {
@@ -93,7 +93,7 @@ if (mongoEndpointEnv !== undefined) {
 }
 
 // Selecting versioning file, environment variable overrides default config file.
-let versioningConfigFilePath = '../config/testnet-bitcoin-versioning.config';
+let versioningConfigFilePath = '../config/testnet-bitcoin-versioning.json';
 if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
   console.log(LogColor.yellow(
     `Environment variable ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH undefined, using default ION bitcoin versioning config path ${versioningConfigFilePath}.`
