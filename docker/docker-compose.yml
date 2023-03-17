@@ -35,7 +35,7 @@ services:
 
   ion-bitcoin:
     container_name: mainnet-ion-bitcoin
-    image: thehenrytsai/ion:1.0.4
+    image: gabetbd/ion:1.0.5
     command: [ node, "src/bitcoin.js" ]
     working_dir: /ion
     environment:
@@ -49,7 +49,7 @@ services:
 
   ion-core:
     container_name: mainnet-ion-core
-    image: thehenrytsai/ion:1.0.4
+    image: gabetbd/ion:1.0.5
     command: [ node, "src/core.js" ]
     working_dir: /ion
     environment:
