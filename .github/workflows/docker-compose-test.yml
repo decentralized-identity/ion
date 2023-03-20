@@ -21,4 +21,4 @@ jobs:
 
     - name: Run test script
       run: |
-        ./docker/test_containers.sh
+        ./docker/test_compose.sh
