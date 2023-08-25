@@ -204,7 +204,7 @@ graph TD
 
 - Gets fee and lock information from ION Bitcoin service to decide how many operations can be written in a transaction.
 
-- The Bitcoin minors at any given time may demand more or less transaction fee the the total per-operation fee required by ION. The batch writer will spend the lager amount of the two to ensure reliable anchoring of the ION transaction.
+- The Bitcoin miners at any given time may demand more or less transaction fee the the total per-operation fee required by ION. The batch writer will spend the lager amount of the two to ensure reliable anchoring of the ION transaction.
 
 - Waits for confirmation.
 
