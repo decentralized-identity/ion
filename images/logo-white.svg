@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="166.8014184397157 105.60787889323296 278.2993908678734 144.59288125223478" width="277.3" height="140.59">
+  <defs>
+    <path d="M326.81 212.05L265.93 247.2L205.05 212.05L205.05 141.76L265.93 106.61L326.81 141.76L326.81 212.05ZM214.13 206.81L265.93 236.72L317.73 206.81L317.73 147L265.93 117.09L214.13 147L214.13 206.81Z" id="a1zThgcQA"></path>
+    <mask id="maska4pSfNHlEC" x="203.05" y="104.61" width="125.76" height="144.59" maskUnits="userSpaceOnUse">
+      <rect x="203.05" y="104.61" width="125.76" height="144.59" fill="#ffffff"></rect>
+      <use href="#a1zThgcQA" opacity="1" fill="#ffffff"></use>
+    </mask>
+    <path d="M305.35 150.8C305.35 150.8 305.35 150.8 305.35 150.8C305.35 182.13 305.35 199.53 305.35 203.01C305.35 203.01 305.35 203.01 305.35 203.01C299.9 203.01 296.87 203.01 296.27 203.01C296.27 203.01 296.27 203.01 296.27 203.01C296.27 171.69 296.27 154.28 296.27 150.8C296.27 150.8 296.27 150.8 296.27 150.8C301.71 150.8 304.74 150.8 305.35 150.8Z" id="i2tUH8YR3T"></path>
+    <path d="M272.65 136.33C272.65 136.33 272.65 136.33 272.65 136.33C245.52 151.99 230.45 160.69 227.44 162.43C227.44 162.43 227.44 162.43 227.44 162.43C224.72 157.72 223.2 155.1 222.9 154.57C222.9 154.57 222.9 154.57 222.9 154.57C250.03 138.91 265.09 130.21 268.11 128.47C268.11 128.47 268.11 128.47 268.11 128.47C270.83 133.19 272.35 135.81 272.65 136.33Z" id="aUbsvpL9"></path>
+    <path d="M272.65 217.47C272.65 217.47 272.65 217.47 272.65 217.47C269.93 222.18 268.41 224.8 268.11 225.33C268.11 225.33 268.11 225.33 268.11 225.33C240.99 209.67 225.92 200.97 222.91 199.23C222.91 199.23 222.91 199.23 222.91 199.23C225.63 194.51 227.14 191.89 227.44 191.37C227.44 191.37 227.44 191.37 227.44 191.37C254.57 207.03 269.64 215.73 272.65 217.47Z" id="c3411lyVvU"></path>
+    <path d="M167.8 118.29L179.15 118.29L179.15 236.23L167.8 236.23L167.8 118.29Z" id="bDcvd5nok"></path><path d="M356.32 124.5L365.64 118.02L442.85 229.18L433.53 235.65L356.32 124.5Z" id="b6d7K4CcX"></path><path d="M433.75 118.29L445.1 118.29L445.1 236.23L433.75 236.23L433.75 118.29Z" id="a2LbcQHDZB"></path>
+    <path d="M354.33 118.29L365.67 118.29L365.67 236.23L354.33 236.23L354.33 118.29Z" id="c7Yv6ES"></path>
+  </defs>
+  <g>
+    <g>
+      <use href="#a1zThgcQA" opacity="1" fill="#ffffff" fill-opacity="1"></use>
+      <g mask="url(#maska4pSfNHlEC)"><use href="#a1zThgcQA" opacity="1" fill-opacity="0" stroke="#ffffff" stroke-width="2" stroke-opacity="1"></use></g>
+    </g>
+    <g><use href="#i2tUH8YR3T" opacity="1" fill="#fff" fill-opacity="0.4"></use></g><g><use href="#aUbsvpL9" opacity="1" fill="#fff" fill-opacity="0.4"></use></g>
+    <g><use href="#c3411lyVvU" opacity="1" fill="#fff" fill-opacity="0.4"></use></g><g><use href="#bDcvd5nok" opacity="1" fill="#ffffff" fill-opacity="1"></use></g>
+    <g>
+      <g><use href="#b6d7K4CcX" opacity="1" fill="#ffffff" fill-opacity="1"></use></g><g><use href="#a2LbcQHDZB" opacity="1" fill="#ffffff" fill-opacity="1"></use></g>
+      <g><use href="#c7Yv6ES" opacity="1" fill="#ffffff" fill-opacity="1"></use></g>
+    </g>
+  </g>
+</svg>

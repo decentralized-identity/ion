@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {% include "head.html" %}
+
+  <body>
+
+    <svg style="display: none">
+      {% include "svg.html" %}
+      {% block svg %}{% endblock %}
+    </svg>
+
+    {% include "nav.html" %}
+    
+    <aside id="sidebar">{% block sidebar %}{% endblock %}</aside>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    {% if no_footer %}
+    
+    {% else %}
+      {% include "footer.html" %}
+    {% endif %}
+    
+
+    {% block scripts %}
+      <script src="/ion/js/compiled/body.js"></script>
+    {% endblock %}
+
+    {% for file in js %}
+      <script src="/ion/js/{{file.path}}.js" {{ 'type=module' if file.module else '' }}></script>
+    {% endfor %}
+
+  </body>
+
+</html>

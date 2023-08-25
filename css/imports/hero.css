@@ -1,0 +1,68 @@
+
+#hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  overflow: hidden;
+  color: var(--light-text);
+  background: var(--primary-blue);
+  box-shadow: 0 0 10px rgb(0 0 0 / 50%),
+              0 -1px 50px rgb(32 56 87 / 90%) inset,
+              0 -1px 1px rgb(255 255 255 / 7%) inset;
+}
+
+#hero:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 70px 80px var(--dark-blue) inset, 0 -2px 0px #fff inset;
+  background: linear-gradient(90deg, var(--primary-blue) 0%, rgba(0,0,0,0) 50%, var(--primary-blue) 100%);
+  z-index: 1;
+}
+
+#hero_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 7em 0 2em;
+  text-align: center;
+  user-select: none;
+  z-index: 1;
+}
+
+#hero canvas {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: calc(100% + 200px) !important;
+  height: calc(100% + 200px) !important;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+#hero_content object {
+  display: block;
+  height: 5em;
+  filter: drop-shadow(0 2px 0.25em rgba(0,0,0,0.4));
+}
+
+#hero_content p {
+  max-width: 440px;
+  margin: 0 0 1.5em;
+  font-size: 1.5em;
+}
+
+#hero_content h1 {
+  text-align: center;
+}
