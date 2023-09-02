@@ -87,7 +87,17 @@ router.get(`${resolvePath}:did`, async (ctx, _next) => {
   // Strip away the first '/identifiers/' string.
   const didOrDidDocument = ctx.url.split(resolvePath)[1];
   const response = await sidetreeCore.handleResolveRequest(didOrDidDocument);
-  setKoaResponse(response, ctx.response);
+  const koaResponse = ctx.response;
+  koaResponse.status = SidetreeResponse.toHttpStatus(response.status);
+
+  if (!response.body) {
+    koaResponse.body = '';
+  } else {
+    koaResponse.set('Content-Type', 'application/ld+json;profile="https://w3id.org/did-resolution";charset=utf-8');
+    // Stringify the result as otherwise the Content-Type gets overridden to
+    // application/json.
+    koaResponse.body = JSON.stringify(response.body);
+  }
 });
 
 router.get('/monitor/operation-queue-size', async (ctx, _next) => {
